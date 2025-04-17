@@ -1,6 +1,7 @@
 Project 'SECW' has the following package references
    [net8.0-android34.0]: 
    Top-level Package                               Requested    Resolved
+   > BCrypt.Net-Next                               4.0.3        4.0.3   
    > Microsoft.Extensions.Logging.Debug            8.0.1        8.0.1   
    > Microsoft.Maui.Controls                       8.0.100      8.0.100 
    > Microsoft.Maui.Controls.Compatibility         8.0.100      8.0.100 
@@ -125,6 +126,7 @@ Project 'SECW' has the following package references
 
    [net8.0-ios18.0]: 
    Top-level Package                               Requested    Resolved
+   > BCrypt.Net-Next                               4.0.3        4.0.3   
    > Microsoft.Extensions.Logging.Debug            8.0.1        8.0.1   
    > Microsoft.Maui.Controls                       8.0.100      8.0.100 
    > Microsoft.Maui.Controls.Compatibility         8.0.100      8.0.100 
@@ -172,6 +174,7 @@ Project 'SECW' has the following package references
 
    [net8.0-maccatalyst18.0]: 
    Top-level Package                               Requested    Resolved
+   > BCrypt.Net-Next                               4.0.3        4.0.3   
    > Microsoft.Extensions.Logging.Debug            8.0.1        8.0.1   
    > Microsoft.Maui.Controls                       8.0.100      8.0.100 
    > Microsoft.Maui.Controls.Compatibility         8.0.100      8.0.100 
@@ -219,6 +222,7 @@ Project 'SECW' has the following package references
 
    [net8.0-windows10.0.19041]: 
    Top-level Package                            Requested   Resolved
+   > BCrypt.Net-Next                            4.0.3       4.0.3   
    > Microsoft.Extensions.Logging.Debug         8.0.1       8.0.1   
    > Microsoft.Maui.Controls                    8.0.100     8.0.100 
    > Microsoft.Maui.Controls.Compatibility      8.0.100     8.0.100 

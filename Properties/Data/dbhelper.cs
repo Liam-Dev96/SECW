@@ -4,16 +4,15 @@ using System.IO;
 //using System.IO is a namespace that provides classes for working with files and directories.
 //SQLite is a lightweight, serverless, self-contained SQL database engine.
 
-
-
 public static class DataBaseHelper
 {
-    private static string connectionString = @"Data Source=..\..\Files\SoftwareEngineering.db;Version=3;";
+    private static string connectionString = @"Data Source=Properties\Data\SoftwareEngineering.db;Version=3;";
     //connection string to connect to the database
     //Data Source specifies the location of the database file.
     //Version specifies the version of the SQLite database engine to use.
     //Version 3 is the most commonly used version of SQLite.
     public static void initializeDatabase()
+    //ensure that its referenced in the project atleast once to avoid errors and create the database.
     //this method is used to initialize the database
     //it checks if the database file exists, and if not, it creates the database file and the tables
     //and inserts the data into the tables
@@ -23,9 +22,9 @@ public static class DataBaseHelper
         //try and catch block to handle exceptions
         //SQLiteException is a class that represents an exception that occurs during SQLite database operations.
         {
-            if (!File.Exists(@"..\..\Files\SoftwareEngineering.db"))
+            if (!File.Exists(@"Properties\Data\SoftwareEngineering.db"))
             {
-                SQLiteConnection.CreateFile(@"..\..\Files\SoftwareEngineering.db");
+                SQLiteConnection.CreateFile(@"Properties\Data\SoftwareEngineering.db");
                 using var Connection = new SQLiteConnection(connectionString);//passing the connection string to the SQLiteConnection constructor
                 {
                     Connection.Open();
@@ -35,30 +34,151 @@ public static class DataBaseHelper
                     pragmaCommand.ExecuteNonQuery();
                     //executes the command to enable foreign key constraints.
 
-
                     //create all the tables for the database.
-                   //example of a table creation query.
-                   //will continue to use varchar for all the string data types due to previously faced issues with text formatting.
-                    string CreateCoachesTableQuery = @"Create Table If Not Exists Coaches(
-                    Coaches_ID integer Primary Key,
-                    Coaches_FirstName VARCHAR (150),
-                    Coaches_LastName VARCHAR (150),
-                    Coaches_Email VARCHAR (225),
-                    Coaches_Address VARCHAR (225),
-                    Coaches_Number Integer,
-                    DOB Date,
-                    Comments VARCHAR (500)
+                    //will continue to use varchar for all the string data types due to previously faced issues with text formatting.
+                    string CreateUsersTableQuery = @"Create Table If Not Exists Users(
+                    UserID integer Primary Key,
+                    Username VARCHAR (50) Unique,
+                    PasswordHash VARCHAR (256),
+                    Email VARCHAR (100),
+                    RoleID Integer,
+                    CreatedAt DateTime,
+                    LastLogin DateTime,
+                    Foreign Key (RoleID) References Roles(RoleID)
                     );";
 
-                    //example of inset query
-                    string insertIntoStaff = @"Insert Into Staff (Staff_ID, Staff_FirstName, Staff_LastName, Staff_Email, Staff_Address, Staff_Number, DOB) Values(10011589, 'John', 'Smith', 'john.smith@example.com', '123 Main St', 1234567890, '1985-03-15');";
+                    string CreateRolesTableQuery = @"Create Table If Not Exists Roles(
+                    RoleID integer Primary Key,
+                    RoleName VARCHAR (50)
+                    );";
 
-                    // example of a table creation query
+                    string CreateSensorsTableQuery = @"Create Table If Not Exists Sensors(
+                    SensorID integer Primary Key,
+                    SensorTypeID Integer,
+                    LocationID Integer,
+                    Status VARCHAR (20),
+                    InstallationDate DateTime,
+                    FirmwareVersion VARCHAR (20),
+                    Foreign Key (SensorTypeID) References SensorTypes(SensorTypeID),
+                    Foreign Key (LocationID) References Locations(LocationID)
+                    );";
+
+                    string CreateSensorTypesTableQuery = @"Create Table If Not Exists SensorTypes(
+                    SensorTypeID integer Primary Key,
+                    TypeName VARCHAR (20),
+                    Description VARCHAR (255)
+                    );";
+
+                    string CreateLocationsTableQuery = @"Create Table If Not Exists Locations(
+                    LocationID integer Primary Key,
+                    Latitude Decimal(9,6),
+                    Longitude Decimal(9,6),
+                    Address VARCHAR (255),
+                    Description VARCHAR (255)
+                    );";
+
+                    string CreateEnvironmentalDataTableQuery = @"Create Table If Not Exists EnvironmentalData(
+                    DataID integer Primary Key,
+                    SensorID Integer,
+                    Timestamp DateTime,
+                    DataType VARCHAR (20),
+                    PM25 Float,
+                    PM10 Float,
+                    CO2 Float,
+                    SO2 Float,
+                    NO2 Float,
+                    pH Float,
+                    DissolvedOxygen Float,
+                    Turbidity Float,
+                    WaterTemp Float,
+                    AirTemp Float,
+                    Humidity Float,
+                    WindSpeed Float,
+                    Precipitation Float,
+                    Foreign Key (SensorID) References Sensors(SensorID)
+                    );";
+
+                    string CreateAlertThresholdsTableQuery = @"Create Table If Not Exists AlertThresholds(
+                    ThresholdID integer Primary Key,
+                    SensorTypeID Integer,
+                    Parameter VARCHAR (50),
+                    MinValue Float,
+                    MaxValue Float,
+                    Foreign Key (SensorTypeID) References SensorTypes(SensorTypeID)
+                    );";
+
+                    string CreateAlertsTableQuery = @"Create Table If Not Exists Alerts(
+                    AlertID integer Primary Key,
+                    SensorID Integer,
+                    ThresholdID Integer,
+                    BreachedValue Float,
+                    Timestamp DateTime,
+                    Status VARCHAR (20),
+                    DataID Integer,
+                    Foreign Key (SensorID) References Sensors(SensorID),
+                    Foreign Key (ThresholdID) References AlertThresholds(ThresholdID),
+                    Foreign Key (DataID) References EnvironmentalData(DataID)
+                    );";
+
+                    string CreateMaintenanceTableQuery = @"Create Table If Not Exists Maintenance(
+                    MaintenanceID integer Primary Key,
+                    SensorID Integer,
+                    ScheduledDate DateTime,
+                    CompletedDate DateTime,
+                    Technician VARCHAR (100),
+                    Notes VARCHAR (MAX),
+                    Foreign Key (SensorID) References Sensors(SensorID)
+                    );";
+
+                    string CreateReportsTableQuery = @"Create Table If Not Exists Reports(
+                    ReportID integer Primary Key,
+                    UserID Integer,
+                    ReportType VARCHAR (50),
+                    StartDate DateTime,
+                    EndDate DateTime,
+                    GeneratedDate DateTime,
+                    Parameters VARCHAR (MAX),
+                    FilePath VARCHAR (255),
+                    Foreign Key (UserID) References Users(UserID)
+                    );";
+
+                    string CreateAuditLogsTableQuery = @"Create Table If Not Exists AuditLogs(
+                    LogID integer Primary Key,
+                    UserID Integer,
+                    Action VARCHAR (50),
+                    Timestamp DateTime,
+                    Details VARCHAR (MAX),
+                    Foreign Key (UserID) References Users(UserID)
+                    );";
+
+                    //table creation query final stage
+                    //using the using statement to ensure that the connection is closed and disposed of properly
+                    //using statement is a syntactic sugar for try-finally block
+                    //it ensures that the connection is closed and disposed of properly, even if an exception occurs
+                    //using statement is a good practice to follow when working with database connections
                     using (var Command = new SQLiteCommand(Connection))
                     {
-                        Command.CommandText = CreateCoachesTableQuery;
+                        Command.CommandText = CreateUsersTableQuery;
                         Command.ExecuteNonQuery();
-                        Command.CommandText = insertIntoStaff;
+                        Command.CommandText = CreateRolesTableQuery;
+                        Command.ExecuteNonQuery();
+                        Command.CommandText = CreateSensorsTableQuery;
+                        Command.ExecuteNonQuery();
+                        Command.CommandText = CreateSensorTypesTableQuery;
+                        Command.ExecuteNonQuery();
+                        Command.CommandText = CreateLocationsTableQuery;
+                        Command.ExecuteNonQuery();
+                        Command.CommandText = CreateEnvironmentalDataTableQuery;
+                        Command.ExecuteNonQuery();
+                        Command.CommandText = CreateAlertThresholdsTableQuery;
+                        Command.ExecuteNonQuery();
+                        Command.CommandText = CreateAlertsTableQuery;
+                        Command.ExecuteNonQuery();
+                        Command.CommandText = CreateMaintenanceTableQuery;
+                        Command.ExecuteNonQuery();
+                        Command.CommandText = CreateReportsTableQuery;
+                        Command.ExecuteNonQuery();
+                        Command.CommandText = CreateAuditLogsTableQuery;
                         Command.ExecuteNonQuery();
                     };
                 }
