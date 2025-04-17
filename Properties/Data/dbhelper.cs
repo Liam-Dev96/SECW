@@ -26,7 +26,7 @@ public static class DataBaseHelper
             if (!File.Exists(@"..\..\Files\SoftwareEngineering.db"))
             {
                 SQLiteConnection.CreateFile(@"..\..\Files\SoftwareEngineering.db");
-                using var Connection = new SQLiteConnection(connectionString);
+                using var Connection = new SQLiteConnection(connectionString);//passing the connection string to the SQLiteConnection constructor
                 {
                     Connection.Open();
                     using var pragmaCommand = new SQLiteCommand("PRAGMA foreign_keys = ON;", Connection);
@@ -36,8 +36,9 @@ public static class DataBaseHelper
                     //executes the command to enable foreign key constraints.
 
 
-                    //create all the tables for the database
-                   //example of a table creation query
+                    //create all the tables for the database.
+                   //example of a table creation query.
+                   //will continue to use varchar for all the string data types due to previously faced issues with text formatting.
                     string CreateCoachesTableQuery = @"Create Table If Not Exists Coaches(
                     Coaches_ID integer Primary Key,
                     Coaches_FirstName VARCHAR (150),
@@ -73,8 +74,11 @@ public static class DataBaseHelper
         catch (SQLiteException ex)
         {
             Console.WriteLine($"SQLiteException: {ex.Message}");
+            //logging the exception message to the console
+            //this is important to do to understand what went wrong, and to debug the code
+            //SQLiteException is a class that represents an exception that occurs during SQLite database operations.
         }
-        // used a try and catch without a finally block.. 
+        // used a try and catch without a finally block...
         //finally block is used to execute code after the try and catch blocks, regardless of whether an exception was thrown or not.
         //in this case, I don't need to execute any code after the try and catch blocks, so I didn't use a finally block.
 
