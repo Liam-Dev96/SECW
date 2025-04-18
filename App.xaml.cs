@@ -1,4 +1,6 @@
-﻿namespace SECW
+﻿using Microsoft.Maui.Controls;
+
+namespace SECW
 {
     public partial class App : Application
     {
@@ -6,6 +8,7 @@
         {
             InitializeComponent();
 
+            // Set the Login page as the main page
             MainPage = new AppShell();
         }
     }
