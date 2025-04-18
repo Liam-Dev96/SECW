@@ -4,9 +4,13 @@ using System.IO;
 //using System.IO is a namespace that provides classes for working with files and directories.
 //SQLite is a lightweight, serverless, self-contained SQL database engine.
 
+namespace SECW.Helpers{
+//namespace SECW.Helpers is a namespace that contains helper classes and methods for the SECW application.
+//namespace SECW is the namespace for the SECW application.
+
 public static class DataBaseHelper
 {
-    private static string connectionString = @"Data Source=Properties\Data\SoftwareEngineering.db;Version=3;";
+    private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;Version=3;";
     //connection string to connect to the database
     //Data Source specifies the location of the database file.
     //Version specifies the version of the SQLite database engine to use.
@@ -22,9 +26,9 @@ public static class DataBaseHelper
         //try and catch block to handle exceptions
         //SQLiteException is a class that represents an exception that occurs during SQLite database operations.
         {
-            if (!File.Exists(@"Properties\Data\SoftwareEngineering.db"))
+            if (!File.Exists(@"Helpers\SoftwareEngineering.db"))
             {
-                SQLiteConnection.CreateFile(@"Properties\Data\SoftwareEngineering.db");
+                SQLiteConnection.CreateFile(@"Helpers\SoftwareEngineering.db");
                 using var Connection = new SQLiteConnection(connectionString);//passing the connection string to the SQLiteConnection constructor
                 {
                     Connection.Open();
@@ -221,4 +225,5 @@ public static class DataBaseHelper
         //in this case, I don't need to execute any code after the try and catch blocks, so I didn't use a finally block.
 
     }
+}
 }
