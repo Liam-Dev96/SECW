@@ -64,12 +64,16 @@ namespace SECW
                                     break;
                                 default:
                                     await DisplayAlert("Error", "Unknown role. Please contact support.", "OK");
-                                    break;
+                                    connection.Close();
+                                    return;
+                                    
                             }
                         }
                         else
                         {
                             await DisplayAlert("Error", "Invalid username or password.", "OK");
+                            connection.Close();
+                            return;
                         }
                     }
                 }
@@ -77,6 +81,7 @@ namespace SECW
             catch (SQLiteException ex)
             {
                 await DisplayAlert("Error", $"Database error: {ex.Message}", "OK");
+            
             }
             catch (Exception ex)
             {
