@@ -7,7 +7,7 @@ namespace SECW
 {
     public partial class Login : ContentPage
     {
-        private static string connectionString = @"Data Source=Properties\Data\SoftwareEngineering.db;Version=3;";
+        private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;Version=3;";
 
         public Login()
         {
