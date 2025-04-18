@@ -16,3 +16,35 @@ will also need to update the dependencies or packages.txt folder after successfu
 Dependancies have been updated.
 
 #Due to my assigned tasks including the creation of the db and login I also took it upon myself to create the other tables and columns required for the completion of the application
+
+
+to ensure that the application runs, 
+you firstly need to download the dependencies for sqllite.
+
+list of commands 
+dotnet clean
+Functionality: Cleans the project by removing all compiled files (e.g., bin and obj folders).
+Use Case: To ensure a fresh build by removing old or cached files.
+
+I also deleted the bin and obj file from the previous demo project the click counter.
+
+ dotnet workload update
+Functionality: Updates all installed .NET workloads to their latest versions.
+Use Case: To ensure that all workloads (e.g., Android, iOS, etc.) are up to date.
+
+ dotnet add package Microsoft.Data.Sqlite
+Functionality: Adds the Microsoft.Data.Sqlite NuGet package to the project.
+Use Case: To use SQLite in a cross-platform manner, especially for .NET MAUI projects.
+
+dotnet workload install android
+Functionality: Installs the Android workload for .NET MAUI development.
+Use Case: To enable building and running the project on Android devices.
+
+ dotnet list package --include-transitive > packages.txt
+Functionality: Lists all the NuGet packages (including transitive dependencies) used in the project and saves the output to a file named packages.txt.
+Use Case: To document all dependencies required for the project.
+
+ docfx build
+Functionality: Builds the documentation using Docfx and generates the output in the _site folder.
+Use Case: To create HTML documentation for your project based on XML comments.
+just testing to see if the auto document features work as expected or not.
