@@ -61,6 +61,19 @@ namespace SECW
                                 case 1:
                                     await DisplayAlert("Success", "Welcome, Admin!", "OK");
                                     Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Admin.");
+                                    // Navigate to Admin page or perform admin-specific actions
+                                    // Assuming the AdminPage.xaml.cs file for the admin interface exsists
+                                    // and is properly set up to handle admin functionalities.
+                                    await this.Navigation.PopAsync(); // Close the login page
+                                    if (Application.Current != null)
+                                    {
+                                        Application.Current.MainPage = new NavigationPage(new AdminPage());
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("[ERROR] Application.Current is null. Cannot navigate to AdminPage.");
+                                    }
+
                                     break;
                                 case 2:
                                     await DisplayAlert("Success", "Welcome, User!", "OK");
