@@ -78,6 +78,7 @@ namespace SECW
                                     }catch(Exception ex){
                                         Console.WriteLine($"[ERROR] Failed to navigate to AdminPage: {ex.Message}");
                                     }
+                                    connection.Close();
                                     break;
                                 case 2:
                                     await DisplayAlert("Success", $"Welcome, User: {username}!", "OK");
@@ -95,11 +96,15 @@ namespace SECW
                                     {
                                         Console.WriteLine("[ERROR] Application.Current is null. Cannot navigate to UserPage.");
                                     }
+                                    connection.Close();
                                     break;
+                                // Assuming the Guest role is represented by RoleID 3
+
                                 case 3:
                                     await DisplayAlert("Success", "Welcome, Guest!", "OK");
                                     Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Guest.");
                                     break;
+
                                 default:
                                     await DisplayAlert("Error", "Unknown role. Please contact support.", "OK");
                                     Console.WriteLine($"[ERROR] Login failed: Username '{username}' has an unknown role.");
@@ -117,6 +122,8 @@ namespace SECW
                     }
                 }
             }
+            // Handle any exceptions that may occur during the database operation
+            // and log them to the console for debugging purposes.
             catch (SQLiteException ex)
             {
                 await DisplayAlert("Error", $"Database error: {ex.Message}", "OK");
@@ -150,6 +157,8 @@ namespace SECW
                 updateCommand.ExecuteNonQuery();
             }
             }
+            // Handle any exceptions that may occur during the database operation
+            // and log them to the console for debugging purposes.
             catch (SQLiteException ex)
             {
                 Console.WriteLine($"[ERROR] Failed to update last login date for username '{username}': {ex.Message}");
