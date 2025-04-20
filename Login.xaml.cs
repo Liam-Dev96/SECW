@@ -47,40 +47,46 @@ namespace SECW
                 {
                     connection.Open();
 
-                    // Query now only fetches the password hash and role for the user.
-                    string query = @"SELECT PasswordHash, RoleID FROM Users WHERE Username = @username";
-                    using (var command = new SQLiteCommand(query, connection))
+                    // Set busy timeout to prevent "database is locked" errors
+                    using (var pragmaCommand = new SQLiteCommand("PRAGMA busy_timeout = 3000;", connection))
                     {
-                        command.Parameters.AddWithValue("@username", username);
+                        pragmaCommand.ExecuteNonQuery();
+                    }
 
-                        using (var reader = command.ExecuteReader())
+                    using (var transaction = connection.BeginTransaction()) // Begin a transaction
+                    {
+                        string query = @"SELECT PasswordHash, RoleID FROM Users WHERE Username = @username";
+                        using (var command = new SQLiteCommand(query, connection))
                         {
-                            if (reader.Read())
+                            command.Parameters.AddWithValue("@username", username);
+
+                            using (var reader = command.ExecuteReader())
                             {
-                                string storedHash = reader["PasswordHash"].ToString() ?? string.Empty;
-                                int role = Convert.ToInt32(reader["RoleID"]);
-
-                                // Use BCrypt to verify entered password against stored hash.
-                                if (!BCrypt.Net.BCrypt.Verify(password, storedHash))
+                                if (reader.Read())
                                 {
-                                    await DisplayAlert("Error", "Invalid username or password.", "OK");
-                                    Console.WriteLine($"[INFO] Login failed: Invalid password for username '{username}'.");
-                                    return;
-                                }
+                                    string storedHash = reader["PasswordHash"].ToString() ?? string.Empty;
+                                    int role = Convert.ToInt32(reader["RoleID"]);
 
-                                // If password is valid, proceed with role-based navigation
-                                switch (role)
-                                {
-                                    case 1:
-                                        await DisplayAlert("Success", $"Welcome, Admin {username}!", "OK");
-                                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Admin.");
-                                        await this.Navigation.PopAsync(); // Close login page
-                                        updateLastLoginDate(username);    // Update last login time
+                                    // Use BCrypt to verify entered password against stored hash
+                                    if (!BCrypt.Net.BCrypt.Verify(password, storedHash))
+                                    {
+                                        await DisplayAlert("Error", "Invalid username or password.", "OK");
+                                        Console.WriteLine($"[INFO] Login failed: Invalid password for username '{username}'.");
+                                        return;
+                                    }
 
+                                    // Proceed with role-based navigation
+                                    switch (role)
+                                    {
+                                        case 1:
+                                            await DisplayAlert("Success", $"Welcome, Admin {username}!", "OK");
+                                            Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Admin.");
                                         try
                                         {
-                                            if (Application.Current != null)
+                                    if (Application.Current != null)
                                             {
+                                                // Navigate to AdminPage
+                                                // Assuming AdminPage is another page in your application
                                                 Application.Current.MainPage = new NavigationPage(new AdminPage());
                                             }
                                             else
@@ -92,44 +98,48 @@ namespace SECW
                                         {
                                             Console.WriteLine($"[ERROR] Failed to navigate to AdminPage: {ex.Message}");
                                         }
+                                            break;
 
-                                        break;
-
-                                    case 2:
-                                        await DisplayAlert("Success", $"Welcome, User: {username}!", "OK");
-                                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as User.");
-                                        await this.Navigation.PopAsync(); // Close login page
-                                        updateLastLoginDate(username);    // Update last login time
-
-                                        if (Application.Current != null)
+                                        case 2:
+                                            await DisplayAlert("Success", $"Welcome, User: {username}!", "OK");
+                                            Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as User.");
+                                    if (Application.Current != null)
                                         {
+                                            // Navigate to UserPage
+                                            // Assuming UserPage is another page in your application
                                             Application.Current.MainPage = new NavigationPage(new UserPage());
                                         }
                                         else
                                         {
                                             Console.WriteLine("[ERROR] Application.Current is null. Cannot navigate to UserPage.");
                                         }
-                                        break;
+                                            break;
 
-                                    case 3:
-                                        await DisplayAlert("Success", "Welcome, Guest!", "OK");
-                                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Guest.");
-                                        break;
+                                        case 3:
+                                            await DisplayAlert("Success", "Welcome, Guest!", "OK");
+                                            Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Guest.");
+                                            break;
 
-                                    default:
-                                        await DisplayAlert("Error", "Unknown role. Please contact support.", "OK");
-                                        Console.WriteLine($"[ERROR] Login failed: Username '{username}' has an unknown role.");
-                                        return;
+                                        default:
+                                            await DisplayAlert("Error", "Unknown role. Please contact support.", "OK");
+                                            Console.WriteLine($"[ERROR] Login failed: Username '{username}' has an unknown role.");
+                                            return;
+                                    }
+
+                                    transaction.Commit(); // Commit transaction after all operations
                                 }
-                            }
-                            else
-                            {
-                                await DisplayAlert("Error", "Invalid username or password.", "OK");
-                                Console.WriteLine($"[INFO] Login failed: Username '{username}' not found.");
-                                return;
+                                else
+                                {
+                                    await DisplayAlert("Error", "Invalid username or password.", "OK");
+                                    Console.WriteLine($"[INFO] Login failed: Username '{username}' not found.");
+                                    return;
+                                }
                             }
                         }
                     }
+
+                    // Update the last login date after the transaction is committed
+                    updateLastLoginDate(connection, username);
                 }
             }
             catch (SQLiteException ex)
@@ -145,34 +155,27 @@ namespace SECW
         }
 
         // Updates the user's last login date to the current timestamp in the database.
-        private static void updateLastLoginDate(string username)
+        private static void updateLastLoginDate(SQLiteConnection connection, string username)
         {
-            using (var connection = new SQLiteConnection(connectionString))
+            try
             {
-                connection.Open();
-                try
+                string updateQuery = @"UPDATE Users SET LastLogin = @lastLoginDate WHERE Username = @username";
+                using (var updateCommand = new SQLiteCommand(updateQuery, connection))
                 {
-                    string updateQuery = @"UPDATE Users SET LastLogin = @lastLoginDate WHERE Username = @username";
-                    using (var updateCommand = new SQLiteCommand(updateQuery, connection))
-                    {
-                        updateCommand.Parameters.AddWithValue("@lastLoginDate", DateTime.Now);
-                        updateCommand.Parameters.AddWithValue("@username", username);
-                        updateCommand.ExecuteNonQuery();
-                    }
+                    updateCommand.Parameters.AddWithValue("@lastLoginDate", DateTime.Now);
+                    updateCommand.Parameters.AddWithValue("@username", username);
+                    updateCommand.ExecuteNonQuery();
                 }
-                catch (SQLiteException ex)
-                {
-                    Console.WriteLine($"[ERROR] Failed to update last login date for username '{username}': {ex.Message}");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"[ERROR] Unexpected error while updating last login date for username '{username}': {ex.Message}");
-                }
-                finally
-                {
-                    connection.Close();
-                    Console.WriteLine($"[INFO] Last login date updated for username '{username}'.");
-                }
+
+                Console.WriteLine($"[INFO] Last login date updated for username '{username}'.");
+            }
+            catch (SQLiteException ex)
+            {
+                Console.WriteLine($"[ERROR] Failed to update last login date for username '{username}': {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] Unexpected error while updating last login date for username '{username}': {ex.Message}");
             }
         }
     }
