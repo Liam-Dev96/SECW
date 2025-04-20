@@ -36,7 +36,7 @@ public partial class AdminPage : ContentPage
         // Navigate to AdminSettingsPage
         // Assuming AdminSettingsPage is another page in your application
         // TODO: Implement AdminSettingsPage
-        //Navigation.PushAsync(new AdminSettingsPage());
+        Navigation.PushAsync(new AdminSettingsPage());
 
     }
 }
