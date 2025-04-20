@@ -152,7 +152,7 @@ namespace SECW
                 connection.Open();
                 try
                 {
-                    string updateQuery = @"UPDATE Users SET LastLoginDate = @lastLoginDate WHERE Username = @username";
+                    string updateQuery = @"UPDATE Users SET LastLogin = @lastLoginDate WHERE Username = @username";
                     using (var updateCommand = new SQLiteCommand(updateQuery, connection))
                     {
                         updateCommand.Parameters.AddWithValue("@lastLoginDate", DateTime.Now);
