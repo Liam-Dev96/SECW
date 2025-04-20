@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls;
 using System.Data.SQLite;
 using BCrypt.Net;
 using SECW.Helpers;
+using Microsoft.Maui.Storage;
 
 namespace SECW
 {
@@ -81,6 +82,7 @@ namespace SECW
                                         case 1:
                                             await DisplayAlert("Success", $"Welcome, Admin {username}!", "OK");
                                             Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Admin.");
+                                            LoggedinUser(username);
                                         try
                                         {
                                     if (Application.Current != null)
@@ -103,6 +105,7 @@ namespace SECW
                                         case 2:
                                             await DisplayAlert("Success", $"Welcome, User: {username}!", "OK");
                                             Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as User.");
+                                        try{
                                     if (Application.Current != null)
                                         {
                                             // Navigate to UserPage
@@ -113,6 +116,12 @@ namespace SECW
                                         {
                                             Console.WriteLine("[ERROR] Application.Current is null. Cannot navigate to UserPage.");
                                         }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine($"[ERROR] Failed to navigate to UserPage: {ex.Message}");
+                                        }
+                                    
                                             break;
 
                                         case 3:
@@ -178,5 +187,14 @@ namespace SECW
                 Console.WriteLine($"[ERROR] Unexpected error while updating last login date for username '{username}': {ex.Message}");
             }
         }
-    }
-}
+        public void LoggedinUser(string username)
+        {
+            var loggedInUser = username;
+            Console.WriteLine($"[INFO] Logged in user: {loggedInUser}");
+
+            // Store the logged-in user in preferences for later use
+            Preferences.Set("LoggedInUser", loggedInUser);
+        }
+
+
+}}

@@ -87,12 +87,14 @@ namespace SECW
             using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
+                // TODO: Grab logged in user and used it to check if the password is correct
+                string loggedInUser = GetLoggedInUser(); // Assuming you have a method to get the logged-in user
 
                 string verifyQuery = @"SELECT PasswordHash FROM Users WHERE Username = @username";
 
                 using (var verifyCommand = new SQLiteCommand(verifyQuery, connection))
                 {
-                    verifyCommand.Parameters.AddWithValue("@username", username);
+                    verifyCommand.Parameters.AddWithValue("@username", loggedInUser);
                     var storedHash = verifyCommand.ExecuteScalar()?.ToString();
 
                     if (storedHash == null)
@@ -112,6 +114,11 @@ namespace SECW
 
             return true;
         }
+
+        private string GetLoggedInUser()
+{
+    return Preferences.Get("LoggedInUser", string.Empty); // Default to empty string if not set
+}
 
         private bool IsInputValid(string username, string email, string oldPassword, string newPassword, string confirmPassword)
         {
