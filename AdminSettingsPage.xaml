@@ -24,9 +24,6 @@
             <Label Text="Confirm Password:" FontAttributes="Bold"/>
             <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm password" IsPassword="True"/>
 
-            <Label Text="Role ID:" FontAttributes="Bold"/>
-            <Entry x:Name="RoleIdEntry" Placeholder="Enter role ID" Keyboard="Numeric"/>
-
             <Button Text="Save Changes"
                     x:Name="SaveButton"
                     HorizontalOptions="Center"
