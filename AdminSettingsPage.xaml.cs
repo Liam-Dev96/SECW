@@ -37,7 +37,7 @@ namespace SECW
                 {
                     connection.Open();
 
-                    string updateQuery = @"UPDATE Users SET Email = @newEmail, Password = @newPassword WHERE Username = @username";
+                    string updateQuery = @"UPDATE Users SET Email = @newEmail, PasswordHash = @newPassword WHERE Username = @username";
 
                     using (var updateCommand = new SQLiteCommand(updateQuery, connection))
                     {
@@ -88,7 +88,7 @@ namespace SECW
             {
                 connection.Open();
 
-                string verifyQuery = @"SELECT Password FROM Users WHERE Username = @username";
+                string verifyQuery = @"SELECT PasswordHash FROM Users WHERE Username = @username";
 
                 using (var verifyCommand = new SQLiteCommand(verifyQuery, connection))
                 {
