@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="SECW.AdminSettingsPage"
+            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            Title="Admin Settings">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Admin Settings"
+            FontSize="24"
+            FontAttributes="Bold"
+            HorizontalOptions="Center"/>
+
+            <Label Text="Username:" FontAttributes="Bold"/>
+            <Entry x:Name="UsernameEntry" Placeholder="Enter username"/>
+
+            <Label Text="Email:" FontAttributes="Bold"/>
+            <Entry x:Name="EmailEntry" Placeholder="Enter email" Keyboard="Email"/>
+
+            <Label Text="Password:" FontAttributes="Bold"/>
+            <Entry x:Name="PasswordEntry" Placeholder="Enter password" IsPassword="True"/>
+
+            <Label Text="Confirm Password:" FontAttributes="Bold"/>
+            <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm password" IsPassword="True"/>
+
+            <Label Text="Role ID:" FontAttributes="Bold"/>
+            <Entry x:Name="RoleIdEntry" Placeholder="Enter role ID" Keyboard="Numeric"/>
+
+            <Button Text="Save Changes"
+                    x:Name="SaveButton"
+                    HorizontalOptions="Center"
+                    Clicked="OnSaveChangesClicked"
+                    Margin="0,20,0,0"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -37,6 +37,7 @@ public partial class AdminPage : ContentPage
         // Assuming AdminSettingsPage is another page in your application
         // TODO: Implement AdminSettingsPage
         Navigation.PushAsync(new AdminSettingsPage());
+        //allowing the admin to navigate to the admin settings page and back to the admin dashboard
 
     }
 }
