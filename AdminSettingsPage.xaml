@@ -13,16 +13,19 @@
             HorizontalOptions="Center"/>
 
             <Label Text="Username:" FontAttributes="Bold"/>
-            <Entry x:Name="UsernameEntry" Placeholder="Enter username"/>
+            <Entry x:Name="UsernameEntry" Placeholder="Enter New Username"/>
 
             <Label Text="Email:" FontAttributes="Bold"/>
-            <Entry x:Name="EmailEntry" Placeholder="Enter email" Keyboard="Email"/>
+            <Entry x:Name="EmailEntry" Placeholder="Enter New Email" Keyboard="Email"/>
+
+            <Label Text="Old Password:" FontAttributes="Bold"/>
+            <Entry x:Name="OldPassword" Placeholder="Enter Old Password" IsPassword="True"/>
 
             <Label Text="Password:" FontAttributes="Bold"/>
-            <Entry x:Name="PasswordEntry" Placeholder="Enter password" IsPassword="True"/>
+            <Entry x:Name="PasswordEntry" Placeholder="Enter New Password" IsPassword="True"/>
 
             <Label Text="Confirm Password:" FontAttributes="Bold"/>
-            <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm password" IsPassword="True"/>
+            <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm New Password" IsPassword="True"/>
 
             <Button Text="Save Changes"
                     x:Name="SaveButton"
