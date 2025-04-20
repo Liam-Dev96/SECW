@@ -274,7 +274,7 @@ namespace SECW.Helpers
 
                         // Insert default Admin user
                         string InsertAdminUserQuery = @"Insert Into Users (Username, PasswordHash, Email, RoleID, CreatedAt, LastLogin)
-                        Values ('admin', 'Rxvstbvy@p72', 'admin112@gmail.com', 1, datetime('now'), NULL);";
+                        Values ('admin', '$2b$12$9IRbqDiT5Vc0A8SModlwu.o/1pYCPfXEZYifdL94TgND/2FpfMBqy', 'admin112@gmail.com', 1, datetime('now'), NULL);";
                         using (var insertCommand = new SQLiteCommand(InsertAdminUserQuery, Connection))
                         {
                             try
