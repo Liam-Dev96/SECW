@@ -162,24 +162,9 @@ public static class DataBaseHelper
                     string InsertAdminRoleQuery = @"Insert Into Roles (RoleName)
                     Values ('Admin');";
 
-                    using (var insertCommand = new SQLiteCommand(InsertAdminRoleQuery, Connection))
-                    {
-                        insertCommand.ExecuteNonQuery();
-                    }
-    
-                    using (var insertCommand = new SQLiteCommand(InsertAdminUserQuery, Connection))
-                    {
-                        insertCommand.ExecuteNonQuery();
-                    }
-
-
-                    //table creation query final stage
-                    //using the using statement to ensure that the connection is closed and disposed of properly
-                    //using statement is a syntactic sugar for try-finally block
-                    //it ensures that the connection is closed and disposed of properly, even if an exception occurs
-                    //using statement is a good practice to follow when working with database connections
                     using (var Command = new SQLiteCommand(Connection))
                     {
+                        // Create tables first
                         Command.CommandText = CreateUsersTableQuery;
                         Command.ExecuteNonQuery();
                         Command.CommandText = CreateRolesTableQuery;
@@ -202,8 +187,24 @@ public static class DataBaseHelper
                         Command.ExecuteNonQuery();
                         Command.CommandText = CreateAuditLogsTableQuery;
                         Command.ExecuteNonQuery();
-                    };
+                    }
+
+                    // Insert default data after tables are created
+                    using (var insertCommand = new SQLiteCommand(InsertAdminRoleQuery, Connection))
+                    {
+                        insertCommand.ExecuteNonQuery();
+                    }
+
+                    using (var insertCommand = new SQLiteCommand(InsertAdminUserQuery, Connection))
+                    {
+                        insertCommand.ExecuteNonQuery();
+                    }
                 }
+                    //table creation query final stage
+                    //using the using statement to ensure that the connection is closed and disposed of properly
+                    //using statement is a syntactic sugar for try-finally block
+                    //it ensures that the connection is closed and disposed of properly, even if an exception occurs
+                    //using statement is a good practice to follow when working with database connections
 
                 Connection.Close();
                 //closes the connection to the database
