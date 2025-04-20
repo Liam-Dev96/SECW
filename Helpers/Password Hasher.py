@@ -11,3 +11,7 @@ admin_password = "Rxvstbvy@p72"
 hashed_password = hash_password(admin_password)
 
 print("BCrypt Hashed Password:\n" + hashed_password)
+
+
+#function used to hash the admin password and update it in the database
+#faster than having to alter the password in the database based upon some conditions
