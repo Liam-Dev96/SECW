@@ -35,7 +35,7 @@ public partial class AdminPage : ContentPage
     {
         // Navigate to AdminSettingsPage
         // Assuming AdminSettingsPage is another page in your application
-        // TODO: Implement AdminSettingsPage
+        // TODO: Implement AdminSettingsPage 
         DisplayAlert("Admin Settings", "Navigating to Admin Settings Page\n this is the page where the admin can change their credentials\n if credentials change is attempted without the old passeord the changes will not take effect and an error will pop up.", "Understood");
         Navigation.PushAsync(new AdminSettingsPage());
         //allowing the admin to navigate to the admin settings page and back to the admin dashboard
