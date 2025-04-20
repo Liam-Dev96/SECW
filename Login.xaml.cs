@@ -24,14 +24,19 @@ namespace SECW
             catch (Exception ex)
             {
                 DisplayAlert("Error", $"Failed to initialize the database: {ex.Message}", "OK");
+                Console.WriteLine($"[ERROR] Database initialization failed: {ex.Message}");
             }
         }
 
         private async void Submitbtn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Username.Text) || string.IsNullOrWhiteSpace(Password.Text))
+            string username = Username.Text;
+            string password = Password.Text;
+
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 await DisplayAlert("Error", "Please enter both username and password.", "OK");
+                Console.WriteLine("[INFO] Login attempt failed: Missing username or password.");
                 return;
             }
 
@@ -43,8 +48,8 @@ namespace SECW
                     string query = @"SELECT RoleID FROM Users WHERE Username = @username AND PasswordHash = @passwordHash";
                     using (var command = new SQLiteCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@username", Username.Text);
-                        command.Parameters.AddWithValue("@passwordHash", Password.Text);
+                        command.Parameters.AddWithValue("@username", username);
+                        command.Parameters.AddWithValue("@passwordHash", password);
 
                         var roleId = command.ExecuteScalar();
 
@@ -55,23 +60,27 @@ namespace SECW
                             {
                                 case 1:
                                     await DisplayAlert("Success", "Welcome, Admin!", "OK");
+                                    Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Admin.");
                                     break;
                                 case 2:
                                     await DisplayAlert("Success", "Welcome, User!", "OK");
+                                    Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as User.");
                                     break;
                                 case 3:
                                     await DisplayAlert("Success", "Welcome, Guest!", "OK");
+                                    Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Guest.");
                                     break;
                                 default:
                                     await DisplayAlert("Error", "Unknown role. Please contact support.", "OK");
+                                    Console.WriteLine($"[ERROR] Login failed: Username '{username}' has an unknown role.");
                                     connection.Close();
                                     return;
-                                    
                             }
                         }
                         else
                         {
                             await DisplayAlert("Error", "Invalid username or password.", "OK");
+                            Console.WriteLine($"[INFO] Login failed: Invalid credentials for username '{username}'.");
                             connection.Close();
                             return;
                         }
@@ -81,11 +90,12 @@ namespace SECW
             catch (SQLiteException ex)
             {
                 await DisplayAlert("Error", $"Database error: {ex.Message}", "OK");
-            
+                Console.WriteLine($"[ERROR] Database error during login attempt for username '{username}': {ex.Message}");
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"An unexpected error occurred: {ex.Message}", "OK");
+                Console.WriteLine($"[ERROR] Unexpected error during login attempt for username '{username}': {ex.Message}");
             }
         }
     }

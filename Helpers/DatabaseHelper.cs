@@ -192,13 +192,36 @@ public static class DataBaseHelper
                     // Insert default data after tables are created
                     using (var insertCommand = new SQLiteCommand(InsertAdminRoleQuery, Connection))
                     {
-                        insertCommand.ExecuteNonQuery();
+                        try
+                        {
+                            insertCommand.ExecuteNonQuery();
+                        }
+                        catch (SQLiteException ex)
+                        {
+                            // Handle the case where the role already exists
+                            if (ex.ErrorCode != (int)SQLiteErrorCode.Constraint)
+                            {
+                                throw;
+                            }
+                        }
+                    
                     }
 
                     using (var insertCommand = new SQLiteCommand(InsertAdminUserQuery, Connection))
                     {
+                    try{
                         insertCommand.ExecuteNonQuery();
                     }
+                    catch (SQLiteException ex)
+                    {
+                        // Handle the case where the user already exists
+                        if (ex.ErrorCode != (int)SQLiteErrorCode.Constraint)
+                        {
+                            throw;
+                        }
+                    }
+                    }
+                    
                 }
                     //table creation query final stage
                     //using the using statement to ensure that the connection is closed and disposed of properly
