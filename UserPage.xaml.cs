@@ -1,6 +1,6 @@
 namespace SECW;
 
-public partial class UserPage
+public partial class UserPage : ContentPage
 {
     public UserPage()
     {
