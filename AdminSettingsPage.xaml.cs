@@ -19,82 +19,116 @@ namespace SECW
         {
             try
             {
-                string username = UsernameEntry.Text?.Trim() ?? string.Empty;
+                string loggedInUser = GetLoggedInUser();
+                string username = loggedInUser; // Ensure the logged-in user is being updated
                 string email = EmailEntry.Text?.Trim() ?? string.Empty;
                 string oldPassword = OldPassword.Text;
                 string newPassword = PasswordEntry.Text;
                 string confirmPassword = ConfirmPasswordEntry.Text;
 
-                if (!IsInputValid(username, email, oldPassword, newPassword, confirmPassword))
+                if (string.IsNullOrWhiteSpace(username))
+                {
+                    DisplayAlert("Input Error", "Username is required.", "OK");
                     return;
+                }
 
-                if (!ValidatePasswordChange(username, oldPassword, newPassword, confirmPassword))
+                if (string.IsNullOrWhiteSpace(oldPassword))
+                {
+                    DisplayAlert("Input Error", "Old password is required.", "OK");
                     return;
+                }
 
-                string hashedNewPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
+                if (!ValidatePasswordChange(username, oldPassword))
+                {
+                    return; // Validation failed, error already displayed
+                }
 
                 using (var connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
 
-                    string updateQuery = @"UPDATE Users SET Email = @newEmail, PasswordHash = @newPassword WHERE Username = @username";
-
-                    using (var updateCommand = new SQLiteCommand(updateQuery, connection))
+                    using (var transaction = connection.BeginTransaction())
                     {
-                        updateCommand.Parameters.AddWithValue("@username", username);
-                        updateCommand.Parameters.AddWithValue("@newEmail", email);
-                        updateCommand.Parameters.AddWithValue("@newPassword", hashedNewPassword);
+                        string updateQuery = "UPDATE Users SET ";
+                        var parameters = new List<string>();
 
-                        updateCommand.ExecuteNonQuery();
+                        // Check if email is provided and valid
+                        if (!string.IsNullOrWhiteSpace(email))
+                        {
+                            if (!email.Contains("@"))
+                            {
+                                DisplayAlert("Input Error", "Please enter a valid email address.", "OK");
+                                return;
+                            }
+                            parameters.Add("Email = @newEmail");
+                        }
+
+                        // Check if new password is provided and valid
+                        if (!string.IsNullOrWhiteSpace(newPassword))
+                        {
+                            if (newPassword != confirmPassword)
+                            {
+                                DisplayAlert("Validation Error", "Passwords do not match.", "OK");
+                                return;
+                            }
+
+                            string hashedNewPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
+                            parameters.Add("PasswordHash = @newPassword");
+                        }
+
+                        // If no parameters were added, display an error
+                        if (parameters.Count == 0)
+                        {
+                            DisplayAlert("Input Error", "No changes to save. Please modify at least one field.", "OK");
+                            return;
+                        }
+
+                        // Build the update query
+                        updateQuery += string.Join(", ", parameters) + " WHERE Username = @username";
+
+                        using (var updateCommand = new SQLiteCommand(updateQuery, connection, transaction))
+                        {
+                            updateCommand.Parameters.AddWithValue("@username", username);
+
+                            if (!string.IsNullOrWhiteSpace(email))
+                                updateCommand.Parameters.AddWithValue("@newEmail", email);
+
+                            if (!string.IsNullOrWhiteSpace(newPassword))
+                                updateCommand.Parameters.AddWithValue("@newPassword", BCrypt.Net.BCrypt.HashPassword(newPassword));
+
+                            int rowsAffected = updateCommand.ExecuteNonQuery();
+                            if (rowsAffected == 0)
+                            {
+                                DisplayAlert("Error", "No matching user found to update. No changes made.", "OK");
+                                return;
+                            }
+                        }
+
+                        transaction.Commit();
                     }
                 }
 
                 DisplayAlert("Success", "Changes saved successfully.", "OK");
-                Console.WriteLine("[INFO] Changes saved successfully.");
             }
             catch (SQLiteException ex)
             {
                 DisplayAlert("Database Error", ex.Message, "OK");
-                Console.WriteLine($"[ERROR] SQLite error: {ex.Message}");
             }
             catch (Exception ex)
             {
                 DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
-                Console.WriteLine($"[ERROR] Unexpected error: {ex.Message}");
             }
         }
 
-        private bool ValidatePasswordChange(string username, string oldPassword, string newPassword, string confirmPassword)
+        private bool ValidatePasswordChange(string username, string oldPassword)
         {
-            if (newPassword != confirmPassword)
-            {
-                DisplayAlert("Validation Error", "Passwords do not match.", "OK");
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(oldPassword))
-            {
-                DisplayAlert("Validation Error", "Old password cannot be empty.", "OK");
-                return false;
-            }
-
-            if (oldPassword == newPassword)
-            {
-                DisplayAlert("Validation Error", "New password cannot be the same as the old password.", "OK");
-                return false;
-            }
-
             using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
-                // TODO: Grab logged in user and used it to check if the password is correct
-                string loggedInUser = GetLoggedInUser(); // Assuming you have a method to get the logged-in user
-
-                string verifyQuery = @"SELECT PasswordHash FROM Users WHERE Username = @username";
-
+                string verifyQuery = "SELECT PasswordHash FROM Users WHERE Username = @username";
                 using (var verifyCommand = new SQLiteCommand(verifyQuery, connection))
                 {
-                    verifyCommand.Parameters.AddWithValue("@username", loggedInUser);
+                    verifyCommand.Parameters.AddWithValue("@username", username); // Use the username parameter
                     var storedHash = verifyCommand.ExecuteScalar()?.ToString();
 
                     if (storedHash == null)
@@ -103,8 +137,7 @@ namespace SECW
                         return false;
                     }
 
-                    bool isPasswordValid = BCrypt.Net.BCrypt.Verify(oldPassword, storedHash);
-                    if (!isPasswordValid)
+                    if (!BCrypt.Net.BCrypt.Verify(oldPassword, storedHash))
                     {
                         DisplayAlert("Validation Error", "Old password is incorrect.", "OK");
                         return false;
@@ -116,9 +149,9 @@ namespace SECW
         }
 
         private string GetLoggedInUser()
-{
-    return Preferences.Get("LoggedInUser", string.Empty); // Default to empty string if not set
-}
+        {
+            return Preferences.Get("LoggedInUser", string.Empty); // Default to empty string if not set
+        }
 
         private bool IsInputValid(string username, string email, string oldPassword, string newPassword, string confirmPassword)
         {
