@@ -8,6 +8,7 @@ namespace SECW
 {
     public partial class AdminSettingsPage : ContentPage
     {
+        // Connection string for SQLite database
         private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;Version=3;";
 
         public AdminSettingsPage()
@@ -15,18 +16,21 @@ namespace SECW
             InitializeComponent();
         }
 
+        // Event handler for the "Save Changes" button click
         private void OnSaveChangesClicked(object sender, EventArgs e)
         {
             try
             {
+                // Retrieve the logged-in user's username
                 string loggedInUser = GetLoggedInUser();
                 string username = loggedInUser; // Ensure the logged-in user is being updated
                 string newUsername = UsernameEntry.Text?.Trim() ?? string.Empty; // New username field
                 string email = EmailEntry.Text?.Trim() ?? string.Empty; // Email field
-                string oldPassword = OldPassword.Text;
-                string newPassword = PasswordEntry.Text;
-                string confirmPassword = ConfirmPasswordEntry.Text;
+                string oldPassword = OldPassword.Text; // Old password field
+                string newPassword = PasswordEntry.Text; // New password field
+                string confirmPassword = ConfirmPasswordEntry.Text; // Confirm password field
 
+                // Validate required fields
                 if (string.IsNullOrWhiteSpace(username))
                 {
                     DisplayAlert("Input Error", "Username is required.", "OK");
@@ -39,6 +43,7 @@ namespace SECW
                     return;
                 }
 
+                // Validate the old password before proceeding
                 if (!ValidatePasswordChange(username, oldPassword))
                 {
                     return; // Validation failed, error already displayed
@@ -84,6 +89,7 @@ namespace SECW
                                 return;
                             }
 
+                            // Hash the new password before saving
                             string hashedNewPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
                             parameters.Add("PasswordHash = @newPassword");
                         }
@@ -95,11 +101,12 @@ namespace SECW
                             return;
                         }
 
-                        // Build the update query
+                        // Build the update query dynamically based on provided inputs
                         updateQuery += string.Join(", ", parameters) + " WHERE Username = @username";
 
                         using (var updateCommand = new SQLiteCommand(updateQuery, connection, transaction))
                         {
+                            // Add parameters to the query
                             updateCommand.Parameters.AddWithValue("@username", username);
 
                             if (!string.IsNullOrWhiteSpace(newUsername))
@@ -111,6 +118,7 @@ namespace SECW
                             if (!string.IsNullOrWhiteSpace(newPassword))
                                 updateCommand.Parameters.AddWithValue("@newPassword", BCrypt.Net.BCrypt.HashPassword(newPassword));
 
+                            // Execute the update query
                             int rowsAffected = updateCommand.ExecuteNonQuery();
                             if (rowsAffected == 0)
                             {
@@ -119,22 +127,27 @@ namespace SECW
                             }
                         }
 
+                        // Commit the transaction if all operations succeed
                         transaction.Commit();
                     }
                 }
 
+                // Notify the user of success
                 DisplayAlert("Success", "Changes saved successfully.", "OK");
             }
             catch (SQLiteException ex)
             {
+                // Handle database-related errors
                 DisplayAlert("Database Error", ex.Message, "OK");
             }
             catch (Exception ex)
             {
+                // Handle general errors
                 DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
             }
         }
 
+        // Validates the old password for the logged-in user
         private bool ValidatePasswordChange(string username, string oldPassword)
         {
             using (var connection = new SQLiteConnection(connectionString))
@@ -152,6 +165,7 @@ namespace SECW
                         return false;
                     }
 
+                    // Verify the old password against the stored hash
                     if (!BCrypt.Net.BCrypt.Verify(oldPassword, storedHash))
                     {
                         DisplayAlert("Validation Error", "Old password is incorrect.", "OK");
@@ -163,11 +177,13 @@ namespace SECW
             return true;
         }
 
+        // Retrieves the currently logged-in user's username from preferences
         private string GetLoggedInUser()
         {
             return Preferences.Get("LoggedInUser", string.Empty); // Default to empty string if not set
         }
 
+        // Validates input fields for general correctness
         private bool IsInputValid(string username, string email, string oldPassword, string newPassword, string confirmPassword)
         {
             if (string.IsNullOrWhiteSpace(username) ||
