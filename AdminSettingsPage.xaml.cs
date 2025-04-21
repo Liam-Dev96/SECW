@@ -21,7 +21,8 @@ namespace SECW
             {
                 string loggedInUser = GetLoggedInUser();
                 string username = loggedInUser; // Ensure the logged-in user is being updated
-                string email = EmailEntry.Text?.Trim() ?? string.Empty;
+                string newUsername = UsernameEntry.Text?.Trim() ?? string.Empty; // New username field
+                string email = EmailEntry.Text?.Trim() ?? string.Empty; // Email field
                 string oldPassword = OldPassword.Text;
                 string newPassword = PasswordEntry.Text;
                 string confirmPassword = ConfirmPasswordEntry.Text;
@@ -51,6 +52,17 @@ namespace SECW
                     {
                         string updateQuery = "UPDATE Users SET ";
                         var parameters = new List<string>();
+
+                        // Check if new username is provided and valid
+                        if (!string.IsNullOrWhiteSpace(newUsername))
+                        {
+                            if (newUsername == username)
+                            {
+                                DisplayAlert("Input Error", "New username cannot be the same as the current username.", "OK");
+                                return;
+                            }
+                            parameters.Add("Username = @newUsername");
+                        }
 
                         // Check if email is provided and valid
                         if (!string.IsNullOrWhiteSpace(email))
@@ -89,6 +101,9 @@ namespace SECW
                         using (var updateCommand = new SQLiteCommand(updateQuery, connection, transaction))
                         {
                             updateCommand.Parameters.AddWithValue("@username", username);
+
+                            if (!string.IsNullOrWhiteSpace(newUsername))
+                                updateCommand.Parameters.AddWithValue("@newUsername", newUsername);
 
                             if (!string.IsNullOrWhiteSpace(email))
                                 updateCommand.Parameters.AddWithValue("@newEmail", email);
