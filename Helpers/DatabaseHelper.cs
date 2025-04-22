@@ -53,7 +53,7 @@ namespace SECW.Helpers
                         {
                             string CreateRolesTableQuery = @"Create Table If Not Exists Roles(
                             RoleID integer Primary Key AUTOINCREMENT,
-                            RoleName VARCHAR (50)
+                            RoleName VARCHAR (50) Unique Check (RoleName IN ('Environmental Scientist', 'Operations Manager', 'Admin'))
                             );";
                             using var Command = new SQLiteCommand(CreateRolesTableQuery, Connection);
                             Command.ExecuteNonQuery();
