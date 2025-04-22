@@ -11,6 +11,7 @@ namespace SECW
         public ObservableCollection<User> Users { get; set; }
         public ICommand DeleteUserCommand { get; }
         public ICommand AddUserCommand { get; }
+        public ICommand EditUserCommand { get; }
 
         public static class DataBaseHelper
         {
@@ -27,6 +28,7 @@ namespace SECW
             // Initialize commands
             DeleteUserCommand = new Command<User>(DeleteUser);
             AddUserCommand = new Command(AddUser);
+            EditUserCommand = new Command<User>(EditUser); // Initialize the EditUserCommand
 
             // Load users from the database
             LoadUsersFromDatabase();
@@ -204,6 +206,61 @@ namespace SECW
             {
                 DisplayAlert("Error", $"Unexpected error: {ex.Message}", "OK");
                 Console.WriteLine($"Unexpected error while deleting user: {ex.Message}");
+            }
+        }
+
+        private async void EditUser(User user)
+        {
+            if (user == null)
+            {
+                Console.WriteLine("EditUser called with null user.");
+                return;
+            }
+
+            Console.WriteLine($"Editing user: {user.Name}");
+
+            // Open the EditUserPage as a modal
+            await Navigation.PushModalAsync(new EditUserPage(user, OnUserModified));
+        }
+
+        private void OnUserModified(User modifiedUser)
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
+                connection.Open();
+
+                // Update the user in the database
+                string query = @"UPDATE Users
+                                SET Username = @Username, Email = @Email, RoleID = (SELECT RoleID FROM Roles WHERE RoleName = @RoleName)
+                                WHERE Username = @OriginalUsername";
+
+                using var command = new SQLiteCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", modifiedUser.Name);
+                command.Parameters.AddWithValue("@Email", modifiedUser.Email);
+                command.Parameters.AddWithValue("@RoleName", modifiedUser.RoleName);
+                command.Parameters.AddWithValue("@OriginalUsername", modifiedUser.Name); // Assuming username is unique
+
+                command.ExecuteNonQuery();
+
+                // Update the user in the ObservableCollection
+                var user = Users.FirstOrDefault(u => u.Name == modifiedUser.Name);
+                if (user != null)
+                {
+                    user.Name = modifiedUser.Name;
+                    user.Email = modifiedUser.Email;
+                    user.RoleName = modifiedUser.RoleName;
+                }
+
+                Console.WriteLine($"User {modifiedUser.Name} updated successfully.");
+            }
+            catch (SQLiteException ex)
+            {
+                Console.WriteLine($"SQLite error while updating user: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unexpected error while updating user: {ex.Message}");
             }
         }
 

@@ -39,7 +39,7 @@
                                 <Button Text="Modify"
                                     BackgroundColor="blue"
                                         TextColor="White"
-                                        Command="{Binding BindingContext.EditUserCommand, Source={x:Reference ManageUsersPage}}"
+                                        Command="{Binding EditUserCommand}"
                                         CommandParameter="{Binding .}" />
                             </StackLayout>
                         </ViewCell>
