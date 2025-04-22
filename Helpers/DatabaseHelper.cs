@@ -33,10 +33,10 @@ namespace SECW.Helpers
                             string CreateUsersTableQuery = @"Create Table If Not Exists Users(
                             UserID integer Primary Key AUTOINCREMENT,
                             Username VARCHAR (50) Unique,
-                            PasswordHash VARCHAR (256),
-                            Email VARCHAR (100),
+                            PasswordHash VARCHAR (256) NOT NULL,
+                            Email VARCHAR (100) NOT NULL,
                             RoleID Integer,
-                            CreatedAt DateTime,
+                            CreatedAt DateTime NOT NULL,
                             LastLogin DateTime,
                             Foreign Key (RoleID) References Roles(RoleID)
                             );";

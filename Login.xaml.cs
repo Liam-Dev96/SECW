@@ -35,6 +35,12 @@ namespace SECW
             string username = Username.Text;
             string password = Password.Text;
 
+            if (username == null || password == null)
+            {
+                await DisplayAlert("Error", "Username or password cannot be null.", "OK");
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 await DisplayAlert("Error", "Please enter both username and password.", "OK");
@@ -54,95 +60,61 @@ namespace SECW
                         pragmaCommand.ExecuteNonQuery();
                     }
 
-                    using (var transaction = connection.BeginTransaction()) // Begin a transaction
+                    string query = @"SELECT PasswordHash, RoleID FROM Users WHERE Username = @username";
+                    using (var command = new SQLiteCommand(query, connection))
                     {
-                        string query = @"SELECT PasswordHash, RoleID FROM Users WHERE Username = @username";
-                        using (var command = new SQLiteCommand(query, connection))
+                        command.Parameters.AddWithValue("@username", username);
+
+                        using (var reader = command.ExecuteReader())
                         {
-                            command.Parameters.AddWithValue("@username", username);
-
-                            using (var reader = command.ExecuteReader())
+                            if (reader.Read())
                             {
-                                if (reader.Read())
-                                {
-                                    string storedHash = reader["PasswordHash"].ToString() ?? string.Empty;
-                                    int role = Convert.ToInt32(reader["RoleID"]);
+                                string storedHash = reader["PasswordHash"].ToString() ?? string.Empty;
+                                int role = Convert.ToInt32(reader["RoleID"]);
 
-                                    // Use BCrypt to verify entered password against stored hash
-                                    if (!BCrypt.Net.BCrypt.Verify(password, storedHash))
-                                    {
-                                        await DisplayAlert("Error", "Invalid username or password.", "OK");
-                                        Console.WriteLine($"[INFO] Login failed: Invalid password for username '{username}'.");
-                                        return;
-                                    }
-
-                                    // Proceed with role-based navigation
-                                    switch (role)
-                                    {
-                                        case 1:
-                                            await DisplayAlert("Success", $"Welcome, Admin {username}!", "OK");
-                                            Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Admin.");
-                                            LoggedinUser(username);
-                                        try
-                                        {
-                                    if (Application.Current != null)
-                                            {
-                                                // Navigate to AdminPage
-                                                // Assuming AdminPage is another page in your application
-                                                Application.Current.MainPage = new NavigationPage(new AdminPage());
-                                            }
-                                            else
-                                            {
-                                                Console.WriteLine("[ERROR] Application.Current is null. Cannot navigate to AdminPage.");
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Console.WriteLine($"[ERROR] Failed to navigate to AdminPage: {ex.Message}");
-                                        }
-                                            break;
-
-                                        case 2:
-                                            await DisplayAlert("Success", $"Welcome, User: {username}!", "OK");
-                                            Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as User.");
-                                        try{
-                                    if (Application.Current != null)
-                                        {
-                                            // Navigate to UserPage
-                                            // Assuming UserPage is another page in your application
-                                            Application.Current.MainPage = new NavigationPage(new UserPage());
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("[ERROR] Application.Current is null. Cannot navigate to UserPage.");
-                                        }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Console.WriteLine($"[ERROR] Failed to navigate to UserPage: {ex.Message}");
-                                        }
-                                    
-                                            break;
-
-                                        case 3:
-                                            await DisplayAlert("Success", "Welcome, Guest!", "OK");
-                                            Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Guest.");
-                                            break;
-
-                                        default:
-                                            await DisplayAlert("Error", "Unknown role. Please contact support.", "OK");
-                                            Console.WriteLine($"[ERROR] Login failed: Username '{username}' has an unknown role.");
-                                            return;
-                                    }
-
-                                    transaction.Commit(); // Commit transaction after all operations
-                                }
-                                else
+                                // Use BCrypt to verify entered password against stored hash
+                                if (!BCrypt.Net.BCrypt.Verify(password, storedHash))
                                 {
                                     await DisplayAlert("Error", "Invalid username or password.", "OK");
-                                    Console.WriteLine($"[INFO] Login failed: Username '{username}' not found.");
+                                    Console.WriteLine($"[INFO] Login failed: Invalid password for username '{username}'.");
                                     return;
                                 }
+
+                                // Proceed with role-based navigation
+                                switch (role)
+                                {
+                                    case 1: // Admin
+                                        await DisplayAlert("Success", $"Welcome, Admin {username}!", "OK");
+                                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Admin.");
+                                        LoggedinUser(username);
+                                        Application.Current.MainPage = new NavigationPage(new AdminPage());
+                                        break;
+
+                                    case 2: // Operational Manager
+                                        await DisplayAlert("Success", $"Welcome, Operational Manager {username}!", "OK");
+                                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Operational Manager.");
+                                        LoggedinUser(username);
+                                        Application.Current.MainPage = new NavigationPage(new OperationalManagerPage());
+                                        break;
+
+                                    case 3: // Environmental Scientist
+                                        await DisplayAlert("Success", $"Welcome, Environmental Scientist {username}!", "OK");
+                                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Environmental Scientist.");
+                                        LoggedinUser(username);
+                                        Application.Current.MainPage = new NavigationPage(new EnvironmentalScientistPage());
+                                        break;
+
+                                    default:
+                                        await DisplayAlert("Error", "Unknown role. Please contact support.", "OK");
+                                        Console.WriteLine($"[ERROR] Login failed: Username '{username}' has an unknown role.");
+                                        return;
+                                }
+                            }
+                            else
+                            {
+                                await DisplayAlert("Error", "Invalid username or password.", "OK");
+                                Console.WriteLine($"[INFO] Login failed: Username '{username}' not found.");
+                                return;
                             }
                         }
                     }
@@ -195,6 +167,5 @@ namespace SECW
             // Store the logged-in user in preferences for later use
             Preferences.Set("LoggedInUser", loggedInUser);
         }
-
-
-}}
+    }
+}
