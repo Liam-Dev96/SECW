@@ -45,7 +45,8 @@ namespace SECW
 
                 string query = @"SELECT Users.Username, Users.Email, Roles.RoleName, Users.RoleID
                                 FROM Users
-                                LEFT JOIN Roles ON Users.RoleID = Roles.RoleID";
+                                LEFT JOIN Roles ON Users.RoleID = Roles.RoleID
+                                 WHERE Users.UserID != 1"; // Exclude admin account
                 using var command = new SQLiteCommand(query, connection);
                 using var reader = command.ExecuteReader();
 
