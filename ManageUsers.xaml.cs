@@ -45,15 +45,15 @@ namespace SECW
 
                 string query = @"SELECT Users.Username, Users.Email, Roles.RoleName, Users.RoleID
                                 FROM Users
-                                INNER JOIN Roles ON Users.RoleID = Roles.RoleID";
+                                LEFT JOIN Roles ON Users.RoleID = Roles.RoleID";
                 using var command = new SQLiteCommand(query, connection);
                 using var reader = command.ExecuteReader();
 
                 Users.Clear();
                 while (reader.Read())
                 {
-                    var roleName = reader["RoleName"].ToString() ?? string.Empty;
-                    var roleId = Convert.ToInt32(reader["RoleID"]);
+                    var roleName = reader["RoleName"]?.ToString() ?? "No Role";
+                    var roleId = reader["RoleID"] != DBNull.Value ? Convert.ToInt32(reader["RoleID"]) : 0;
                     Console.WriteLine($"Loaded user: {reader["Username"]}, Role: {roleName} (ID: {roleId})");
 
                     Users.Add(new User
@@ -87,11 +87,17 @@ namespace SECW
                 if (string.IsNullOrWhiteSpace(Username.Text) ||
                     string.IsNullOrWhiteSpace(EmailEntry.Text) ||
                     string.IsNullOrWhiteSpace(Password.Text) ||
-                    string.IsNullOrWhiteSpace(ConfirmPassword.Text) ||
-                    RolePicker.SelectedItem == null)
+                    string.IsNullOrWhiteSpace(ConfirmPassword.Text))
                 {
-                    DisplayAlert("Error", "Please fill in all fields.", "OK");
+                    DisplayAlert("Error", "Please fill in all required fields.", "OK");
                     Console.WriteLine("Validation failed: Missing required fields.");
+                    return;
+                }
+
+                if (RolePicker.SelectedItem == null)
+                {
+                    DisplayAlert("Error", "Please select a role for the user.", "OK");
+                    Console.WriteLine("Validation failed: No role selected.");
                     return;
                 }
 
