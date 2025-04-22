@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SECW.ManageUsers"
+             x:Name="ManageUsersPage"
+             Title="Manage Users">
+             
+    <StackLayout Padding="20" Spacing="15">
+        <Label Text="Add Users" FontSize="24" HorizontalOptions="Center" />
+        <Entry x:Name="Username" Placeholder="UserName" />
+        <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" />
+        <Picker x:Name="RolePicker" Title="Select Role">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Operations Manager</x:String>
+                    <x:String>Environmental Scientist</x:String>
+                    <x:String>Admin</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <Entry x:Name="Password" Placeholder="Password" IsPassword="True" />
+        <Entry x:Name="ConfirmPassword" Placeholder="Confirm Password" IsPassword="True" />
+        <Button Text="Add User" Command="{Binding AddUserCommand}" />
+        <ListView ItemsSource="{Binding Users}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Email}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
