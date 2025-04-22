@@ -271,6 +271,20 @@ namespace SECW.Helpers
                                 }
                             }
                         }
+        string InsertRolesQuery = @"
+    INSERT OR IGNORE INTO Roles (RoleID, RoleName) VALUES (1, 'Admin');
+    INSERT OR IGNORE INTO Roles (RoleID, RoleName) VALUES (2, 'Operations Manager');
+    INSERT OR IGNORE INTO Roles (RoleID, RoleName) VALUES (3, 'Environmental Scientist');
+";
+            try
+            {
+                        using var insertRolesCommand = new SQLiteCommand(InsertRolesQuery, Connection);
+                        insertRolesCommand.ExecuteNonQuery();
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        Console.WriteLine($"Error inserting roles: {ex.Message}");
+                    }
 
                         // Insert default Admin user
                         string InsertAdminUserQuery = @"Insert Into Users (Username, PasswordHash, Email, RoleID, CreatedAt, LastLogin)
@@ -291,21 +305,6 @@ namespace SECW.Helpers
                             }
                         }
                     }
-                    try
-                    {
-                        string InsertRolesQuery = @"
-    INSERT OR IGNORE INTO Roles (RoleID, RoleName) VALUES (1, 'Admin');
-    INSERT OR IGNORE INTO Roles (RoleID, RoleName) VALUES (2, 'Operational Manager');
-    INSERT OR IGNORE INTO Roles (RoleID, RoleName) VALUES (3, 'Environmental Scientist');
-";
-                        using var insertRolesCommand = new SQLiteCommand(InsertRolesQuery, Connection);
-                        insertRolesCommand.ExecuteNonQuery();
-                    }
-                    catch (SQLiteException ex)
-                    {
-                        Console.WriteLine($"Error inserting roles: {ex.Message}");
-                    }
-
                     // Close the database connection
                     Connection.Close();
                 }

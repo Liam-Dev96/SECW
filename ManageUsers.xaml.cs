@@ -114,6 +114,15 @@ namespace SECW
                 // Hash the password using BCrypt
                 string hashedPassword = BCrypt.Net.BCrypt.HashPassword(Password.Text);
 
+                // Map RoleName to RoleID
+                int roleId = RolePicker.SelectedItem.ToString() switch
+                {
+                    "Admin" => 1,
+                    "Operational Manager" => 2,
+                    "Environmental Scientist" => 3,
+                    _ => throw new Exception("Invalid role selected.")
+                };
+
                 using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
                 connection.Open();
 
@@ -132,14 +141,13 @@ namespace SECW
 
                 // Insert the new user into the database
                 string query = @"INSERT INTO Users (Username, PasswordHash, Email, RoleID, CreatedAt)
-                                VALUES (@Username, @PasswordHash, @Email, 
-                                        (SELECT RoleID FROM Roles WHERE RoleName = @RoleName), datetime('now'))";
+                            VALUES (@Username, @PasswordHash, @Email, @RoleID, datetime('now'))";
 
                 using var command = new SQLiteCommand(query, connection);
                 command.Parameters.AddWithValue("@Username", Username.Text);
                 command.Parameters.AddWithValue("@PasswordHash", hashedPassword);
                 command.Parameters.AddWithValue("@Email", EmailEntry.Text);
-                command.Parameters.AddWithValue("@RoleName", RolePicker.SelectedItem.ToString());
+                command.Parameters.AddWithValue("@RoleID", roleId);
 
                 command.ExecuteNonQuery();
 
@@ -148,7 +156,8 @@ namespace SECW
                 {
                     Name = Username.Text,
                     Email = EmailEntry.Text,
-                    RoleName = RolePicker.SelectedItem.ToString() ?? string.Empty
+                    RoleName = RolePicker.SelectedItem.ToString() ?? string.Empty,
+                    RoleID = roleId
                 });
 
                 // Clear input fields

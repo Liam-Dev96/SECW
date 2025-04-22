@@ -12,9 +12,9 @@
             <Picker x:Name="RolePicker" Title="Select Role">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
-                        <x:String>Operations Manager</x:String>
-                        <x:String>Environmental Scientist</x:String>
                         <x:String>Admin</x:String>
+                        <x:String>Operational Manager</x:String>
+                        <x:String>Environmental Scientist</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
