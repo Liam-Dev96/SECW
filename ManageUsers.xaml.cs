@@ -11,12 +11,11 @@ namespace SECW
         public ObservableCollection<User> Users { get; set; }
         public ICommand DeleteUserCommand { get; }
         public ICommand AddUserCommand { get; }
-        public static class DataBaseHelper
-    {
-        public static string ConnectionString { get; } = @"Data Source=Helpers\SoftwareEngineering.db;Version=3;";
 
-        
-    }
+        public static class DataBaseHelper
+        {
+            public static string ConnectionString { get; } = @"Data Source=Helpers\SoftwareEngineering.db;Version=3;";
+        }
 
         public ManageUsers()
         {
@@ -32,6 +31,7 @@ namespace SECW
             // Load users from the database
             LoadUsersFromDatabase();
 
+            // Set the BindingContext for data binding
             BindingContext = this;
         }
 
@@ -39,10 +39,11 @@ namespace SECW
         {
             try
             {
+                Console.WriteLine("Attempting to load users from the database...");
                 using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
                 connection.Open();
 
-                string query = @"SELECT Users.Username, Users.Email, Roles.RoleName
+                string query = @"SELECT Users.Username, Users.Email, Roles.RoleName, Users.RoleID
                                 FROM Users
                                 INNER JOIN Roles ON Users.RoleID = Roles.RoleID";
                 using var command = new SQLiteCommand(query, connection);
@@ -51,43 +52,73 @@ namespace SECW
                 Users.Clear();
                 while (reader.Read())
                 {
+                    var roleName = reader["RoleName"].ToString() ?? string.Empty;
+                    var roleId = Convert.ToInt32(reader["RoleID"]);
+                    Console.WriteLine($"Loaded user: {reader["Username"]}, Role: {roleName} (ID: {roleId})");
+
                     Users.Add(new User
                     {
                         Name = reader["Username"].ToString() ?? string.Empty,
                         Email = reader["Email"].ToString() ?? string.Empty,
-                        role = reader["RoleName"].ToString() ?? string.Empty
+                        RoleName = roleName,
+                        RoleID = roleId
                     });
                 }
+
+                Console.WriteLine("Users loaded successfully.");
             }
             catch (SQLiteException ex)
             {
                 Console.WriteLine($"Error loading users: {ex.Message}");
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unexpected error: {ex.Message}");
+            }
         }
 
         private void AddUser()
         {
-            if (string.IsNullOrWhiteSpace(Username.Text) ||
-                string.IsNullOrWhiteSpace(EmailEntry.Text) ||
-                string.IsNullOrWhiteSpace(Password.Text) ||
-                string.IsNullOrWhiteSpace(ConfirmPassword.Text) ||
-                RolePicker.SelectedItem == null)
-            {
-                DisplayAlert("Error", "Please fill in all fields.", "OK");
-                return;
-            }
-
-            if (Password.Text != ConfirmPassword.Text)
-            {
-                DisplayAlert("Error", "Passwords do not match.", "OK");
-                return;
-            }
-
             try
             {
+                Console.WriteLine("Attempting to add a new user...");
+
+                // Validate input fields
+                if (string.IsNullOrWhiteSpace(Username.Text) ||
+                    string.IsNullOrWhiteSpace(EmailEntry.Text) ||
+                    string.IsNullOrWhiteSpace(Password.Text) ||
+                    string.IsNullOrWhiteSpace(ConfirmPassword.Text) ||
+                    RolePicker.SelectedItem == null)
+                {
+                    DisplayAlert("Error", "Please fill in all fields.", "OK");
+                    Console.WriteLine("Validation failed: Missing required fields.");
+                    return;
+                }
+
+                if (Password.Text != ConfirmPassword.Text)
+                {
+                    DisplayAlert("Error", "Passwords do not match.", "OK");
+                    Console.WriteLine("Validation failed: Passwords do not match.");
+                    return;
+                }
+
                 using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
                 connection.Open();
 
+                // Check if the username already exists
+                string checkQuery = "SELECT COUNT(*) FROM Users WHERE Username = @Username";
+                using var checkCommand = new SQLiteCommand(checkQuery, connection);
+                checkCommand.Parameters.AddWithValue("@Username", Username.Text);
+
+                var count = Convert.ToInt32(checkCommand.ExecuteScalar());
+                if (count > 0)
+                {
+                    DisplayAlert("Error", "Username already exists. Please choose a different username.", "OK");
+                    Console.WriteLine("Validation failed: Username already exists.");
+                    return;
+                }
+
+                // Insert the new user
                 string query = @"INSERT INTO Users (Username, PasswordHash, Email, RoleID, CreatedAt)
                                 VALUES (@Username, @PasswordHash, @Email, 
                                         (SELECT RoleID FROM Roles WHERE RoleName = @RoleName), datetime('now'))";
@@ -104,7 +135,8 @@ namespace SECW
                 Users.Add(new User
                 {
                     Name = Username.Text,
-                    Email = EmailEntry.Text
+                    Email = EmailEntry.Text,
+                    RoleName = RolePicker.SelectedItem.ToString() ?? string.Empty
                 });
 
                 // Clear input fields
@@ -115,20 +147,32 @@ namespace SECW
                 RolePicker.SelectedItem = null;
 
                 DisplayAlert("Success", "User added successfully.", "OK");
+                Console.WriteLine("User added successfully.");
             }
             catch (SQLiteException ex)
             {
                 DisplayAlert("Error", $"Failed to add user: {ex.Message}", "OK");
+                Console.WriteLine($"SQLite error while adding user: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Error", $"Unexpected error: {ex.Message}", "OK");
+                Console.WriteLine($"Unexpected error while adding user: {ex.Message}");
             }
         }
 
         private void DeleteUser(User user)
         {
             if (user == null)
+            {
+                Console.WriteLine("DeleteUser called with null user.");
                 return;
+            }
 
             try
             {
+                Console.WriteLine($"Attempting to delete user: {user.Name}");
+
                 using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
                 connection.Open();
 
@@ -142,10 +186,50 @@ namespace SECW
                 Users.Remove(user);
 
                 DisplayAlert("Success", "User deleted successfully.", "OK");
+                Console.WriteLine($"User {user.Name} deleted successfully.");
             }
             catch (SQLiteException ex)
             {
                 DisplayAlert("Error", $"Failed to delete user: {ex.Message}", "OK");
+                Console.WriteLine($"SQLite error while deleting user: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Error", $"Unexpected error: {ex.Message}", "OK");
+                Console.WriteLine($"Unexpected error while deleting user: {ex.Message}");
+            }
+        }
+
+        private void FilterUsersByRole(string roleName)
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
+                connection.Open();
+
+                string query = @"SELECT Users.Username, Users.Email, Roles.RoleName
+                                FROM Users
+                                INNER JOIN Roles ON Users.RoleID = Roles.RoleID
+                                WHERE Roles.RoleName = @RoleName";
+
+                using var command = new SQLiteCommand(query, connection);
+                command.Parameters.AddWithValue("@RoleName", roleName);
+                using var reader = command.ExecuteReader();
+
+                Users.Clear();
+                while (reader.Read())
+                {
+                    Users.Add(new User
+                    {
+                        Name = reader["Username"].ToString() ?? string.Empty,
+                        Email = reader["Email"].ToString() ?? string.Empty,
+                        RoleName = reader["RoleName"].ToString() ?? string.Empty
+                    });
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                Console.WriteLine($"Error filtering users: {ex.Message}");
             }
         }
     }
@@ -154,6 +238,7 @@ namespace SECW
     {
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public string role { get; set; } = string.Empty;
+        public string RoleName { get; set; } = string.Empty; // Display RoleName
+        public int RoleID { get; set; } // Store RoleID
     }
 }
