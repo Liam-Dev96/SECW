@@ -87,21 +87,42 @@ namespace SECW
                                         await DisplayAlert("Success", $"Welcome, Admin {username}!", "OK");
                                         Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Admin.");
                                         LoggedinUser(username);
-                                        Application.Current.MainPage = new NavigationPage(new AdminPage());
+                                        if (Application.Current != null)
+                                        {
+                                            Application.Current.MainPage = new NavigationPage(new AdminPage());
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("[ERROR] Application.Current is null.");
+                                        }
                                         break;
 
                                     case 2: // Operational Manager
                                         await DisplayAlert("Success", $"Welcome, Operational Manager {username}!", "OK");
                                         Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Operational Manager.");
                                         LoggedinUser(username);
-                                        Application.Current.MainPage = new NavigationPage(new OperationalManagerPage());
+                                        if (Application.Current != null)
+                                        {
+                                            Application.Current.MainPage = new NavigationPage(new OperationalManagerPage());
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("[ERROR] Application.Current is null.");
+                                        }
                                         break;
 
                                     case 3: // Environmental Scientist
                                         await DisplayAlert("Success", $"Welcome, Environmental Scientist {username}!", "OK");
                                         Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Environmental Scientist.");
                                         LoggedinUser(username);
-                                        Application.Current.MainPage = new NavigationPage(new EnvironmentalScientistPage());
+                                        if (Application.Current != null)
+                                        {
+                                            Application.Current.MainPage = new NavigationPage(new EnvironmentalScientistPage());
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("[ERROR] Application.Current is null.");
+                                        }
                                         break;
 
                                     default:

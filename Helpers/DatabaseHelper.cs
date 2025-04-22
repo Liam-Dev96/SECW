@@ -52,7 +52,7 @@ namespace SECW.Helpers
                         try
                         {
                             string CreateRolesTableQuery = @"Create Table If Not Exists Roles(
-                            RoleID integer Primary Key AUTOINCREMENT,
+                            RoleID integer Primary Key,
                             RoleName VARCHAR (50) Unique Check (RoleName IN ('Environmental Scientist', 'Operations Manager', 'Admin'))
                             );";
                             using var Command = new SQLiteCommand(CreateRolesTableQuery, Connection);
@@ -290,6 +290,20 @@ namespace SECW.Helpers
                                 }
                             }
                         }
+                    }
+                    try
+                    {
+                        string InsertRolesQuery = @"
+    INSERT OR IGNORE INTO Roles (RoleID, RoleName) VALUES (1, 'Admin');
+    INSERT OR IGNORE INTO Roles (RoleID, RoleName) VALUES (2, 'Operational Manager');
+    INSERT OR IGNORE INTO Roles (RoleID, RoleName) VALUES (3, 'Environmental Scientist');
+";
+                        using var insertRolesCommand = new SQLiteCommand(InsertRolesQuery, Connection);
+                        insertRolesCommand.ExecuteNonQuery();
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        Console.WriteLine($"Error inserting roles: {ex.Message}");
                     }
 
                     // Close the database connection
