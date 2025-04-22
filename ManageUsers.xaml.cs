@@ -111,6 +111,9 @@ namespace SECW
                     return;
                 }
 
+                // Hash the password using BCrypt
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(Password.Text);
+
                 using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
                 connection.Open();
 
@@ -127,14 +130,14 @@ namespace SECW
                     return;
                 }
 
-                // Insert the new user
+                // Insert the new user into the database
                 string query = @"INSERT INTO Users (Username, PasswordHash, Email, RoleID, CreatedAt)
                                 VALUES (@Username, @PasswordHash, @Email, 
                                         (SELECT RoleID FROM Roles WHERE RoleName = @RoleName), datetime('now'))";
 
                 using var command = new SQLiteCommand(query, connection);
                 command.Parameters.AddWithValue("@Username", Username.Text);
-                command.Parameters.AddWithValue("@PasswordHash", BCrypt.Net.BCrypt.HashPassword(Password.Text));
+                command.Parameters.AddWithValue("@PasswordHash", hashedPassword);
                 command.Parameters.AddWithValue("@Email", EmailEntry.Text);
                 command.Parameters.AddWithValue("@RoleName", RolePicker.SelectedItem.ToString());
 
