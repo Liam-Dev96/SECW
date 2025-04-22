@@ -10,6 +10,9 @@ public partial class AdminPage : ContentPage
     // Event handlers
     private void ManageUsersBtn_Click(object sender, EventArgs e)
     {
+        // Navigate to ManageUsersPage
+        // Assuming ManageUsersPage is another page in your application
+        Navigation.PushAsync(new ManageUsers());
     }
 
     private void ViewReportsBtn_Click(object sender, EventArgs e)
