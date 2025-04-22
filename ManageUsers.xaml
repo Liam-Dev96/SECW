@@ -37,9 +37,9 @@
                                         Command="{Binding BindingContext.DeleteUserCommand, Source={x:Reference ManageUsersPage}}"
                                         CommandParameter="{Binding .}" />
                                 <Button Text="Modify"
-                                    BackgroundColor="blue"
+                                        BackgroundColor="Blue"
                                         TextColor="White"
-                                        Command="{Binding EditUserCommand}"
+                                        Command="{Binding BindingContext.EditUserCommand, Source={x:Reference ManageUsersPage}}"
                                         CommandParameter="{Binding .}" />
                             </StackLayout>
                         </ViewCell>

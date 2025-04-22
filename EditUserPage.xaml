@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SECW.EditUserPage"
-             Title="Edit User">
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="SECW.EditUserPage"
+            Title="Edit User">
     <StackLayout Padding="20" Spacing="15">
         <Label Text="Edit User Details" FontSize="24" HorizontalOptions="Center" />
         <Entry x:Name="UsernameEntry" Placeholder="Username" />
         <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" />
         <Picker x:Name="RolePicker" Title="Select Role" />
-        <Button Text="Save Changes" BackgroundColor="Green" TextColor="White" Clicked="OnSaveChangesClicked" />
-        <Button Text="Cancel" BackgroundColor="Red" TextColor="White" Clicked="OnCancelClicked" />
+        <Button Text="Save Changes" BackgroundColor="orange" TextColor="White" Clicked="OnSaveChangesClicked" />
+        <Button Text="Cancel" BackgroundColor="orange" TextColor="White" Clicked="OnCancelClicked" />
     </StackLayout>
 </ContentPage>
