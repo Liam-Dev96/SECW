@@ -1,9 +1,9 @@
 using System;
 using Microsoft.Maui.Controls;
-using System.Data.SQLite;
 using BCrypt.Net;
 using SECW.Helpers;
 using Microsoft.Maui.Storage;
+using Microsoft.Data.Sqlite;
 
 namespace SECW
 {
@@ -50,18 +50,18 @@ namespace SECW
 
             try
             {
-                using (var connection = new SQLiteConnection(connectionString))
+                using (var connection = new SqliteConnection(connectionString))
                 {
                     connection.Open();
 
                     // Set busy timeout to prevent "database is locked" errors
-                    using (var pragmaCommand = new SQLiteCommand("PRAGMA busy_timeout = 3000;", connection))
+                    using (var pragmaCommand = new SqliteCommand("PRAGMA busy_timeout = 3000;", connection))
                     {
                         pragmaCommand.ExecuteNonQuery();
                     }
 
                     string query = @"SELECT PasswordHash, RoleID FROM Users WHERE Username = @username";
-                    using (var command = new SQLiteCommand(query, connection))
+                    using (var command = new SqliteCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@username", username);
 
@@ -144,7 +144,7 @@ namespace SECW
                     updateLastLoginDate(connection, username);
                 }
             }
-            catch (SQLiteException ex)
+            catch (SqliteException ex)
             {
                 await DisplayAlert("Error", $"Database error: {ex.Message}", "OK");
                 Console.WriteLine($"[ERROR] Database error during login attempt for username '{username}': {ex.Message}");
@@ -157,12 +157,12 @@ namespace SECW
         }
 
         // Updates the user's last login date to the current timestamp in the database.
-        private static void updateLastLoginDate(SQLiteConnection connection, string username)
+        private static void updateLastLoginDate(SqliteConnection connection, string username)
         {
             try
             {
                 string updateQuery = @"UPDATE Users SET LastLogin = @lastLoginDate WHERE Username = @username";
-                using (var updateCommand = new SQLiteCommand(updateQuery, connection))
+                using (var updateCommand = new SqliteCommand(updateQuery, connection))
                 {
                     updateCommand.Parameters.AddWithValue("@lastLoginDate", DateTime.Now);
                     updateCommand.Parameters.AddWithValue("@username", username);
@@ -171,7 +171,7 @@ namespace SECW
 
                 Console.WriteLine($"[INFO] Last login date updated for username '{username}'.");
             }
-            catch (SQLiteException ex)
+            catch (SqliteException ex)
             {
                 Console.WriteLine($"[ERROR] Failed to update last login date for username '{username}': {ex.Message}");
             }

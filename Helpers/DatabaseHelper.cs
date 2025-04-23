@@ -1,4 +1,4 @@
-using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using System.IO;
 
 namespace SECW.Helpers
@@ -6,7 +6,7 @@ namespace SECW.Helpers
     public static class DataBaseHelper
     {
         // Connection string to the SQLite database file
-        private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;Version=3;";
+        private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;";
 
         // Method to initialize the database and create necessary tables
         public static void initializeDatabase()
@@ -16,15 +16,20 @@ namespace SECW.Helpers
                 // Check if the database file exists, if not, create it
                 if (!File.Exists(@"Helpers\SoftwareEngineering.db"))
                 {
-                    SQLiteConnection.CreateFile(@"Helpers\SoftwareEngineering.db");
+                    // Ensure the database file is created by opening a connection
+                    using (var tempConnection = new SqliteConnection(connectionString))
+                    {
+                        tempConnection.Open();
+                        tempConnection.Close();
+                    }
 
                     // Open a connection to the database
-                    using var Connection = new SQLiteConnection(connectionString);
+                    using var Connection = new SqliteConnection(connectionString);
                     {
                         Connection.Open();
 
                         // Enable foreign key constraints
-                        using var pragmaCommand = new SQLiteCommand("PRAGMA foreign_keys = ON;", Connection);
+                        using var pragmaCommand = new SqliteCommand("PRAGMA foreign_keys = ON;", Connection);
                         pragmaCommand.ExecuteNonQuery();
 
                         // Create the Users table
@@ -35,15 +40,15 @@ namespace SECW.Helpers
                             Username VARCHAR (50) Unique,
                             PasswordHash VARCHAR (256) NOT NULL,
                             Email VARCHAR (100) NOT NULL,
-                            RoleID Integer,
+                            RoleID Integer NOT NULL,
                             CreatedAt DateTime NOT NULL,
                             LastLogin DateTime,
                             Foreign Key (RoleID) References Roles(RoleID)
                             );";
-                            using var Command = new SQLiteCommand(CreateUsersTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateUsersTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
-                        catch (SQLiteException ex)
+                        catch (SqliteException ex)
                         {
                             Console.WriteLine($"Error creating Users table: {ex.Message}");
                         }
@@ -55,10 +60,10 @@ namespace SECW.Helpers
                             RoleID integer Primary Key,
                             RoleName VARCHAR (50) Unique Check (RoleName IN ('Environmental Scientist', 'Operations Manager', 'Admin'))
                             );";
-                            using var Command = new SQLiteCommand(CreateRolesTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateRolesTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
-                        catch (SQLiteException ex)
+                        catch (SqliteException ex)
                         {
                             Console.WriteLine($"Error creating Roles table: {ex.Message}");
                         }
@@ -76,10 +81,10 @@ namespace SECW.Helpers
                             Foreign Key (SensorTypeID) References SensorTypes(SensorTypeID),
                             Foreign Key (LocationID) References Locations(LocationID)
                             );";
-                            using var Command = new SQLiteCommand(CreateSensorsTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateSensorsTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
-                        catch (SQLiteException ex)
+                        catch (SqliteException ex)
                         {
                             Console.WriteLine($"Error creating Sensors table: {ex.Message}");
                         }
@@ -92,10 +97,10 @@ namespace SECW.Helpers
                             TypeName VARCHAR (20),
                             Description VARCHAR (255)
                             );";
-                            using var Command = new SQLiteCommand(CreateSensorTypesTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateSensorTypesTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
-                        catch (SQLiteException ex)
+                        catch (SqliteException ex)
                         {
                             Console.WriteLine($"Error creating SensorTypes table: {ex.Message}");
                         }
@@ -110,10 +115,10 @@ namespace SECW.Helpers
                             Address VARCHAR (255),
                             Description VARCHAR (255)
                             );";
-                            using var Command = new SQLiteCommand(CreateLocationsTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateLocationsTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
-                        catch (SQLiteException ex)
+                        catch (SqliteException ex)
                         {
                             Console.WriteLine($"Error creating Locations table: {ex.Message}");
                         }
@@ -141,10 +146,10 @@ namespace SECW.Helpers
                             Precipitation Float,
                             Foreign Key (SensorID) References Sensors(SensorID)
                             );";
-                            using var Command = new SQLiteCommand(CreateEnvironmentalDataTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateEnvironmentalDataTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
-                        catch (SQLiteException ex)
+                        catch (SqliteException ex)
                         {
                             Console.WriteLine($"Error creating EnvironmentalData table: {ex.Message}");
                         }
@@ -160,10 +165,10 @@ namespace SECW.Helpers
                             MaxValue Float,
                             Foreign Key (SensorTypeID) References SensorTypes(SensorTypeID)
                             );";
-                            using var Command = new SQLiteCommand(CreateAlertThresholdsTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateAlertThresholdsTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
-                        catch (SQLiteException ex)
+                        catch (SqliteException ex)
                         {
                             Console.WriteLine($"Error creating AlertThresholds table: {ex.Message}");
                         }
@@ -183,10 +188,10 @@ namespace SECW.Helpers
                             Foreign Key (ThresholdID) References AlertThresholds(ThresholdID),
                             Foreign Key (DataID) References EnvironmentalData(DataID)
                             );";
-                            using var Command = new SQLiteCommand(CreateAlertsTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateAlertsTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
-                        catch (SQLiteException ex)
+                        catch (SqliteException ex)
                         {
                             Console.WriteLine($"Error creating Alerts table: {ex.Message}");
                         }
@@ -204,10 +209,10 @@ namespace SECW.Helpers
                             Status VARCHAR (20),
                             Foreign Key (SensorID) References Sensors(SensorID)
                             );";
-                            using var Command = new SQLiteCommand(CreateMaintenanceTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateMaintenanceTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
-                        catch (SQLiteException ex)
+                        catch (SqliteException ex)
                         {
                             Console.WriteLine($"Error creating Maintenance table: {ex.Message}");
                         }
@@ -226,10 +231,10 @@ namespace SECW.Helpers
                             FilePath VARCHAR (255),
                             Foreign Key (UserID) References Users(UserID) ON DELETE CASCADE
                             );";
-                            using var Command = new SQLiteCommand(CreateReportsTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateReportsTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
-                        catch (SQLiteException ex)
+                        catch (SqliteException ex)
                         {
                             Console.WriteLine($"Error creating Reports table: {ex.Message}");
                         }
@@ -245,10 +250,10 @@ namespace SECW.Helpers
                             Details VARCHAR (255),
                             Foreign Key (UserID) References Users(UserID) ON DELETE CASCADE
                             );";
-                            using var Command = new SQLiteCommand(CreateAuditLogsTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateAuditLogsTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
-                        catch (SQLiteException ex)
+                        catch (SqliteException ex)
                         {
                             Console.WriteLine($"Error creating AuditLogs table: {ex.Message}");
                         }
@@ -256,16 +261,16 @@ namespace SECW.Helpers
                         // Insert default Admin role
                         string InsertAdminRoleQuery = @"Insert Into Roles (RoleName)
                         Values ('Admin');";
-                        using (var insertCommand = new SQLiteCommand(InsertAdminRoleQuery, Connection))
+                        using (var insertCommand = new SqliteCommand(InsertAdminRoleQuery, Connection))
                         {
                             try
                             {
                                 insertCommand.ExecuteNonQuery();
                             }
-                            catch (SQLiteException ex)
+                            catch (SqliteException ex)
                             {
                                 // Ignore constraint violations (e.g., duplicate entries)
-                                if (ex.ErrorCode != (int)SQLiteErrorCode.Constraint)
+                                if (ex.ErrorCode != 19) // 19 is the SQLite error code for constraint violations
                                 {
                                     throw;
                                 }
@@ -278,10 +283,10 @@ namespace SECW.Helpers
 ";
             try
             {
-                        using var insertRolesCommand = new SQLiteCommand(InsertRolesQuery, Connection);
+                        using var insertRolesCommand = new SqliteCommand(InsertRolesQuery, Connection);
                         insertRolesCommand.ExecuteNonQuery();
                     }
-                    catch (SQLiteException ex)
+                    catch (SqliteException ex)
                     {
                         Console.WriteLine($"Error inserting roles: {ex.Message}");
                     }
@@ -289,16 +294,16 @@ namespace SECW.Helpers
                         // Insert default Admin user
                         string InsertAdminUserQuery = @"Insert Into Users (Username, PasswordHash, Email, RoleID, CreatedAt, LastLogin)
                         Values ('admin', '$2b$12$9IRbqDiT5Vc0A8SModlwu.o/1pYCPfXEZYifdL94TgND/2FpfMBqy', 'admin112@gmail.com', 1, datetime('now'), NULL);";
-                        using (var insertCommand = new SQLiteCommand(InsertAdminUserQuery, Connection))
+                        using (var insertCommand = new SqliteCommand(InsertAdminUserQuery, Connection))
                         {
                             try
                             {
                                 insertCommand.ExecuteNonQuery();
                             }
-                            catch (SQLiteException ex)
+                            catch (SqliteException ex)
                             {
                                 // Ignore constraint violations (e.g., duplicate entries)
-                                if (ex.ErrorCode != (int)SQLiteErrorCode.Constraint)
+                                if (ex.ErrorCode != 19) // 19 is the SQLite error code for constraint violations
                                 {
                                     throw;
                                 }
@@ -309,10 +314,10 @@ namespace SECW.Helpers
                     Connection.Close();
                 }
             }
-            catch (SQLiteException ex)
+            catch (SqliteException ex)
             {
                 // Log SQLite exceptions
-                Console.WriteLine($"SQLiteException: {ex.Message}");
+                Console.WriteLine($"SqliteException: {ex.Message}");
             }
         }
     }

@@ -1,7 +1,7 @@
 using Microsoft.Maui.Controls;
 using SECW.Helpers;
 using System.Collections.ObjectModel;
-using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using System.Windows.Input;
 
 namespace SECW
@@ -42,14 +42,14 @@ namespace SECW
             try
             {
                 Console.WriteLine("Attempting to load users from the database...");
-                using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
+                using var connection = new SqliteConnection(DataBaseHelper.ConnectionString);
                 connection.Open();
 
                 string query = @"SELECT Users.Username, Users.Email, Roles.RoleName, Users.RoleID
                                 FROM Users
                                 LEFT JOIN Roles ON Users.RoleID = Roles.RoleID
                                  WHERE Users.UserID != 1"; // Exclude admin account
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 using var reader = command.ExecuteReader();
 
                 Users.Clear();
@@ -70,7 +70,7 @@ namespace SECW
 
                 Console.WriteLine("Users loaded successfully.");
             }
-            catch (SQLiteException ex)
+            catch (SqliteException ex)
             {
                 Console.WriteLine($"Error loading users: {ex.Message}");
             }
@@ -123,12 +123,12 @@ namespace SECW
                     _ => throw new Exception("Invalid role selected.")
                 };
 
-                using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
+                using var connection = new SqliteConnection(DataBaseHelper.ConnectionString);
                 connection.Open();
 
                 // Check if the username already exists
                 string checkQuery = "SELECT COUNT(*) FROM Users WHERE Username = @Username";
-                using var checkCommand = new SQLiteCommand(checkQuery, connection);
+                using var checkCommand = new SqliteCommand(checkQuery, connection);
                 checkCommand.Parameters.AddWithValue("@Username", Username.Text);
 
                 var count = Convert.ToInt32(checkCommand.ExecuteScalar());
@@ -143,7 +143,7 @@ namespace SECW
                 string query = @"INSERT INTO Users (Username, PasswordHash, Email, RoleID, CreatedAt)
                             VALUES (@Username, @PasswordHash, @Email, @RoleID, datetime('now'))";
 
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@Username", Username.Text);
                 command.Parameters.AddWithValue("@PasswordHash", hashedPassword);
                 command.Parameters.AddWithValue("@Email", EmailEntry.Text);
@@ -170,7 +170,7 @@ namespace SECW
                 DisplayAlert("Success", "User added successfully.", "OK");
                 Console.WriteLine("User added successfully.");
             }
-            catch (SQLiteException ex)
+            catch (SqliteException ex)
             {
                 DisplayAlert("Error", $"Failed to add user: {ex.Message}", "OK");
                 Console.WriteLine($"SQLite error while adding user: {ex.Message}");
@@ -194,11 +194,11 @@ namespace SECW
             {
                 Console.WriteLine($"Attempting to delete user: {user.Name}");
 
-                using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
+                using var connection = new SqliteConnection(DataBaseHelper.ConnectionString);
                 connection.Open();
 
                 string query = "DELETE FROM Users WHERE Username = @Username";
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@Username", user.Name);
 
                 command.ExecuteNonQuery();
@@ -209,7 +209,7 @@ namespace SECW
                 DisplayAlert("Success", "User deleted successfully.", "OK");
                 Console.WriteLine($"User {user.Name} deleted successfully.");
             }
-            catch (SQLiteException ex)
+            catch (SqliteException ex)
             {
                 DisplayAlert("Error", $"Failed to delete user: {ex.Message}", "OK");
                 Console.WriteLine($"SQLite error while deleting user: {ex.Message}");
@@ -239,21 +239,23 @@ namespace SECW
         {
             try
             {
-                using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
+                using var connection = new SqliteConnection(DataBaseHelper.ConnectionString);
                 connection.Open();
 
-                // Update the user in the database
+                // Update the user's details in the database
                 string query = @"UPDATE Users
-                                SET Username = @Username, Email = @Email, RoleID = (SELECT RoleID FROM Roles WHERE RoleName = @RoleName)
+                                SET Username = @Username, Email = @Email
                                 WHERE Username = @OriginalUsername";
 
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@Username", modifiedUser.Name);
                 command.Parameters.AddWithValue("@Email", modifiedUser.Email);
-                command.Parameters.AddWithValue("@RoleName", modifiedUser.RoleName);
                 command.Parameters.AddWithValue("@OriginalUsername", modifiedUser.Name); // Assuming username is unique
 
                 command.ExecuteNonQuery();
+
+                // Update the user's role using UpdateUserRole
+                UpdateUserRole(modifiedUser.Name, modifiedUser.RoleName);
 
                 // Update the user in the ObservableCollection
                 var user = Users.FirstOrDefault(u => u.Name == modifiedUser.Name);
@@ -266,7 +268,7 @@ namespace SECW
 
                 Console.WriteLine($"User {modifiedUser.Name} updated successfully.");
             }
-            catch (SQLiteException ex)
+            catch (SqliteException ex)
             {
                 Console.WriteLine($"SQLite error while updating user: {ex.Message}");
             }
@@ -280,7 +282,7 @@ namespace SECW
         {
             try
             {
-                using var connection = new SQLiteConnection(DataBaseHelper.ConnectionString);
+                using var connection = new SqliteConnection(DataBaseHelper.ConnectionString);
                 connection.Open();
 
                 string query = @"SELECT Users.Username, Users.Email, Roles.RoleName
@@ -288,7 +290,7 @@ namespace SECW
                                 INNER JOIN Roles ON Users.RoleID = Roles.RoleID
                                 WHERE Roles.RoleName = @RoleName";
 
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@RoleName", roleName);
                 using var reader = command.ExecuteReader();
 
@@ -303,9 +305,51 @@ namespace SECW
                     });
                 }
             }
-            catch (SQLiteException ex)
+            catch (SqliteException ex)
             {
                 Console.WriteLine($"Error filtering users: {ex.Message}");
+            }
+        }
+
+        private void UpdateUserRole(string username, string newRoleName)
+        {
+            try
+            {
+                using var connection = new SqliteConnection(DataBaseHelper.ConnectionString);
+                connection.Open();
+
+                // Map RoleName to RoleID
+                int newRoleId = newRoleName switch
+                {
+                    "Admin" => 1,
+                    "Operational Manager" => 2,
+                    "Environmental Scientist" => 3,
+                    _ => throw new Exception("Invalid role selected.")
+                };
+
+                // Update the user's RoleID in the database
+                string updateQuery = "UPDATE Users SET RoleID = @RoleID WHERE Username = @Username";
+                using var updateCommand = new SqliteCommand(updateQuery, connection);
+                updateCommand.Parameters.AddWithValue("@RoleID", newRoleId);
+                updateCommand.Parameters.AddWithValue("@Username", username);
+
+                int rowsAffected = updateCommand.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine($"[INFO] Role updated successfully for user '{username}' to '{newRoleName}'.");
+                }
+                else
+                {
+                    Console.WriteLine($"[ERROR] Failed to update role for user '{username}'.");
+                }
+            }
+            catch (SqliteException ex)
+            {
+                Console.WriteLine($"[ERROR] SQLite error while updating role: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] Unexpected error while updating role: {ex.Message}");
             }
         }
     }

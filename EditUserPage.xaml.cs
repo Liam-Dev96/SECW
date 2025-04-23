@@ -44,5 +44,25 @@ namespace SECW
             // Close the modal without saving
             await Navigation.PopModalAsync();
         }
+
+        private async void EditUser(User user)
+        {
+            if (user == null)
+            {
+                Console.WriteLine("EditUser called with null user.");
+                return;
+            }
+
+            Console.WriteLine($"Editing user: {user.Name}");
+
+            // Open the EditUserPage as a modal
+            await Navigation.PushModalAsync(new EditUserPage(user, OnUserModified));
+        }
+
+        private void OnUserModified(User modifiedUser)
+        {
+            // Handle the modified user here
+            Console.WriteLine($"User modified: {modifiedUser.Name}, {modifiedUser.Email}, {modifiedUser.RoleName}");
+        }
     }
 }

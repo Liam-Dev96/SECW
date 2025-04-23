@@ -1,6 +1,6 @@
 using System;
 using Microsoft.Maui.Controls;
-using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using BCrypt.Net;
 using SECW.Helpers;
 
@@ -49,7 +49,7 @@ namespace SECW
                     return; // Validation failed, error already displayed
                 }
 
-                using (var connection = new SQLiteConnection(connectionString))
+                using (var connection = new SqliteConnection(connectionString))
                 {
                     connection.Open();
 
@@ -104,7 +104,7 @@ namespace SECW
                         // Build the update query dynamically based on provided inputs
                         updateQuery += string.Join(", ", parameters) + " WHERE Username = @username";
 
-                        using (var updateCommand = new SQLiteCommand(updateQuery, connection, transaction))
+                        using (var updateCommand = new SqliteCommand(updateQuery, connection, transaction))
                         {
                             // Add parameters to the query
                             updateCommand.Parameters.AddWithValue("@username", username);
@@ -135,7 +135,7 @@ namespace SECW
                 // Notify the user of success
                 DisplayAlert("Success", "Changes saved successfully.", "OK");
             }
-            catch (SQLiteException ex)
+            catch (SqliteException ex)
             {
                 // Handle database-related errors
                 DisplayAlert("Database Error", ex.Message, "OK");
@@ -150,11 +150,11 @@ namespace SECW
         // Validates the old password for the logged-in user
         private bool ValidatePasswordChange(string username, string oldPassword)
         {
-            using (var connection = new SQLiteConnection(connectionString))
+            using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 string verifyQuery = "SELECT PasswordHash FROM Users WHERE Username = @username";
-                using (var verifyCommand = new SQLiteCommand(verifyQuery, connection))
+                using (var verifyCommand = new SqliteCommand(verifyQuery, connection))
                 {
                     verifyCommand.Parameters.AddWithValue("@username", username); // Use the username parameter
                     var storedHash = verifyCommand.ExecuteScalar()?.ToString();
