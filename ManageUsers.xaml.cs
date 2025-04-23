@@ -267,6 +267,7 @@ namespace SECW
                 }
 
                 Console.WriteLine($"User {modifiedUser.Name} updated successfully.");
+                DisplayAlert("Success", "User updated successfully.", "OK");
             }
             catch (SqliteException ex)
             {
@@ -352,7 +353,7 @@ namespace SECW
                 Console.WriteLine($"[ERROR] Unexpected error while updating role: {ex.Message}");
             }
         }
-    }
+
 
     public class User
     {
@@ -361,4 +362,5 @@ namespace SECW
         public string RoleName { get; set; } = string.Empty; // Display RoleName
         public int RoleID { get; set; } // Store RoleID
     }
-}
+    }
+    }

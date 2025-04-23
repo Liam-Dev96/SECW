@@ -1,7 +1,4 @@
-using Microsoft.Maui.Controls;
-using System;
-using System.Collections.Generic;
-
+using static SECW.ManageUsers;
 namespace SECW
 {
     public partial class EditUserPage : ContentPage
