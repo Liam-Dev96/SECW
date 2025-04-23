@@ -15,7 +15,7 @@ namespace SECW
 
         public static class DataBaseHelper
         {
-            public static string ConnectionString { get; } = @"Data Source=Helpers\SoftwareEngineering.db;Version=3;";
+            public static string ConnectionString { get; } = @"Data Source=Helpers\SoftwareEngineering.db;";
         }
 
         public ManageUsers()

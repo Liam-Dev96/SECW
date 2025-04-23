@@ -9,7 +9,7 @@ namespace SECW
     public partial class AdminSettingsPage : ContentPage
     {
         // Connection string for SQLite database
-        private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;Version=3;";
+        private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;";
 
         public AdminSettingsPage()
         {
