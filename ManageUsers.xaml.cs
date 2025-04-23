@@ -279,6 +279,9 @@ namespace SECW
             }
         }
 
+//was intially made to allow the admin to fiter users by role, and then export a mailing list of users and usernames and so on as a .txt file using the library stream writer.
+//however, this was not implemented due to it not being a requirement for the project.
+//just something id like to personally add in the future as a point of interest.
         private void FilterUsersByRole(string roleName)
         {
             try
