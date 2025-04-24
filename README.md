@@ -13,6 +13,6 @@ need to also create the new table with the fields stated above to log the data i
 
 ![image](https://github.com/user-attachments/assets/16437a45-c514-4f9a-a5d4-d894dc893875)
 another example with a different error message that passes in the users the error is related to
-
+now the function to detect when the error shows up is where the genius comes in because there are a few methods of doing so and its up to you to choose which is best suited for you and the development of the project.
 
 
