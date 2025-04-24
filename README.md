@@ -1,6 +1,16 @@
 for admin data back up, you can simplify it by creating a log of all admin actions kinda like i was doing, but add a new table to the database called adminbackup, give said table these columns,
 changeID autoincrement, changeDate date time now ,changemade varchar 500, then dont replace the logging but add on to it by making a variable and assigning said variable the logging data then make a function which has the connection string and adds on to the db, then pass through the variable and save it doing so ensures that youve made a back up of all admin actions and attempts.
 
+try
+CREATE TABLE adminbackup (
+    changeID INTEGER PRIMARY KEY AUTOINCREMENT,
+    changeDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    changemade VARCHAR(500)
+);
+
+catch
+error()
+
 ![image](https://github.com/user-attachments/assets/e732581b-d0f1-435e-bc41-f6bd4ca6e705)
 here is an example of what i mean
 ![image](https://github.com/user-attachments/assets/684c5043-c7d1-42b6-ac30-76ac3c686c4d)
