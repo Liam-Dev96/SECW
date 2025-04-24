@@ -1,50 +1,18 @@
-# SECW
-which documentation tool are we moving forward with? I think it may be best to use Docfx due to its auto gernerative html documents from xml comments instead of the alternatives such as sandcastle (which is a tad bit too old) or doxygen (compatible with diffrent langauges).
+for admin data back up, you can simplify it by creating a log of all admin actions kinda like i was doing, but add a new table to the database called adminbackup, give said table these columns,
+changeID autoincrement, changeDate date time now ,changemade varchar 500, then dont replace the logging but add on to it by making a variable and assigning said variable the logging data then make a function which has the connection string and adds on to the db, then pass through the variable and save it doing so ensures that youve made a back up of all admin actions and attempts.
 
-#I already installed Docfx on my device using "dotnet tool install -g docfx"
-#and we can simply comment the desired descriptive sections using // and invoke its use with docfx build which as the document says should create the html file automatically in the _site folder. as for presentation am not too sure if it adds any styling or css but a simple document should suffice.
+![image](https://github.com/user-attachments/assets/e732581b-d0f1-435e-bc41-f6bd4ca6e705)
+here is an example of what i mean
+![image](https://github.com/user-attachments/assets/684c5043-c7d1-42b6-ac30-76ac3c686c4d)
 
-#Used command "dotnet list package --include-transitive > packages.txt" #(to update packages.txt run this command once more.)
-in order to create a file similar to Requiremnts, to store all packages and Dependancies needed to be installed for this specific application to run.
-the database helper is coded in C# and it includes a prototype of the required tables along side multiple comments to explain what each section does.
+we created the variable, passed through the error message.
+we will next create the function to save into the database and continue passing through the messages periodicalling when they arrise
+need to make anoher function that detects when these are used or called to then pass them through other wise everything will be passed through at once which will not be a useful log.
 
+need to also create the new table with the fields stated above to log the data into.
 
-Validation libraries, login and sign up related related information
-for email validation I plan to use the built in System.ComponentModel.DataAnnotations.
-for password validation I plan to use Bcrypt.
-will also need to update the dependencies or packages.txt folder after successfuly installing bcrypt...
-Dependancies have been updated.
-
-#Due to my assigned tasks including the creation of the db and login I also took it upon myself to create the other tables and columns required for the completion of the application
+![image](https://github.com/user-attachments/assets/16437a45-c514-4f9a-a5d4-d894dc893875)
+another example with a different error message that passes in the users the error is related to
 
 
-to ensure that the application runs, 
-you firstly need to download the dependencies for sqllite.
 
-list of commands 
-dotnet clean
-Functionality: Cleans the project by removing all compiled files (e.g., bin and obj folders).
-Use Case: To ensure a fresh build by removing old or cached files.
-
-I also deleted the bin and obj file from the previous demo project the click counter.
-
- dotnet workload update
-Functionality: Updates all installed .NET workloads to their latest versions.
-Use Case: To ensure that all workloads (e.g., Android, iOS, etc.) are up to date.
-
- dotnet add package Microsoft.Data.Sqlite
-Functionality: Adds the Microsoft.Data.Sqlite NuGet package to the project.
-Use Case: To use SQLite in a cross-platform manner, especially for .NET MAUI projects.
-
-dotnet workload install android
-Functionality: Installs the Android workload for .NET MAUI development.
-Use Case: To enable building and running the project on Android devices.
-
- dotnet list package --include-transitive > packages.txt
-Functionality: Lists all the NuGet packages (including transitive dependencies) used in the project and saves the output to a file named packages.txt.
-Use Case: To document all dependencies required for the project.
-
- docfx build
-Functionality: Builds the documentation using Docfx and generates the output in the _site folder.
-Use Case: To create HTML documentation for your project based on XML comments.
-just testing to see if the auto document features work as expected or not.
