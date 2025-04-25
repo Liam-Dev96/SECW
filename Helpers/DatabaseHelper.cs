@@ -1,5 +1,6 @@
 using Microsoft.Data.Sqlite;
 using System.IO;
+using System.Collections.Generic;
 
 namespace SECW.Helpers
 {
@@ -71,16 +72,55 @@ namespace SECW.Helpers
                         // Create the Sensors table
                         try
                         {
-                            string CreateSensorsTableQuery = @"Create Table If Not Exists Sensors(
-                            SensorID integer Primary Key,
-                            SensorTypeID Integer,
-                            LocationID Integer,
-                            Status VARCHAR (20),
-                            InstallationDate DateTime,
-                            FirmwareVersion VARCHAR (20),
-                            Foreign Key (SensorTypeID) References SensorTypes(SensorTypeID),
-                            Foreign Key (LocationID) References Locations(LocationID)
-                            );";
+                            string CreateSensorsTableQuery = @"
+CREATE TABLE IF NOT EXISTS Sensors (
+    SensorID INTEGER PRIMARY KEY,
+    Status VARCHAR(20),
+    FirmwareVersion VARCHAR(20),
+    SensorType VARCHAR(50),
+    Location VARCHAR(255),
+    Manufacturer VARCHAR(100),
+    Model VARCHAR(100),
+    SerialNumber VARCHAR(100),
+    CalibrationDate DATETIME,
+    LastMaintenanceDate DATETIME,
+    BatteryStatus VARCHAR(50),
+    SignalStrength VARCHAR(50),
+    DataRate VARCHAR(50),
+    DataFormat VARCHAR(50),
+    CommunicationProtocol VARCHAR(50),
+    PowerSource VARCHAR(50),
+    OperatingTemperatureRange VARCHAR(50),
+    HumidityRange VARCHAR(50),
+    PressureRange VARCHAR(50),
+    MeasurementRange VARCHAR(50),
+    MeasurementUnits VARCHAR(50),
+    MeasurementAccuracy VARCHAR(50),
+    MeasurementResolution VARCHAR(50),
+    MeasurementInterval VARCHAR(50),
+    DataStorageCapacity VARCHAR(50),
+    DataTransmissionInterval VARCHAR(50),
+    DataTransmissionMethod VARCHAR(50),
+    DataEncryption VARCHAR(50),
+    DataCompression VARCHAR(50),
+    DataBackup VARCHAR(50),
+    DataRecovery VARCHAR(50),
+    DataVisualization VARCHAR(50),
+    DataAnalysis VARCHAR(50),
+    DataReporting VARCHAR(50),
+    DataSharing VARCHAR(50),
+    DataIntegration VARCHAR(50),
+    DataStorageLocation VARCHAR(50),
+    DataAccessControl VARCHAR(50),
+    DataRetentionPolicy VARCHAR(50),
+    DataDisposalPolicy VARCHAR(50),
+    DataSecurity VARCHAR(50),
+    DataPrivacy VARCHAR(50),
+    DataCompliance VARCHAR(50),
+    DataGovernance VARCHAR(50),
+    DataQuality VARCHAR(50),
+    DataIntegrity VARCHAR(50)
+);";
                             using var Command = new SqliteCommand(CreateSensorsTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
@@ -321,4 +361,4 @@ namespace SECW.Helpers
             }
         }
     }
-}
+    }
