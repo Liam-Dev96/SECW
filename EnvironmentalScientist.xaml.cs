@@ -31,7 +31,13 @@ public partial class EnvironmentalScientistPage : ContentPage
     private void OnAddSensorClicked(object sender, EventArgs e)
     {
         if (!ValidateSensorInput(out int sensorID)) return;
-
+       // Check if a sensor with the same ID already exists
+        var existingSensor = Sensors.FirstOrDefault(s => s.SensorID == sensorID);
+    if (existingSensor != null)
+    {
+        DisplayAlert("Error", $"A sensor with ID {sensorID} already exists.", "OK");
+        return;
+    }
         // Logic to add a new sensor
         var newSensor = new Sensor
         {
@@ -89,69 +95,6 @@ public partial class EnvironmentalScientistPage : ContentPage
         DisplayAlert("Success", "Sensor added successfully.", "OK");
     }
 
-    private void OnEditSensorClicked(object sender, EventArgs e)
-    {
-        if (SelectedSensor == null)
-        {
-            DisplayAlert("Error", "No sensor selected for editing.", "OK");
-            return;
-        }
-
-        if (!ValidateSensorInput(out int sensorID)) return;
-
-        // Update the selected sensor
-        SelectedSensor.SensorID = sensorID;
-        SelectedSensor.Status = StatusEntry.Text;
-        SelectedSensor.FirmwareVersion = FirmwareVersionEntry.Text;
-        SelectedSensor.SensorType = SensorTypeEntry.Text;
-        SelectedSensor.Location = LocationEntry.Text;
-        SelectedSensor.Manufacturer = ManufacturerEntry.Text;
-        SelectedSensor.Model = ModelEntry.Text;
-        SelectedSensor.SerialNumber = SerialNumberEntry.Text;
-        SelectedSensor.CalibrationDate = DateTime.TryParse(CalibrationDateEntry.Text, out var calibrationDate) ? calibrationDate : null;
-        SelectedSensor.LastMaintenanceDate = DateTime.TryParse(LastMaintenanceDateEntry.Text, out var maintenanceDate) ? maintenanceDate : null;
-        SelectedSensor.BatteryStatus = BatteryStatusEntry.Text;
-        SelectedSensor.SignalStrength = SignalStrengthEntry.Text;
-        SelectedSensor.DataRate = DataRateEntry.Text;
-        SelectedSensor.DataFormat = DataFormatEntry.Text;
-        SelectedSensor.CommunicationProtocol = CommunicationProtocolEntry.Text;
-        SelectedSensor.PowerSource = PowerSourceEntry.Text;
-        SelectedSensor.OperatingTemperatureRange = OperatingTemperatureRangeEntry.Text;
-        SelectedSensor.HumidityRange = HumidityRangeEntry.Text;
-        SelectedSensor.PressureRange = PressureRangeEntry.Text;
-        SelectedSensor.MeasurementRange = MeasurementRangeEntry.Text;
-        SelectedSensor.MeasurementUnits = MeasurementUnitsEntry.Text;
-        SelectedSensor.MeasurementAccuracy = MeasurementAccuracyEntry.Text;
-        SelectedSensor.MeasurementResolution = MeasurementResolutionEntry.Text;
-        SelectedSensor.MeasurementInterval = MeasurementIntervalEntry.Text;
-        SelectedSensor.DataStorageCapacity = DataStorageCapacityEntry.Text;
-        SelectedSensor.DataTransmissionInterval = DataTransmissionIntervalEntry.Text;
-        SelectedSensor.DataTransmissionMethod = DataTransmissionMethodEntry.Text;
-        SelectedSensor.DataEncryption = DataEncryptionEntry.Text;
-        SelectedSensor.DataCompression = DataCompressionEntry.Text;
-        SelectedSensor.DataBackup = DataBackupEntry.Text;
-        SelectedSensor.DataRecovery = DataRecoveryEntry.Text;
-        SelectedSensor.DataVisualization = DataVisualizationEntry.Text;
-        SelectedSensor.DataAnalysis = DataAnalysisEntry.Text;
-        SelectedSensor.DataReporting = DataReportingEntry.Text;
-        SelectedSensor.DataSharing = DataSharingEntry.Text;
-        SelectedSensor.DataIntegration = DataIntegrationEntry.Text;
-        SelectedSensor.DataStorageLocation = DataStorageLocationEntry.Text;
-        SelectedSensor.DataAccessControl = DataAccessControlEntry.Text;
-        SelectedSensor.DataRetentionPolicy = DataRetentionPolicyEntry.Text;
-        SelectedSensor.DataDisposalPolicy = DataDisposalPolicyEntry.Text;
-        SelectedSensor.DataSecurity = DataSecurityEntry.Text;
-        SelectedSensor.DataPrivacy = DataPrivacyEntry.Text;
-        SelectedSensor.DataCompliance = DataComplianceEntry.Text;
-        SelectedSensor.DataGovernance = DataGovernanceEntry.Text;
-        SelectedSensor.DataQuality = DataQualityEntry.Text;
-        SelectedSensor.DataIntegrity = DataIntegrityEntry.Text;
-
-        SensorsHelper.UpdateSensor(SelectedSensor);
-        LoadSensors();
-        ClearInputFields();
-        DisplayAlert("Success", "Sensor updated successfully.", "OK");
-    }
 
     private void OnRemoveSensorClicked(object sender, EventArgs e)
     {

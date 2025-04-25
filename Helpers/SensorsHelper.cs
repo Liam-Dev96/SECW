@@ -6,8 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-
-        namespace SECW.Helpers
+namespace SECW.Helpers
 {
     public static class SensorsHelper
     {
@@ -213,51 +212,51 @@ using System.Windows.Input;
 
             using var command = new SqliteCommand(query, connection);
             command.Parameters.AddWithValue("@SensorID", sensor.SensorID);
-            command.Parameters.AddWithValue("@Status", sensor.Status);
-            command.Parameters.AddWithValue("@FirmwareVersion", sensor.FirmwareVersion);
-            command.Parameters.AddWithValue("@SensorType", sensor.SensorType);
-            command.Parameters.AddWithValue("@Location", sensor.Location);
-            command.Parameters.AddWithValue("@Manufacturer", sensor.Manufacturer);
-            command.Parameters.AddWithValue("@Model", sensor.Model);
-            command.Parameters.AddWithValue("@SerialNumber", sensor.SerialNumber);
-            command.Parameters.AddWithValue("@CalibrationDate", sensor.CalibrationDate);
-            command.Parameters.AddWithValue("@LastMaintenanceDate", sensor.LastMaintenanceDate);
-            command.Parameters.AddWithValue("@BatteryStatus", sensor.BatteryStatus);
-            command.Parameters.AddWithValue("@SignalStrength", sensor.SignalStrength);
-            command.Parameters.AddWithValue("@DataRate", sensor.DataRate);
-            command.Parameters.AddWithValue("@DataFormat", sensor.DataFormat);
-            command.Parameters.AddWithValue("@CommunicationProtocol", sensor.CommunicationProtocol);
-            command.Parameters.AddWithValue("@PowerSource", sensor.PowerSource);
-            command.Parameters.AddWithValue("@OperatingTemperatureRange", sensor.OperatingTemperatureRange);
-            command.Parameters.AddWithValue("@HumidityRange", sensor.HumidityRange);
-            command.Parameters.AddWithValue("@PressureRange", sensor.PressureRange);
-            command.Parameters.AddWithValue("@MeasurementRange", sensor.MeasurementRange);
-            command.Parameters.AddWithValue("@MeasurementUnits", sensor.MeasurementUnits);
-            command.Parameters.AddWithValue("@MeasurementAccuracy", sensor.MeasurementAccuracy);
-            command.Parameters.AddWithValue("@MeasurementResolution", sensor.MeasurementResolution);
-            command.Parameters.AddWithValue("@MeasurementInterval", sensor.MeasurementInterval);
-            command.Parameters.AddWithValue("@DataStorageCapacity", sensor.DataStorageCapacity);
-            command.Parameters.AddWithValue("@DataTransmissionInterval", sensor.DataTransmissionInterval);
-            command.Parameters.AddWithValue("@DataTransmissionMethod", sensor.DataTransmissionMethod);
-            command.Parameters.AddWithValue("@DataEncryption", sensor.DataEncryption);
-            command.Parameters.AddWithValue("@DataCompression", sensor.DataCompression);
-            command.Parameters.AddWithValue("@DataBackup", sensor.DataBackup);
-            command.Parameters.AddWithValue("@DataRecovery", sensor.DataRecovery);
-            command.Parameters.AddWithValue("@DataVisualization", sensor.DataVisualization);
-            command.Parameters.AddWithValue("@DataAnalysis", sensor.DataAnalysis);
-            command.Parameters.AddWithValue("@DataReporting", sensor.DataReporting);
-            command.Parameters.AddWithValue("@DataSharing", sensor.DataSharing);
-            command.Parameters.AddWithValue("@DataIntegration", sensor.DataIntegration);
-            command.Parameters.AddWithValue("@DataStorageLocation", sensor.DataStorageLocation);
-            command.Parameters.AddWithValue("@DataAccessControl", sensor.DataAccessControl);
-            command.Parameters.AddWithValue("@DataRetentionPolicy", sensor.DataRetentionPolicy);
-            command.Parameters.AddWithValue("@DataDisposalPolicy", sensor.DataDisposalPolicy);
-            command.Parameters.AddWithValue("@DataSecurity", sensor.DataSecurity);
-            command.Parameters.AddWithValue("@DataPrivacy", sensor.DataPrivacy);
-            command.Parameters.AddWithValue("@DataCompliance", sensor.DataCompliance);
-            command.Parameters.AddWithValue("@DataGovernance", sensor.DataGovernance);
-            command.Parameters.AddWithValue("@DataQuality", sensor.DataQuality);
-            command.Parameters.AddWithValue("@DataIntegrity", sensor.DataIntegrity);
+            command.Parameters.AddWithValue("@Status", sensor.Status ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@FirmwareVersion", sensor.FirmwareVersion ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@SensorType", sensor.SensorType ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@Location", sensor.Location ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@Manufacturer", sensor.Manufacturer ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@Model", sensor.Model ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@SerialNumber", sensor.SerialNumber ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@CalibrationDate", sensor.CalibrationDate?.ToString("yyyy-MM-dd") ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@LastMaintenanceDate", sensor.LastMaintenanceDate?.ToString("yyyy-MM-dd") ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@BatteryStatus", sensor.BatteryStatus ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@SignalStrength", sensor.SignalStrength ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataRate", sensor.DataRate ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataFormat", sensor.DataFormat ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@CommunicationProtocol", sensor.CommunicationProtocol ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@PowerSource", sensor.PowerSource ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@OperatingTemperatureRange", sensor.OperatingTemperatureRange ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@HumidityRange", sensor.HumidityRange ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@PressureRange", sensor.PressureRange ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@MeasurementRange", sensor.MeasurementRange ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@MeasurementUnits", sensor.MeasurementUnits ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@MeasurementAccuracy", sensor.MeasurementAccuracy ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@MeasurementResolution", sensor.MeasurementResolution ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@MeasurementInterval", sensor.MeasurementInterval ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataStorageCapacity", sensor.DataStorageCapacity ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataTransmissionInterval", sensor.DataTransmissionInterval ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataTransmissionMethod", sensor.DataTransmissionMethod ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataEncryption", sensor.DataEncryption ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataCompression", sensor.DataCompression ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataBackup", sensor.DataBackup ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataRecovery", sensor.DataRecovery ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataVisualization", sensor.DataVisualization ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataAnalysis", sensor.DataAnalysis ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataReporting", sensor.DataReporting ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataSharing", sensor.DataSharing ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataIntegration", sensor.DataIntegration ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataStorageLocation", sensor.DataStorageLocation ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataAccessControl", sensor.DataAccessControl ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataRetentionPolicy", sensor.DataRetentionPolicy ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataDisposalPolicy", sensor.DataDisposalPolicy ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataSecurity", sensor.DataSecurity ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataPrivacy", sensor.DataPrivacy ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataCompliance", sensor.DataCompliance ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataGovernance", sensor.DataGovernance ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataQuality", sensor.DataQuality ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@DataIntegrity", sensor.DataIntegrity ?? (object)DBNull.Value);
 
             command.ExecuteNonQuery();
         }
@@ -283,133 +282,126 @@ using System.Windows.Input;
 
         public static Sensor? PopulateSensorFields(SelectedItemChangedEventArgs e, Entry sensorIDEntry, int sensorID)
         {
-            // This method retrieves the sensor data for the given SensorID and returns a Sensor object.
-            // The returned Sensor object can be used to populate the fields in the UI for editing.
-try{
-
-            using var connection = new SqliteConnection(connectionString);
-            connection.Open();
-
-            string query = "SELECT * FROM Sensors WHERE SensorID = @SensorID";
-            using var command = new SqliteCommand(query, connection);
-            command.Parameters.AddWithValue("@SensorID", sensorID);
-
-            using var reader = command.ExecuteReader();
-            if (reader.Read())
+            try
             {
-            return new Sensor
-            {
-                SensorID = reader.GetInt32(0),
-                Status = reader.GetString(1),
-                FirmwareVersion = reader.GetString(2),
-                SensorType = reader.GetString(3),
-                Location = reader.GetString(4),
-                Manufacturer = reader.GetString(5),
-                Model = reader.GetString(6),
-                SerialNumber = reader.GetString(7),
-                CalibrationDate = reader.IsDBNull(8) ? null : DateTime.TryParse(reader.GetString(8), out var calibrationDate) ? calibrationDate : null,
-                LastMaintenanceDate = reader.IsDBNull(9) ? null : DateTime.TryParse(reader.GetString(9), out var lastMaintenanceDate) ? lastMaintenanceDate : null,
-                BatteryStatus = reader.GetString(10),
-                SignalStrength = reader.GetString(11),
-                DataRate = reader.GetString(12),
-                DataFormat = reader.GetString(13),
-                CommunicationProtocol = reader.GetString(14),
-                PowerSource = reader.GetString(15),
-                OperatingTemperatureRange = reader.GetString(16),
-                HumidityRange = reader.GetString(17),
-                PressureRange = reader.GetString(18),
-                MeasurementRange = reader.GetString(19),
-                MeasurementUnits = reader.GetString(20),
-                MeasurementAccuracy = reader.GetString(21),
-                MeasurementResolution = reader.GetString(22),
-                MeasurementInterval = reader.GetString(23),
-                DataStorageCapacity = reader.GetString(24),
-                DataTransmissionInterval = reader.GetString(25),
-                DataTransmissionMethod = reader.GetString(26),
-                DataEncryption = reader.GetString(27),
-                DataCompression = reader.GetString(28),
-                DataBackup = reader.GetString(29),
-                DataRecovery = reader.GetString(30),
-                DataVisualization = reader.GetString(31),
-                DataAnalysis = reader.GetString(32),
-                DataReporting = reader.GetString(33),
-                DataSharing = reader.GetString(34),
-                DataIntegration = reader.GetString(35),
-                DataStorageLocation = reader.GetString(36),
-                DataAccessControl = reader.GetString(37),
-                DataRetentionPolicy = reader.GetString(38),
-                DataDisposalPolicy = reader.GetString(39),
-                DataSecurity = reader.GetString(40),
-                DataPrivacy = reader.GetString(41),
-                DataCompliance = reader.GetString(42),
-                DataGovernance = reader.GetString(43),
-                DataQuality = reader.GetString(44),
-                DataIntegrity = reader.GetString(45)
-            };
+                using var connection = new SqliteConnection(connectionString);
+                connection.Open();
+
+                string query = "SELECT * FROM Sensors WHERE SensorID = @SensorID";
+                using var command = new SqliteCommand(query, connection);
+                command.Parameters.AddWithValue("@SensorID", sensorID);
+
+                using var reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Sensor
+                    {
+                        SensorID = reader.GetInt32(0),
+                        Status = reader.GetString(1),
+                        FirmwareVersion = reader.GetString(2),
+                        SensorType = reader.GetString(3),
+                        Location = reader.GetString(4),
+                        Manufacturer = reader.GetString(5),
+                        Model = reader.GetString(6),
+                        SerialNumber = reader.GetString(7),
+                        CalibrationDate = reader.IsDBNull(8) ? null : DateTime.TryParse(reader.GetString(8), out var calibrationDate) ? calibrationDate : null,
+                        LastMaintenanceDate = reader.IsDBNull(9) ? null : DateTime.TryParse(reader.GetString(9), out var lastMaintenanceDate) ? lastMaintenanceDate : null,
+                        BatteryStatus = reader.GetString(10),
+                        SignalStrength = reader.GetString(11),
+                        DataRate = reader.GetString(12),
+                        DataFormat = reader.GetString(13),
+                        CommunicationProtocol = reader.GetString(14),
+                        PowerSource = reader.GetString(15),
+                        OperatingTemperatureRange = reader.GetString(16),
+                        HumidityRange = reader.GetString(17),
+                        PressureRange = reader.GetString(18),
+                        MeasurementRange = reader.GetString(19),
+                        MeasurementUnits = reader.GetString(20),
+                        MeasurementAccuracy = reader.GetString(21),
+                        MeasurementResolution = reader.GetString(22),
+                        MeasurementInterval = reader.GetString(23),
+                        DataStorageCapacity = reader.GetString(24),
+                        DataTransmissionInterval = reader.GetString(25),
+                        DataTransmissionMethod = reader.GetString(26),
+                        DataEncryption = reader.GetString(27),
+                        DataCompression = reader.GetString(28),
+                        DataBackup = reader.GetString(29),
+                        DataRecovery = reader.GetString(30),
+                        DataVisualization = reader.GetString(31),
+                        DataAnalysis = reader.GetString(32),
+                        DataReporting = reader.GetString(33),
+                        DataSharing = reader.GetString(34),
+                        DataIntegration = reader.GetString(35),
+                        DataStorageLocation = reader.GetString(36),
+                        DataAccessControl = reader.GetString(37),
+                        DataRetentionPolicy = reader.GetString(38),
+                        DataDisposalPolicy = reader.GetString(39),
+                        DataSecurity = reader.GetString(40),
+                        DataPrivacy = reader.GetString(41),
+                        DataCompliance = reader.GetString(42),
+                        DataGovernance = reader.GetString(43),
+                        DataQuality = reader.GetString(44),
+                        DataIntegrity = reader.GetString(45)
+                    };
+                }
+
+                return null; // Return null if no sensor is found with the given SensorID.
             }
-
-            return null; // Return null if no sensor is found with the given SensorID.
-        }
             catch (SqliteException ex)
             {
                 Console.WriteLine($"Error retrieving sensor data: {ex.Message}");
                 return null;
             }
         }
-}
+    }
 
-// This file is responsible for managing the sensors in the database.
-// It includes methods to get all sensors, add a new sensor, update an existing sensor, and remove a sensor.
-// The GetSensors method retrieves all sensors from the database and returns them as a list of Sensor objects.
-// add all of these to the .xaml
-//stopped at the stage of edit sensor, save configuration works but not edit sensor or the other, make it so that save configuration can auto fill the fields based on the selected sensor. 
-public class Sensor
-{
-    public int SensorID { get; set; }
-    public string? Status { get; set; }
-    public string? FirmwareVersion { get; set; }
-    public string? SensorType { get; set; }
-    public string? Location { get; set; }
-    public string? Manufacturer { get; set; }
-    public string? Model { get; set; }
-    public string? SerialNumber { get; set; }
-    public DateTime? CalibrationDate { get; set; }
-    public DateTime? LastMaintenanceDate { get; set; }
-    public string? BatteryStatus { get; set; }
-    public string? SignalStrength { get; set; }
-    public string? DataRate { get; set; }
-    public string? DataFormat { get; set; }
-    public string? CommunicationProtocol { get; set; }
-    public string? PowerSource { get; set; }
-    public string? OperatingTemperatureRange { get; set; }
-    public string? HumidityRange { get; set; }
-    public string? PressureRange { get; set; }
-    public string? MeasurementRange { get; set; }
-    public string? MeasurementUnits { get; set; }
-    public string? MeasurementAccuracy { get; set; }
-    public string? MeasurementResolution { get; set; }
-    public string? MeasurementInterval { get; set; }
-    public string? DataStorageCapacity { get; set; }
-    public string? DataTransmissionInterval { get; set; }
-    public string? DataTransmissionMethod { get; set; }
-    public string? DataEncryption { get; set; }
-    public string? DataCompression { get; set; }
-    public string? DataBackup { get; set; }
-    public string? DataRecovery { get; set; }
-    public string? DataVisualization { get; set; }
-    public string? DataAnalysis { get; set; }
-    public string? DataReporting { get; set; }
-    public string? DataSharing { get; set; }
-    public string? DataIntegration { get; set; }
-    public string? DataStorageLocation { get; set; }
-    public string? DataAccessControl { get; set; }
-    public string? DataRetentionPolicy { get; set; }
-    public string? DataDisposalPolicy { get; set; }
-    public string? DataSecurity { get; set; }
-    public string? DataPrivacy { get; set; }
-    public string? DataCompliance { get; set; }
-    public string? DataGovernance { get; set; }
-    public string? DataQuality { get; set; }
-    public string? DataIntegrity { get; set; }
-}
+    public class Sensor
+    {
+        public int SensorID { get; set; }
+        public string? Status { get; set; }
+        public string? FirmwareVersion { get; set; }
+        public string? SensorType { get; set; }
+        public string? Location { get; set; }
+        public string? Manufacturer { get; set; }
+        public string? Model { get; set; }
+        public string? SerialNumber { get; set; }
+        public DateTime? CalibrationDate { get; set; }
+        public DateTime? LastMaintenanceDate { get; set; }
+        public string? BatteryStatus { get; set; }
+        public string? SignalStrength { get; set; }
+        public string? DataRate { get; set; }
+        public string? DataFormat { get; set; }
+        public string? CommunicationProtocol { get; set; }
+        public string? PowerSource { get; set; }
+        public string? OperatingTemperatureRange { get; set; }
+        public string? HumidityRange { get; set; }
+        public string? PressureRange { get; set; }
+        public string? MeasurementRange { get; set; }
+        public string? MeasurementUnits { get; set; }
+        public string? MeasurementAccuracy { get; set; }
+        public string? MeasurementResolution { get; set; }
+        public string? MeasurementInterval { get; set; }
+        public string? DataStorageCapacity { get; set; }
+        public string? DataTransmissionInterval { get; set; }
+        public string? DataTransmissionMethod { get; set; }
+        public string? DataEncryption { get; set; }
+        public string? DataCompression { get; set; }
+        public string? DataBackup { get; set; }
+        public string? DataRecovery { get; set; }
+        public string? DataVisualization { get; set; }
+        public string? DataAnalysis { get; set; }
+        public string? DataReporting { get; set; }
+        public string? DataSharing { get; set; }
+        public string? DataIntegration { get; set; }
+        public string? DataStorageLocation { get; set; }
+        public string? DataAccessControl { get; set; }
+        public string? DataRetentionPolicy { get; set; }
+        public string? DataDisposalPolicy { get; set; }
+        public string? DataSecurity { get; set; }
+        public string? DataPrivacy { get; set; }
+        public string? DataCompliance { get; set; }
+        public string? DataGovernance { get; set; }
+        public string? DataQuality { get; set; }
+        public string? DataIntegrity { get; set; }
+    }
 }
