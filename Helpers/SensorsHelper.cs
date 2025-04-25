@@ -280,7 +280,83 @@ using System.Windows.Input;
                 Console.WriteLine($"Error deleting sensor: {ex.Message}");
             }
         }
+
+        public static Sensor? PopulateSensorFields(SelectedItemChangedEventArgs e, Entry sensorIDEntry, int sensorID)
+        {
+            // This method retrieves the sensor data for the given SensorID and returns a Sensor object.
+            // The returned Sensor object can be used to populate the fields in the UI for editing.
+try{
+
+            using var connection = new SqliteConnection(connectionString);
+            connection.Open();
+
+            string query = "SELECT * FROM Sensors WHERE SensorID = @SensorID";
+            using var command = new SqliteCommand(query, connection);
+            command.Parameters.AddWithValue("@SensorID", sensorID);
+
+            using var reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+            return new Sensor
+            {
+                SensorID = reader.GetInt32(0),
+                Status = reader.GetString(1),
+                FirmwareVersion = reader.GetString(2),
+                SensorType = reader.GetString(3),
+                Location = reader.GetString(4),
+                Manufacturer = reader.GetString(5),
+                Model = reader.GetString(6),
+                SerialNumber = reader.GetString(7),
+                CalibrationDate = reader.IsDBNull(8) ? null : DateTime.TryParse(reader.GetString(8), out var calibrationDate) ? calibrationDate : null,
+                LastMaintenanceDate = reader.IsDBNull(9) ? null : DateTime.TryParse(reader.GetString(9), out var lastMaintenanceDate) ? lastMaintenanceDate : null,
+                BatteryStatus = reader.GetString(10),
+                SignalStrength = reader.GetString(11),
+                DataRate = reader.GetString(12),
+                DataFormat = reader.GetString(13),
+                CommunicationProtocol = reader.GetString(14),
+                PowerSource = reader.GetString(15),
+                OperatingTemperatureRange = reader.GetString(16),
+                HumidityRange = reader.GetString(17),
+                PressureRange = reader.GetString(18),
+                MeasurementRange = reader.GetString(19),
+                MeasurementUnits = reader.GetString(20),
+                MeasurementAccuracy = reader.GetString(21),
+                MeasurementResolution = reader.GetString(22),
+                MeasurementInterval = reader.GetString(23),
+                DataStorageCapacity = reader.GetString(24),
+                DataTransmissionInterval = reader.GetString(25),
+                DataTransmissionMethod = reader.GetString(26),
+                DataEncryption = reader.GetString(27),
+                DataCompression = reader.GetString(28),
+                DataBackup = reader.GetString(29),
+                DataRecovery = reader.GetString(30),
+                DataVisualization = reader.GetString(31),
+                DataAnalysis = reader.GetString(32),
+                DataReporting = reader.GetString(33),
+                DataSharing = reader.GetString(34),
+                DataIntegration = reader.GetString(35),
+                DataStorageLocation = reader.GetString(36),
+                DataAccessControl = reader.GetString(37),
+                DataRetentionPolicy = reader.GetString(38),
+                DataDisposalPolicy = reader.GetString(39),
+                DataSecurity = reader.GetString(40),
+                DataPrivacy = reader.GetString(41),
+                DataCompliance = reader.GetString(42),
+                DataGovernance = reader.GetString(43),
+                DataQuality = reader.GetString(44),
+                DataIntegrity = reader.GetString(45)
+            };
+            }
+
+            return null; // Return null if no sensor is found with the given SensorID.
         }
+            catch (SqliteException ex)
+            {
+                Console.WriteLine($"Error retrieving sensor data: {ex.Message}");
+                return null;
+            }
+        }
+}
 
 // This file is responsible for managing the sensors in the database.
 // It includes methods to get all sensors, add a new sensor, update an existing sensor, and remove a sensor.
@@ -337,4 +413,3 @@ public class Sensor
     public string? DataIntegrity { get; set; }
 }
 }
-    
