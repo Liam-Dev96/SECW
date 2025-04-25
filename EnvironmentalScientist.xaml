@@ -17,8 +17,8 @@
             <!-- Sensor Management Section -->
             <Label Text="Manage Sensors" FontSize="18" />
             <ListView x:Name="SensorListView" ItemsSource="{Binding Sensors}" 
-                      SelectedItem="{Binding SelectedSensor, Mode=TwoWay}"
-                      ItemSelected="OnSensorSelected">
+                    SelectedItem="{Binding SelectedSensor, Mode=TwoWay}"
+                    ItemSelected="OnSensorSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding SensorID}" Detail="{Binding Status}" />

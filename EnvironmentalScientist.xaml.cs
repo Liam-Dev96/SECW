@@ -37,7 +37,50 @@ public partial class EnvironmentalScientistPage : ContentPage
         {
             SensorID = sensorID,
             Status = StatusEntry.Text,
-            FirmwareVersion = FirmwareVersionEntry.Text
+            FirmwareVersion = FirmwareVersionEntry.Text,
+            SensorType = SensorTypeEntry.Text,
+            Location = LocationEntry.Text,
+            Manufacturer = ManufacturerEntry.Text,
+            Model = ModelEntry.Text,
+            SerialNumber = SerialNumberEntry.Text,
+            CalibrationDate = DateTime.TryParse(CalibrationDateEntry.Text, out var calibrationDate) ? calibrationDate : null,
+            LastMaintenanceDate = DateTime.TryParse(LastMaintenanceDateEntry.Text, out var maintenanceDate) ? maintenanceDate : null,
+            BatteryStatus = BatteryStatusEntry.Text,
+            SignalStrength = SignalStrengthEntry.Text,
+            DataRate = DataRateEntry.Text,
+            DataFormat = DataFormatEntry.Text,
+            CommunicationProtocol = CommunicationProtocolEntry.Text,
+            PowerSource = PowerSourceEntry.Text,
+            OperatingTemperatureRange = OperatingTemperatureRangeEntry.Text,
+            HumidityRange = HumidityRangeEntry.Text,
+            PressureRange = PressureRangeEntry.Text,
+            MeasurementRange = MeasurementRangeEntry.Text,
+            MeasurementUnits = MeasurementUnitsEntry.Text,
+            MeasurementAccuracy = MeasurementAccuracyEntry.Text,
+            MeasurementResolution = MeasurementResolutionEntry.Text,
+            MeasurementInterval = MeasurementIntervalEntry.Text,
+            DataStorageCapacity = DataStorageCapacityEntry.Text,
+            DataTransmissionInterval = DataTransmissionIntervalEntry.Text,
+            DataTransmissionMethod = DataTransmissionMethodEntry.Text,
+            DataEncryption = DataEncryptionEntry.Text,
+            DataCompression = DataCompressionEntry.Text,
+            DataBackup = DataBackupEntry.Text,
+            DataRecovery = DataRecoveryEntry.Text,
+            DataVisualization = DataVisualizationEntry.Text,
+            DataAnalysis = DataAnalysisEntry.Text,
+            DataReporting = DataReportingEntry.Text,
+            DataSharing = DataSharingEntry.Text,
+            DataIntegration = DataIntegrationEntry.Text,
+            DataStorageLocation = DataStorageLocationEntry.Text,
+            DataAccessControl = DataAccessControlEntry.Text,
+            DataRetentionPolicy = DataRetentionPolicyEntry.Text,
+            DataDisposalPolicy = DataDisposalPolicyEntry.Text,
+            DataSecurity = DataSecurityEntry.Text,
+            DataPrivacy = DataPrivacyEntry.Text,
+            DataCompliance = DataComplianceEntry.Text,
+            DataGovernance = DataGovernanceEntry.Text,
+            DataQuality = DataQualityEntry.Text,
+            DataIntegrity = DataIntegrityEntry.Text
         };
 
         SensorsHelper.AddSensor(newSensor);
@@ -209,10 +252,6 @@ public partial class EnvironmentalScientistPage : ContentPage
             {
                 ClearInputFields();
             }
-        }
-        else
-        {
-            ClearInputFields();
         }
     }
 
