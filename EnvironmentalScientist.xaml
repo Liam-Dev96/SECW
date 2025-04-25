@@ -25,8 +25,8 @@
             </ListView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <Button Text="Add Sensor" Clicked="OnAddSensorClicked" />
-                <Button Text="Edit Sensor" Clicked="OnEditSensorClicked" IsEnabled="{Binding SelectedSensor, Converter={StaticResource NullToBoolConverter}}" />
-                <Button Text="Remove Sensor" Clicked="OnRemoveSensorClicked" IsEnabled="{Binding SelectedSensor, Converter={StaticResource NullToBoolConverter}}" />
+                <Button Text="Edit Sensor" Clicked="OnEditSensorClicked" />
+                <Button Text="Remove Sensor" Clicked="OnRemoveSensorClicked"/>
             </StackLayout>
 
                         <!-- Sensor Configuration Section -->
