@@ -6,7 +6,10 @@ namespace SECW;
 
 public partial class EnvironmentalScientistPage : ContentPage
 {
+    // ObservableCollection to hold the list of sensors
     public ObservableCollection<Sensor> Sensors { get; set; } = new ObservableCollection<Sensor>();
+
+    // Currently selected sensor
     public Sensor? SelectedSensor { get; set; }
 
     public EnvironmentalScientistPage()
@@ -14,31 +17,45 @@ public partial class EnvironmentalScientistPage : ContentPage
         InitializeComponent();
         BindingContext = this;
 
-        // Load sensors from the database
+        // Load sensors from the database on initialization
         LoadSensors();
     }
 
+    /// <summary>
+    /// Loads sensors from the database and populates the ObservableCollection.
+    /// </summary>
     private void LoadSensors()
     {
         Sensors.Clear();
+        Console.WriteLine("Loading sensors from the database...");
         var sensors = SensorsHelper.GetSensors();
         foreach (var sensor in sensors)
         {
             Sensors.Add(sensor);
         }
+        Console.WriteLine($"Loaded {Sensors.Count} sensors.");
     }
 
+    /// <summary>
+    /// Handles the Add Sensor button click event.
+    /// Validates input, checks for duplicates, and adds a new sensor.
+    /// </summary>
     private void OnAddSensorClicked(object sender, EventArgs e)
     {
+        Console.WriteLine("Add Sensor button clicked.");
+
         if (!ValidateSensorInput(out int sensorID)) return;
-       // Check if a sensor with the same ID already exists
+
+        // Check if a sensor with the same ID already exists
         var existingSensor = Sensors.FirstOrDefault(s => s.SensorID == sensorID);
-    if (existingSensor != null)
-    {
-        DisplayAlert("Error", $"A sensor with ID {sensorID} already exists.", "OK");
-        return;
-    }
-        // Logic to add a new sensor
+        if (existingSensor != null)
+        {
+            Console.WriteLine($"Sensor with ID {sensorID} already exists.");
+            DisplayAlert("Error", $"A sensor with ID {sensorID} already exists.", "OK");
+            return;
+        }
+
+        // Create a new sensor object
         var newSensor = new Sensor
         {
             SensorID = sensorID,
@@ -89,38 +106,67 @@ public partial class EnvironmentalScientistPage : ContentPage
             DataIntegrity = DataIntegrityEntry.Text
         };
 
+        // Add the new sensor to the database
         SensorsHelper.AddSensor(newSensor);
+        Console.WriteLine($"Sensor with ID {sensorID} added successfully.");
+
+        // Refresh the sensor list
         LoadSensors();
+
+        // Clear input fields
         ClearInputFields();
+
+        // Notify the user
         DisplayAlert("Success", "Sensor added successfully.", "OK");
     }
 
-
+    /// <summary>
+    /// Handles the Remove Sensor button click event.
+    /// Removes the selected sensor from the database.
+    /// </summary>
     private void OnRemoveSensorClicked(object sender, EventArgs e)
     {
+        Console.WriteLine("Remove Sensor button clicked.");
+
         if (SelectedSensor == null)
         {
+            Console.WriteLine("No sensor selected for removal.");
             DisplayAlert("Error", "No sensor selected for removal.", "OK");
             return;
         }
 
+        // Remove the sensor from the database
         SensorsHelper.RemoveSensor(SelectedSensor.SensorID);
+        Console.WriteLine($"Sensor with ID {SelectedSensor.SensorID} removed successfully.");
+
+        // Refresh the sensor list
         LoadSensors();
+
+        // Clear input fields
         ClearInputFields();
+
+        // Notify the user
         DisplayAlert("Success", "Sensor removed successfully.", "OK");
     }
 
+    /// <summary>
+    /// Handles the Save Configuration button click event.
+    /// Updates the selected sensor's configuration in the database.
+    /// </summary>
     private void OnSaveConfigurationClicked(object sender, EventArgs e)
     {
+        Console.WriteLine("Save Configuration button clicked.");
+
         if (SelectedSensor == null)
         {
+            Console.WriteLine("No sensor selected for saving configuration.");
             DisplayAlert("Error", "No sensor selected for saving configuration.", "OK");
             return;
         }
 
         if (!ValidateSensorInput(out _)) return;
 
-        // Update the selected sensor
+        // Update the selected sensor's properties
         SelectedSensor.Status = StatusEntry.Text;
         SelectedSensor.FirmwareVersion = FirmwareVersionEntry.Text;
         SelectedSensor.SensorType = SensorTypeEntry.Text;
@@ -167,82 +213,93 @@ public partial class EnvironmentalScientistPage : ContentPage
         SelectedSensor.DataQuality = DataQualityEntry.Text;
         SelectedSensor.DataIntegrity = DataIntegrityEntry.Text;
 
+        // Save the updated sensor to the database
         SensorsHelper.UpdateSensor(SelectedSensor);
+        Console.WriteLine($"Configuration for sensor with ID {SelectedSensor.SensorID} saved successfully.");
+
+        // Refresh the sensor list
         LoadSensors();
+        // Clear input fields
+        ClearInputFields();
+        // Clear the selected sensor
+        // Notify the user
         DisplayAlert("Success", "Configuration saved successfully.", "OK");
     }
 
+    /// <summary>
+    /// Handles the selection of a sensor from the list.
+    /// Populates the input fields with the selected sensor's details.
+    /// </summary>
     private void OnSensorSelected(object sender, SelectedItemChangedEventArgs e)
     {
         if (e.SelectedItem == null)
         {
+            Console.WriteLine("No sensor selected.");
             ClearInputFields();
             return;
         }
 
         if (e.SelectedItem is Sensor selectedSensor)
         {
-            // Fetch the full sensor details from the database
-            var sensorDetails = SensorsHelper.PopulateSensorFields(e, SensorIDEntry, selectedSensor.SensorID);
-            if (sensorDetails != null)
-            {
-                SelectedSensor = sensorDetails;
-                SensorIDEntry.Text = sensorDetails.SensorID.ToString();
-                StatusEntry.Text = sensorDetails.Status;
-                FirmwareVersionEntry.Text = sensorDetails.FirmwareVersion;
-                SensorTypeEntry.Text = sensorDetails.SensorType;
-                LocationEntry.Text = sensorDetails.Location;
-                ManufacturerEntry.Text = sensorDetails.Manufacturer;
-                ModelEntry.Text = sensorDetails.Model;
-                SerialNumberEntry.Text = sensorDetails.SerialNumber;
-                CalibrationDateEntry.Text = sensorDetails.CalibrationDate?.ToString("yyyy-MM-dd");
-                LastMaintenanceDateEntry.Text = sensorDetails.LastMaintenanceDate?.ToString("yyyy-MM-dd");
-                BatteryStatusEntry.Text = sensorDetails.BatteryStatus;
-                SignalStrengthEntry.Text = sensorDetails.SignalStrength;
-                DataRateEntry.Text = sensorDetails.DataRate;
-                DataFormatEntry.Text = sensorDetails.DataFormat;
-                CommunicationProtocolEntry.Text = sensorDetails.CommunicationProtocol;
-                PowerSourceEntry.Text = sensorDetails.PowerSource;
-                OperatingTemperatureRangeEntry.Text = sensorDetails.OperatingTemperatureRange;
-                HumidityRangeEntry.Text = sensorDetails.HumidityRange;
-                PressureRangeEntry.Text = sensorDetails.PressureRange;
-                MeasurementRangeEntry.Text = sensorDetails.MeasurementRange;
-                MeasurementUnitsEntry.Text = sensorDetails.MeasurementUnits;
-                MeasurementAccuracyEntry.Text = sensorDetails.MeasurementAccuracy;
-                MeasurementResolutionEntry.Text = sensorDetails.MeasurementResolution;
-                MeasurementIntervalEntry.Text = sensorDetails.MeasurementInterval;
-                DataStorageCapacityEntry.Text = sensorDetails.DataStorageCapacity;
-                DataTransmissionIntervalEntry.Text = sensorDetails.DataTransmissionInterval;
-                DataTransmissionMethodEntry.Text = sensorDetails.DataTransmissionMethod;
-                DataEncryptionEntry.Text = sensorDetails.DataEncryption;
-                DataCompressionEntry.Text = sensorDetails.DataCompression;
-                DataBackupEntry.Text = sensorDetails.DataBackup;
-                DataRecoveryEntry.Text = sensorDetails.DataRecovery;
-                DataVisualizationEntry.Text = sensorDetails.DataVisualization;
-                DataAnalysisEntry.Text = sensorDetails.DataAnalysis;
-                DataReportingEntry.Text = sensorDetails.DataReporting;
-                DataSharingEntry.Text = sensorDetails.DataSharing;
-                DataIntegrationEntry.Text = sensorDetails.DataIntegration;
-                DataStorageLocationEntry.Text = sensorDetails.DataStorageLocation;
-                DataAccessControlEntry.Text = sensorDetails.DataAccessControl;
-                DataRetentionPolicyEntry.Text = sensorDetails.DataRetentionPolicy;
-                DataDisposalPolicyEntry.Text = sensorDetails.DataDisposalPolicy;
-                DataSecurityEntry.Text = sensorDetails.DataSecurity;
-                DataPrivacyEntry.Text = sensorDetails.DataPrivacy;
-                DataComplianceEntry.Text = sensorDetails.DataCompliance;
-                DataGovernanceEntry.Text = sensorDetails.DataGovernance;
-                DataQualityEntry.Text = sensorDetails.DataQuality;
-                DataIntegrityEntry.Text = sensorDetails.DataIntegrity;
-            }
-            else
-            {
-                ClearInputFields();
-            }
+            Console.WriteLine($"Sensor with ID {selectedSensor.SensorID} selected.");
+            SelectedSensor = selectedSensor;
+
+            // Populate input fields with the selected sensor's details
+            SensorIDEntry.Text = selectedSensor.SensorID.ToString();
+            StatusEntry.Text = selectedSensor.Status;
+            FirmwareVersionEntry.Text = selectedSensor.FirmwareVersion;
+            SensorTypeEntry.Text = selectedSensor.SensorType;
+            LocationEntry.Text = selectedSensor.Location;
+            ManufacturerEntry.Text = selectedSensor.Manufacturer;
+            ModelEntry.Text = selectedSensor.Model;
+            SerialNumberEntry.Text = selectedSensor.SerialNumber;
+            CalibrationDateEntry.Text = selectedSensor.CalibrationDate?.ToString("yyyy-MM-dd");
+            LastMaintenanceDateEntry.Text = selectedSensor.LastMaintenanceDate?.ToString("yyyy-MM-dd");
+            BatteryStatusEntry.Text = selectedSensor.BatteryStatus;
+            SignalStrengthEntry.Text = selectedSensor.SignalStrength;
+            DataRateEntry.Text = selectedSensor.DataRate;
+            DataFormatEntry.Text = selectedSensor.DataFormat;
+            CommunicationProtocolEntry.Text = selectedSensor.CommunicationProtocol;
+            PowerSourceEntry.Text = selectedSensor.PowerSource;
+            OperatingTemperatureRangeEntry.Text = selectedSensor.OperatingTemperatureRange;
+            HumidityRangeEntry.Text = selectedSensor.HumidityRange;
+            PressureRangeEntry.Text = selectedSensor.PressureRange;
+            MeasurementRangeEntry.Text = selectedSensor.MeasurementRange;
+            MeasurementUnitsEntry.Text = selectedSensor.MeasurementUnits;
+            MeasurementAccuracyEntry.Text = selectedSensor.MeasurementAccuracy;
+            MeasurementResolutionEntry.Text = selectedSensor.MeasurementResolution;
+            MeasurementIntervalEntry.Text = selectedSensor.MeasurementInterval;
+            DataStorageCapacityEntry.Text = selectedSensor.DataStorageCapacity;
+            DataTransmissionIntervalEntry.Text = selectedSensor.DataTransmissionInterval;
+            DataTransmissionMethodEntry.Text = selectedSensor.DataTransmissionMethod;
+            DataEncryptionEntry.Text = selectedSensor.DataEncryption;
+            DataCompressionEntry.Text = selectedSensor.DataCompression;
+            DataBackupEntry.Text = selectedSensor.DataBackup;
+            DataRecoveryEntry.Text = selectedSensor.DataRecovery;
+            DataVisualizationEntry.Text = selectedSensor.DataVisualization;
+            DataAnalysisEntry.Text = selectedSensor.DataAnalysis;
+            DataReportingEntry.Text = selectedSensor.DataReporting;
+            DataSharingEntry.Text = selectedSensor.DataSharing;
+            DataIntegrationEntry.Text = selectedSensor.DataIntegration;
+            DataStorageLocationEntry.Text = selectedSensor.DataStorageLocation;
+            DataAccessControlEntry.Text = selectedSensor.DataAccessControl;
+            DataRetentionPolicyEntry.Text = selectedSensor.DataRetentionPolicy;
+            DataDisposalPolicyEntry.Text = selectedSensor.DataDisposalPolicy;
+            DataSecurityEntry.Text = selectedSensor.DataSecurity;
+            DataPrivacyEntry.Text = selectedSensor.DataPrivacy;
+            DataComplianceEntry.Text = selectedSensor.DataCompliance;
+            DataGovernanceEntry.Text = selectedSensor.DataGovernance;
+            DataQualityEntry.Text = selectedSensor.DataQuality;
+            DataIntegrityEntry.Text = selectedSensor.DataIntegrity;
         }
     }
 
+    /// <summary>
+    /// Clears all input fields and resets the selected sensor.
+    /// </summary>
     private void ClearInputFields()
     {
+        Console.WriteLine("Clearing input fields.");
         SelectedSensor = null;
         SensorIDEntry.Text = string.Empty;
         StatusEntry.Text = string.Empty;
@@ -292,32 +349,33 @@ public partial class EnvironmentalScientistPage : ContentPage
         DataIntegrityEntry.Text = string.Empty;
     }
 
+    /// <summary>
+    /// Validates the sensor input fields.
+    /// Ensures the Sensor ID is valid and not already in use.
+    /// </summary>
+    /// <returns>True if validation passes, otherwise false.</returns>
+    /// <exception cref="ArgumentException">Thrown when the Sensor ID is invalid.</exception>
+    /// allows for white space and empty values to be checked for in the sensor ID entry field other fields are not checked for empty values as they are not required to be filled in at this point in time.</exception>
     private bool ValidateSensorInput(out int sensorID)
     {
-        // Validate Sensor ID
-        // Check if the Sensor ID is empty or not a number
-        // Check if the Sensor ID is a positive integer
-        // Check if the Sensor ID is already in use
-        // Check if the Sensor ID is a valid number
-        // allows for whitespace and empty strings for all fields except sensorID.
         sensorID = 0;
 
+        // Validate Sensor ID
         if (string.IsNullOrWhiteSpace(SensorIDEntry.Text) || !int.TryParse(SensorIDEntry.Text, out sensorID))
         {
+            Console.WriteLine("Invalid Sensor ID: Not a number or empty.");
             DisplayAlert("Error", "Please enter a valid Sensor ID (must be a number).", "OK");
             return false;
         }
 
         if (sensorID <= 0)
         {
+            Console.WriteLine("Invalid Sensor ID: Must be a positive integer.");
             DisplayAlert("Error", "Sensor ID must be a positive integer.", "OK");
             return false;
         }
 
-        // Log successful validation
-        Console.WriteLine("Sensor input validation passed successfully.");
+        Console.WriteLine($"Sensor input validation passed for Sensor ID {sensorID}.");
         return true;
     }
 }
-
-
