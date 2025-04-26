@@ -21,6 +21,327 @@
       "version": ""
     },
     {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.AdminPage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.AdminPage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.AdminPage",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.AdminSettingsPage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.AdminSettingsPage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.AdminSettingsPage",
+      "Summary": "<p sourcefile=\"api/SECW.AdminSettingsPage.yml\" sourcestartlinenumber=\"1\">Represents the Admin Settings Page where users can update their account details.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.App.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.App.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.App",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.AppShell.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.AppShell.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.AppShell",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.EditUserPage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.EditUserPage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.EditUserPage",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.EnvironmentalScientistPage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.EnvironmentalScientistPage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.EnvironmentalScientistPage",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.Helpers.DataBaseHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.Helpers.DataBaseHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.Helpers.DataBaseHelper",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.Helpers.NullToBoolConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.Helpers.NullToBoolConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.Helpers.NullToBoolConverter",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.Helpers.Sensor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.Helpers.Sensor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.Helpers.Sensor",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.Helpers.SensorsHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.Helpers.SensorsHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.Helpers.SensorsHelper",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.Helpers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.Helpers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.Helpers",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.Login.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.Login.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.Login",
+      "Summary": "<p sourcefile=\"api/SECW.Login.yml\" sourcestartlinenumber=\"1\">Represents the Login page for the application.\nHandles user authentication and role-based navigation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.MainActivity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.MainActivity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.MainActivity",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.MainApplication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.MainApplication.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.MainApplication",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.ManageUsers.DataBaseHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.ManageUsers.DataBaseHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.ManageUsers.DataBaseHelper",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.ManageUsers.User.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.ManageUsers.User.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.ManageUsers.User",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.ManageUsers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.ManageUsers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.ManageUsers",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.MauiProgram.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.MauiProgram.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.MauiProgram",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.OperationalManagerPage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.OperationalManagerPage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.OperationalManagerPage",
+      "Summary": "<p sourcefile=\"api/SECW.OperationalManagerPage.yml\" sourcestartlinenumber=\"1\">Represents the Operational Manager Page, which provides functionalities\nfor managing sensors, checking battery status, and handling maintenance/calibration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.Resource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.Resource.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.Resource",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.UserPage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.UserPage.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW.UserPage",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SECW.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SECW.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SECW",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "docs/AdminPage.md",
       "output": {
