@@ -1,0 +1,112 @@
+{
+  "source_base_path": "C:/Users/Ahmed/Downloads/VScodeRepo/SECW",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "README.md",
+      "output": {
+        ".html": {
+          "relative_path": "README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/AdminPage.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/AdminPage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/AdminSettingsPage.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/AdminSettingsPage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/EditUserPage.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/EditUserPage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/EnvironmentalScientistPage.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/EnvironmentalScientistPage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/Login.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/Login.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/ManageUsers.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/ManageUsers.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/OperationalManagerPage.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/OperationalManagerPage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
