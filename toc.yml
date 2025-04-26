@@ -5,16 +5,16 @@
 - name: Pages
   items:
     - name: Admin Page
-      href: AdminPage.md
+      href: docs/AdminPage.md
     - name: Admin Settings Page
-      href: AdminSettingsPage.md
+      href: docs/AdminSettingsPage.md
     - name: Edit User Page
-      href: EditUserPage.md
+      href: docs/EditUserPage.md
     - name: Environmental Scientist Page
-      href: EnvironmentalScientistPage.md
+      href: docs/EnvironmentalScientistPage.md
     - name: Login Page
-      href: Login.md
+      href: docs/Login.md
     - name: Manage Users Page
-      href: ManageUsers.md
+      href: docs/ManageUsers.md
     - name: Operational Manager Page
-      href: OperationalManagerPage.md
+      href: docs/OperationalManagerPage.md
