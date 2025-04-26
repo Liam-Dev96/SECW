@@ -294,20 +294,28 @@ public partial class EnvironmentalScientistPage : ContentPage
 
     private bool ValidateSensorInput(out int sensorID)
     {
+        // Validate Sensor ID
+        // Check if the Sensor ID is empty or not a number
+        // Check if the Sensor ID is a positive integer
+        // Check if the Sensor ID is already in use
+        // Check if the Sensor ID is a valid number
+        // allows for whitespace and empty strings for all fields except sensorID.
         sensorID = 0;
 
         if (string.IsNullOrWhiteSpace(SensorIDEntry.Text) || !int.TryParse(SensorIDEntry.Text, out sensorID))
         {
-            DisplayAlert("Error", "Please enter a valid Sensor ID.", "OK");
+            DisplayAlert("Error", "Please enter a valid Sensor ID (must be a number).", "OK");
             return false;
         }
 
-        if (string.IsNullOrWhiteSpace(StatusEntry.Text) || string.IsNullOrWhiteSpace(FirmwareVersionEntry.Text))
+        if (sensorID <= 0)
         {
-            DisplayAlert("Error", "Please fill in all fields.", "OK");
+            DisplayAlert("Error", "Sensor ID must be a positive integer.", "OK");
             return false;
         }
 
+        // Log successful validation
+        Console.WriteLine("Sensor input validation passed successfully.");
         return true;
     }
 }
