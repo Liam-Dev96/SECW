@@ -7,21 +7,34 @@ using Microsoft.Data.Sqlite;
 
 namespace SECW
 {
+    /// <summary>
+    /// Represents the Login page for the application.
+    /// Handles user authentication and role-based navigation.
+    /// </summary>
     public partial class Login : ContentPage
     {
+        // Connection string for the SQLite database
         private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Login"/> class.
+        /// </summary>
         public Login()
         {
             InitializeComponent();
             InitializeDatabase();
         }
 
+        /// <summary>
+        /// Initializes the database by invoking the helper method.
+        /// Logs any errors encountered during initialization.
+        /// </summary>
         private void InitializeDatabase()
         {
             try
             {
                 DataBaseHelper.initializeDatabase();
+                Console.WriteLine("[INFO] Database initialized successfully.");
             }
             catch (Exception ex)
             {
@@ -30,14 +43,22 @@ namespace SECW
             }
         }
 
+        /// <summary>
+        /// Handles the login submission event.
+        /// Validates user credentials and navigates based on user roles.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private async void Submitbtn_Click(object sender, EventArgs e)
         {
             string username = Username.Text;
             string password = Password.Text;
 
+            // Validate input fields
             if (username == null || password == null)
             {
                 await DisplayAlert("Error", "Username or password cannot be null.", "OK");
+                Console.WriteLine("[WARN] Login attempt failed: Null username or password.");
                 return;
             }
 
@@ -53,11 +74,13 @@ namespace SECW
                 using (var connection = new SqliteConnection(connectionString))
                 {
                     connection.Open();
+                    Console.WriteLine("[INFO] Database connection opened successfully.");
 
                     // Set busy timeout to prevent "database is locked" errors
                     using (var pragmaCommand = new SqliteCommand("PRAGMA busy_timeout = 3000;", connection))
                     {
                         pragmaCommand.ExecuteNonQuery();
+                        Console.WriteLine("[INFO] PRAGMA busy_timeout set to 3000ms.");
                     }
 
                     string query = @"SELECT PasswordHash, RoleID FROM Users WHERE Username = @username";
@@ -72,7 +95,7 @@ namespace SECW
                                 string storedHash = reader["PasswordHash"].ToString() ?? string.Empty;
                                 int role = Convert.ToInt32(reader["RoleID"]);
 
-                                // Use BCrypt to verify entered password against stored hash
+                                // Verify password using BCrypt
                                 if (!BCrypt.Net.BCrypt.Verify(password, storedHash))
                                 {
                                     await DisplayAlert("Error", "Invalid username or password.", "OK");
@@ -80,56 +103,8 @@ namespace SECW
                                     return;
                                 }
 
-                                // Proceed with role-based navigation
-                                switch (role)
-                                {
-                                    case 1: // Admin
-                                        await DisplayAlert("Success", $"Welcome, Admin {username}!", "OK");
-                                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Admin.");
-                                        LoggedinUser(username);
-                                        if (Application.Current != null)
-                                        {
-                                            Application.Current.MainPage = new NavigationPage(new AdminPage());
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("[ERROR] Application.Current is null.");
-                                        }
-                                        break;
-
-                                    case 2: // Operational Manager
-                                        await DisplayAlert("Success", $"Welcome, Operational Manager {username}!", "OK");
-                                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Operational Manager.");
-                                        LoggedinUser(username);
-                                        if (Application.Current != null)
-                                        {
-                                            Application.Current.MainPage = new NavigationPage(new OperationalManagerPage());
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("[ERROR] Application.Current is null.");
-                                        }
-                                        break;
-
-                                    case 3: // Environmental Scientist
-                                        await DisplayAlert("Success", $"Welcome, Environmental Scientist {username}!", "OK");
-                                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Environmental Scientist.");
-                                        LoggedinUser(username);
-                                        if (Application.Current != null)
-                                        {
-                                            Application.Current.MainPage = new NavigationPage(new EnvironmentalScientistPage());
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("[ERROR] Application.Current is null.");
-                                        }
-                                        break;
-
-                                    default:
-                                        await DisplayAlert("Error", "Unknown role. Please contact support.", "OK");
-                                        Console.WriteLine($"[ERROR] Login failed: Username '{username}' has an unknown role.");
-                                        return;
-                                }
+                                // Handle role-based navigation
+                                HandleRoleBasedNavigation(role, username);
                             }
                             else
                             {
@@ -140,7 +115,7 @@ namespace SECW
                         }
                     }
 
-                    // Update the last login date after the transaction is committed
+                    // Update the last login date
                     updateLastLoginDate(connection, username);
                 }
             }
@@ -156,7 +131,76 @@ namespace SECW
             }
         }
 
-        // Updates the user's last login date to the current timestamp in the database.
+        /// <summary>
+        /// Handles navigation based on the user's role.
+        /// </summary>
+        /// <param name="role">The role ID of the user.</param>
+        /// <param name="username">The username of the logged-in user.</param>
+        private async void HandleRoleBasedNavigation(int role, string username)
+        {
+            try
+            {
+                switch (role)
+                {
+                    case 1: // Admin
+                        await DisplayAlert("Success", $"Welcome, Admin {username}!", "OK");
+                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Admin.");
+                        LoggedinUser(username);
+                        if (Application.Current != null)
+                        {
+                            Application.Current.MainPage = new NavigationPage(new AdminPage());
+                        }
+                        else
+                        {
+                            Console.WriteLine("[ERROR] Application.Current is null. Cannot navigate to AdminPage.");
+                        }
+                        break;
+
+                    case 2: // Operational Manager
+                        await DisplayAlert("Success", $"Welcome, Operational Manager {username}!", "OK");
+                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Operational Manager.");
+                        LoggedinUser(username);
+                        if (Application.Current != null)
+                        {
+                            Application.Current.MainPage = new NavigationPage(new OperationalManagerPage());
+                        }
+                        else
+                        {
+                            Console.WriteLine("[ERROR] Application.Current is null. Cannot navigate to OperationalManagerPage.");
+                        }
+                        break;
+
+                    case 3: // Environmental Scientist
+                        await DisplayAlert("Success", $"Welcome, Environmental Scientist {username}!", "OK");
+                        Console.WriteLine($"[INFO] Login successful: Username '{username}' logged in as Environmental Scientist.");
+                        LoggedinUser(username);
+                        if (Application.Current != null)
+                        {
+                            Application.Current.MainPage = new NavigationPage(new EnvironmentalScientistPage());
+                        }
+                        else
+                        {
+                            Console.WriteLine("[ERROR] Application.Current is null. Cannot navigate to EnvironmentalScientistPage.");
+                        }
+                        break;
+
+                    default:
+                        await DisplayAlert("Error", "Unknown role. Please contact support.", "OK");
+                        Console.WriteLine($"[ERROR] Login failed: Username '{username}' has an unknown role.");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] Error during role-based navigation for username '{username}': {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Updates the user's last login date to the current timestamp in the database.
+        /// </summary>
+        /// <param name="connection">The SQLite connection.</param>
+        /// <param name="username">The username of the logged-in user.</param>
         private static void updateLastLoginDate(SqliteConnection connection, string username)
         {
             try
@@ -180,13 +224,26 @@ namespace SECW
                 Console.WriteLine($"[ERROR] Unexpected error while updating last login date for username '{username}': {ex.Message}");
             }
         }
+
+        /// <summary>
+        /// Logs the username of the currently logged-in user and stores it in preferences.
+        /// </summary>
+        /// <param name="username">The username of the logged-in user.</param>
         public void LoggedinUser(string username)
         {
-            var loggedInUser = username;
-            Console.WriteLine($"[INFO] Logged in user: {loggedInUser}");
+            try
+            {
+                var loggedInUser = username;
+                Console.WriteLine($"[INFO] Logged in user: {loggedInUser}");
 
-            // Store the logged-in user in preferences for later use
-            Preferences.Set("LoggedInUser", loggedInUser);
+                // Store the logged-in user in preferences for later use
+                Preferences.Set("LoggedInUser", loggedInUser);
+                Console.WriteLine("[INFO] Logged-in user stored in preferences.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] Failed to store logged-in user in preferences: {ex.Message}");
+            }
         }
     }
 }
