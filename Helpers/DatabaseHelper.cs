@@ -128,23 +128,7 @@ CREATE TABLE IF NOT EXISTS Sensors (
                         {
                             Console.WriteLine($"Error creating Sensors table: {ex.Message}");
                         }
-
-                        // Create the SensorTypes table
-                        try
-                        {
-                            string CreateSensorTypesTableQuery = @"Create Table If Not Exists SensorTypes(
-                            SensorTypeID integer Primary Key,
-                            TypeName VARCHAR (20),
-                            Description VARCHAR (255)
-                            );";
-                            using var Command = new SqliteCommand(CreateSensorTypesTableQuery, Connection);
-                            Command.ExecuteNonQuery();
-                        }
-                        catch (SqliteException ex)
-                        {
-                            Console.WriteLine($"Error creating SensorTypes table: {ex.Message}");
-                        }
-
+                        
                         // Create the Locations table
                         try
                         {
