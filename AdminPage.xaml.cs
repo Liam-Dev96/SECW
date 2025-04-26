@@ -1,3 +1,13 @@
+// Admin Page
+
+// The `AdminPage` class represents the main page for administrators. It provides the following functionalities:
+// - **Manage Users**: Navigate to the `ManageUsersPage` to manage user accounts.
+// - **View Reports**: Placeholder for viewing reports (not yet implemented).
+// - **Settings**: Placeholder for settings (not yet implemented).
+// - **Logout**: Logs out the user and navigates back to the login page.
+// - **Admin Settings**: Navigate to the `AdminSettingsPage` for admin-specific settings.
+// - **Check Maintenance and Calibration Dates**: Placeholder for checking maintenance and calibration dates (not yet implemented).
+
 namespace SECW;
 
 public partial class AdminPage : ContentPage
