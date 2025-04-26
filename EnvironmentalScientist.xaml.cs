@@ -68,7 +68,7 @@ public partial class EnvironmentalScientistPage : ContentPage
             SerialNumber = SerialNumberEntry.Text,
             CalibrationDate = DateTime.TryParse(CalibrationDateEntry.Text, out var calibrationDate) ? calibrationDate : null,
             LastMaintenanceDate = DateTime.TryParse(LastMaintenanceDateEntry.Text, out var maintenanceDate) ? maintenanceDate : null,
-            BatteryStatus = BatteryStatusEntry.Text,
+            BatteryStatus = BatteryPercentagePicker.SelectedItem?.ToString(),
             SignalStrength = SignalStrengthEntry.Text,
             DataRate = DataRateEntry.Text,
             DataFormat = DataFormatEntry.Text,
@@ -176,7 +176,7 @@ public partial class EnvironmentalScientistPage : ContentPage
         SelectedSensor.SerialNumber = SerialNumberEntry.Text;
         SelectedSensor.CalibrationDate = DateTime.TryParse(CalibrationDateEntry.Text, out var calibrationDate) ? calibrationDate : null;
         SelectedSensor.LastMaintenanceDate = DateTime.TryParse(LastMaintenanceDateEntry.Text, out var maintenanceDate) ? maintenanceDate : null;
-        SelectedSensor.BatteryStatus = BatteryStatusEntry.Text;
+        SelectedSensor.BatteryStatus = BatteryPercentagePicker.SelectedItem?.ToString();
         SelectedSensor.SignalStrength = SignalStrengthEntry.Text;
         SelectedSensor.DataRate = DataRateEntry.Text;
         SelectedSensor.DataFormat = DataFormatEntry.Text;
@@ -255,7 +255,14 @@ public partial class EnvironmentalScientistPage : ContentPage
             SerialNumberEntry.Text = selectedSensor.SerialNumber;
             CalibrationDateEntry.Text = selectedSensor.CalibrationDate?.ToString("yyyy-MM-dd");
             LastMaintenanceDateEntry.Text = selectedSensor.LastMaintenanceDate?.ToString("yyyy-MM-dd");
-            BatteryStatusEntry.Text = selectedSensor.BatteryStatus;
+            if (int.TryParse(selectedSensor.BatteryStatus, out int batteryPercentage))
+            {
+                BatteryPercentagePicker.SelectedItem = batteryPercentage;
+            }
+            else
+            {
+                BatteryPercentagePicker.SelectedItem = null;
+            }
             SignalStrengthEntry.Text = selectedSensor.SignalStrength;
             DataRateEntry.Text = selectedSensor.DataRate;
             DataFormatEntry.Text = selectedSensor.DataFormat;
@@ -311,7 +318,7 @@ public partial class EnvironmentalScientistPage : ContentPage
         SerialNumberEntry.Text = string.Empty;
         CalibrationDateEntry.Text = string.Empty;
         LastMaintenanceDateEntry.Text = string.Empty;
-        BatteryStatusEntry.Text = string.Empty;
+        BatteryPercentagePicker.SelectedItem = null;
         SignalStrengthEntry.Text = string.Empty;
         DataRateEntry.Text = string.Empty;
         DataFormatEntry.Text = string.Empty;
@@ -355,7 +362,10 @@ public partial class EnvironmentalScientistPage : ContentPage
     /// </summary>
     /// <returns>True if validation passes, otherwise false.</returns>
     /// <exception cref="ArgumentException">Thrown when the Sensor ID is invalid.</exception>
-    /// allows for white space and empty values to be checked for in the sensor ID entry field other fields are not checked for empty values as they are not required to be filled in at this point in time.</exception>
+    /// <remarks>
+    /// Allows for white space and empty values to be checked for in the Sensor ID entry field. 
+    /// Other fields are not checked for empty values as they are not required to be filled in at this point in time.
+    /// </remarks>
     private bool ValidateSensorInput(out int sensorID)
     {
         sensorID = 0;
