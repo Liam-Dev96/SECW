@@ -66,8 +66,8 @@ public partial class EnvironmentalScientistPage : ContentPage
             Manufacturer = ManufacturerEntry.Text,
             Model = ModelEntry.Text,
             SerialNumber = SerialNumberEntry.Text,
-            CalibrationDate = DateTime.TryParse(CalibrationDateEntry.Text, out var calibrationDate) ? calibrationDate : null,
-            LastMaintenanceDate = DateTime.TryParse(LastMaintenanceDateEntry.Text, out var maintenanceDate) ? maintenanceDate : null,
+            CalibrationDate = CalibrationDatePicker.Date,
+            LastMaintenanceDate = LastMaintenanceDatePicker.Date,
             BatteryStatus = BatteryPercentagePicker.SelectedItem?.ToString(),
             SignalStrength = SignalStrengthEntry.Text,
             DataRate = DataRateEntry.Text,
@@ -174,8 +174,8 @@ public partial class EnvironmentalScientistPage : ContentPage
         SelectedSensor.Manufacturer = ManufacturerEntry.Text;
         SelectedSensor.Model = ModelEntry.Text;
         SelectedSensor.SerialNumber = SerialNumberEntry.Text;
-        SelectedSensor.CalibrationDate = DateTime.TryParse(CalibrationDateEntry.Text, out var calibrationDate) ? calibrationDate : null;
-        SelectedSensor.LastMaintenanceDate = DateTime.TryParse(LastMaintenanceDateEntry.Text, out var maintenanceDate) ? maintenanceDate : null;
+        SelectedSensor.CalibrationDate = CalibrationDatePicker.Date;
+        SelectedSensor.LastMaintenanceDate = LastMaintenanceDatePicker.Date;
         SelectedSensor.BatteryStatus = BatteryPercentagePicker.SelectedItem?.ToString();
         SelectedSensor.SignalStrength = SignalStrengthEntry.Text;
         SelectedSensor.DataRate = DataRateEntry.Text;
@@ -253,8 +253,8 @@ public partial class EnvironmentalScientistPage : ContentPage
             ManufacturerEntry.Text = selectedSensor.Manufacturer;
             ModelEntry.Text = selectedSensor.Model;
             SerialNumberEntry.Text = selectedSensor.SerialNumber;
-            CalibrationDateEntry.Text = selectedSensor.CalibrationDate?.ToString("yyyy-MM-dd");
-            LastMaintenanceDateEntry.Text = selectedSensor.LastMaintenanceDate?.ToString("yyyy-MM-dd");
+            CalibrationDatePicker.Date = DateTime.Now; // Updated
+            LastMaintenanceDatePicker.Date = DateTime.Now; // Updated
             if (int.TryParse(selectedSensor.BatteryStatus, out int batteryPercentage))
             {
                 BatteryPercentagePicker.SelectedItem = batteryPercentage;
@@ -316,9 +316,8 @@ public partial class EnvironmentalScientistPage : ContentPage
         ManufacturerEntry.Text = string.Empty;
         ModelEntry.Text = string.Empty;
         SerialNumberEntry.Text = string.Empty;
-        CalibrationDateEntry.Text = string.Empty;
-        LastMaintenanceDateEntry.Text = string.Empty;
-        BatteryPercentagePicker.SelectedItem = null;
+        CalibrationDatePicker.Date = DateTime.Now;
+        LastMaintenanceDatePicker.Date = DateTime.Now;BatteryPercentagePicker.SelectedItem = null;
         SignalStrengthEntry.Text = string.Empty;
         DataRateEntry.Text = string.Empty;
         DataFormatEntry.Text = string.Empty;
@@ -388,4 +387,80 @@ public partial class EnvironmentalScientistPage : ContentPage
         Console.WriteLine($"Sensor input validation passed for Sensor ID {sensorID}.");
         return true;
     }
+
+    private void OnClearFieldsClicked(object sender, EventArgs e)
+{
+    // Clear all fields in the UI
+    ClearInputFields();
+    Console.WriteLine("User cleared all input fields.");
+}
+
+/// <summary>
+    /// Handles the click event for the Logout button.
+    /// Navigates back to the login page and resets the navigation stack.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event data.</param>
+    private void LogoutBtn_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            // Log logout attempt
+            Console.WriteLine("Attempting to log out and navigate to LoginPage...");
+
+            if (Application.Current != null)
+            {
+                // Navigate to LoginPage and reset navigation stack
+                Application.Current.MainPage = new NavigationPage(new Login());
+
+                // Log successful logout
+                Console.WriteLine("Successfully logged out and navigated to LoginPage.");
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            Console.WriteLine($"Error during logout: {ex.Message}");
+        }
+    }
+
+    //below will be a function used to display alerts by checking the last date of maintenance and calibration and if they are older than 3 months
+    //then an alert will be displayed to the user with the sensor ID and the date of the last maintenance or calibration the sensors type and location
+    private void CheckMaintenanceAndCalibrationDates()
+{
+    Console.WriteLine("Checking maintenance and calibration dates...");
+
+    // Retrieve sensors from the database
+    var sensors = SensorsHelper.GetSensors();
+
+    foreach (var sensor in sensors)
+    {
+        string alertMessage = string.Empty;
+
+        // Check if the last maintenance date is older than 3 months
+        if (sensor.LastMaintenanceDate.HasValue && sensor.LastMaintenanceDate.Value < DateTime.Now.AddMonths(-3))
+        {
+            alertMessage += $"Maintenance required. Last maintenance date: {sensor.LastMaintenanceDate.Value.ToShortDateString()}\n";
+        }
+
+        // Check if the last calibration date is older than 3 months
+        if (sensor.CalibrationDate.HasValue && sensor.CalibrationDate.Value < DateTime.Now.AddMonths(-3))
+        {
+            alertMessage += $"Calibration required. Last calibration date: {sensor.CalibrationDate.Value.ToShortDateString()}\n";
+        }
+
+        // Display alert if any issues are found
+        if (!string.IsNullOrEmpty(alertMessage))
+        {
+            DisplayAlert(
+                "Sensor Alert",
+                $"Sensor {sensor.SensorID} ({sensor.SensorType}, located at {sensor.Location}):\n{alertMessage}",
+                "OK"
+            );
+        }
+    }
+
+    Console.WriteLine("Maintenance and calibration check completed.");
+}
+
 }
