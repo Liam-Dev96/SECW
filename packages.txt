@@ -7,8 +7,10 @@ Project 'SECW' has the following package references
    > Microsoft.Maui.Controls                       8.0.100      8.0.100 
    > Microsoft.Maui.Controls.Compatibility         8.0.100      8.0.100 
    > Microsoft.NET.ILLink.Tasks              (A)   [8.0.15, )   8.0.15  
+   > Moq                                           4.20.72      4.20.72 
 
    Transitive Package                                           Resolved       
+   > Castle.Core                                                5.1.1          
    > GoogleGson                                                 2.10.1.4       
    > Microsoft.Data.Sqlite.Core                                 9.0.4          
    > Microsoft.Extensions.Configuration                         8.0.0          
@@ -31,6 +33,7 @@ Project 'SECW' has the following package references
    > SQLitePCLRaw.lib.e_sqlite3.android                         2.1.10         
    > SQLitePCLRaw.provider.e_sqlite3                            2.1.10         
    > System.Buffers                                             4.4.0          
+   > System.Diagnostics.EventLog                                6.0.0          
    > System.Memory                                              4.5.3          
    > System.Runtime.CompilerServices.Unsafe                     4.5.2          
    > Xamarin.Android.Glide                                      4.15.1.2       
@@ -125,8 +128,10 @@ Project 'SECW' has the following package references
    > Microsoft.Maui.Controls                       8.0.100      8.0.100 
    > Microsoft.Maui.Controls.Compatibility         8.0.100      8.0.100 
    > Microsoft.NET.ILLink.Tasks              (A)   [8.0.15, )   8.0.15  
+   > Moq                                           4.20.72      4.20.72 
 
    Transitive Package                                           Resolved
+   > Castle.Core                                                5.1.1   
    > Microsoft.Data.Sqlite.Core                                 9.0.4   
    > Microsoft.Extensions.Configuration                         8.0.0   
    > Microsoft.Extensions.Configuration.Abstractions            8.0.0   
@@ -147,6 +152,7 @@ Project 'SECW' has the following package references
    > SQLitePCLRaw.core                                          2.1.10  
    > SQLitePCLRaw.lib.e_sqlite3.ios                             2.1.10  
    > SQLitePCLRaw.provider.internal                             2.1.10  
+   > System.Diagnostics.EventLog                                6.0.0   
    > System.Memory                                              4.5.3   
    > System.Runtime.InteropServices.NFloat.Internal             6.0.1   
 
@@ -158,8 +164,10 @@ Project 'SECW' has the following package references
    > Microsoft.Maui.Controls                       8.0.100      8.0.100 
    > Microsoft.Maui.Controls.Compatibility         8.0.100      8.0.100 
    > Microsoft.NET.ILLink.Tasks              (A)   [8.0.15, )   8.0.15  
+   > Moq                                           4.20.72      4.20.72 
 
    Transitive Package                                           Resolved
+   > Castle.Core                                                5.1.1   
    > Microsoft.Data.Sqlite.Core                                 9.0.4   
    > Microsoft.Extensions.Configuration                         8.0.0   
    > Microsoft.Extensions.Configuration.Abstractions            8.0.0   
@@ -180,6 +188,7 @@ Project 'SECW' has the following package references
    > SQLitePCLRaw.core                                          2.1.10  
    > SQLitePCLRaw.lib.e_sqlite3                                 2.1.10  
    > SQLitePCLRaw.provider.e_sqlite3                            2.1.10  
+   > System.Diagnostics.EventLog                                6.0.0   
    > System.Memory                                              4.5.3   
 
    [net8.0-windows10.0.19041]: 
@@ -189,8 +198,10 @@ Project 'SECW' has the following package references
    > Microsoft.Extensions.Logging.Debug         8.0.1       8.0.1   
    > Microsoft.Maui.Controls                    8.0.100     8.0.100 
    > Microsoft.Maui.Controls.Compatibility      8.0.100     8.0.100 
+   > Moq                                        4.20.72     4.20.72 
 
    Transitive Package                                           Resolved      
+   > Castle.Core                                                5.1.1         
    > Microsoft.Data.Sqlite.Core                                 9.0.4         
    > Microsoft.Extensions.Configuration                         8.0.0         
    > Microsoft.Extensions.Configuration.Abstractions            8.0.0         
@@ -216,6 +227,7 @@ Project 'SECW' has the following package references
    > SQLitePCLRaw.core                                          2.1.10        
    > SQLitePCLRaw.lib.e_sqlite3                                 2.1.10        
    > SQLitePCLRaw.provider.e_sqlite3                            2.1.10        
+   > System.Diagnostics.EventLog                                6.0.0         
    > System.Memory                                              4.5.3         
 
 (A) : Auto-referenced package.
