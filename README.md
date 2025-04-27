@@ -90,3 +90,12 @@ This creates a `packages.txt` file listing all required packages and dependencie
 - For password validation, we are using **Bcrypt**.
 
 ---
+
+## important(ingore all warnings that pop up)
+- **'dotnet test SECW.Tests.Solution.sln'**
+this is how to run the unit tests which are implemented using docker in order to isolate the 2 csproj files, I kept running into errors with the dependencies being duplicated and when i deleted one and refrenced the other file it kept saying the dependencies were missing, then even after suppressing the errors the app kept crashing while the unit tests worked, and after I fixed the app the unit tests kept crashing, i created a new project which had the aim of sharing files and code between projects passing data back and forth to classes and even then i ran into dependency issues thats when i remembered that docker existed and that it can simplify all of this, heads up the project has about 400+ warnings, ignore them all or supress them either way it will run without an issue further testing is required though.
+
+# testing added
+I added one testing file with no code coverage
+from what i expect this tests about at least 80% of operations and tasks going through in this application
+reasoning being that it creates a database, mimics table creation based on fields similar to databasehelper, goes through crud operations, then deletes the temporary directory after.
