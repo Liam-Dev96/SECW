@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="SECW.ManageUsers"
+            x:Name="ManageUsersPage"
+            Title="Manage Users">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Add Users" FontSize="24" HorizontalOptions="Center" />
+            <Entry x:Name="Username" Placeholder="UserName" />
+            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" />
+            <Picker x:Name="RolePicker" Title="Select Role">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Admin</x:String>
+                        <x:String>Operational Manager</x:String>
+                        <x:String>Environmental Scientist</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Entry x:Name="Password" Placeholder="Password" IsPassword="True" />
+            <Entry x:Name="ConfirmPassword" Placeholder="Confirm Password" IsPassword="True" />
+            <Button Text="Add User" Command="{Binding AddUserCommand}" />
+            <Label Text="View/Delete users" FontSize="24" HorizontalOptions="Center" />
+            <ListView ItemsSource="{Binding Users}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <Label Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                                <Label Text="{Binding Email}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                                <Label Text="{Binding RoleName}" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                                <Button Text="Delete"
+                                    BackgroundColor="orange"
+                                        TextColor="White"
+                                        Command="{Binding BindingContext.DeleteUserCommand, Source={x:Reference ManageUsersPage}}"
+                                        CommandParameter="{Binding .}" />
+                                <Button Text="Modify"
+                                        BackgroundColor="Blue"
+                                        TextColor="White"
+                                        Command="{Binding BindingContext.EditUserCommand, Source={x:Reference ManageUsersPage}}"
+                                        CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

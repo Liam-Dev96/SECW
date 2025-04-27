@@ -1,0 +1,46 @@
+<ContentPage x:Class="SECW.Login"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Login Page"
+             BackgroundColor="#1E1E1E">
+    <VerticalStackLayout Margin="20" Spacing="15" VerticalOptions="Center">
+        <Label Text="Welcome Back!"
+               TextColor="DarkOrange"
+               FontSize="30"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+        <BoxView HeightRequest="2" BackgroundColor="DarkOrange" HorizontalOptions="Fill" />
+        <Label Text="Username:" TextColor="White" FontSize="18" />
+        <Entry x:Name="Username"
+               Placeholder="Enter your username"
+               BackgroundColor="#2E2E2E"
+               FontSize="18"
+               TextColor="White"
+               PlaceholderColor="Gray"
+               Margin="0,0,0,10" />
+        <Label Text="Password:" TextColor="White" FontSize="18" />
+        <Entry x:Name="Password"
+               Placeholder="Enter your password"
+               BackgroundColor="#2E2E2E"
+               FontSize="18"
+               TextColor="White"
+               PlaceholderColor="Gray"
+               IsPassword="True"
+               Margin="0,0,0,20" />
+        <Button x:Name="Submitbtn"
+                Text="Login"
+                BackgroundColor="DarkOrange"
+                TextColor="White"
+                FontSize="18"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HorizontalOptions="Fill"
+                HeightRequest="50"
+                Clicked="Submitbtn_Click" />
+        <Label Text="Don't have an account? Sign up now!"
+               TextColor="Gray"
+               FontSize="14"
+               HorizontalOptions="Center"
+               Margin="0,20,0,0" />
+    </VerticalStackLayout>
+</ContentPage>
