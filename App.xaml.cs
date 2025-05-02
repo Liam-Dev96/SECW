@@ -5,15 +5,11 @@ namespace SECW
 {
     public partial class App : Application
     {
-        public App()
+        public App(Login loginPage)
         {
             InitializeComponent();
 
-            // Initialize the database at app startup
-            DataBaseHelper.initializeDatabase();
-
-            // Set the Login page as the main page
-            MainPage = new AppShell();
+            Login = loginPage;
         }
     }
 }
