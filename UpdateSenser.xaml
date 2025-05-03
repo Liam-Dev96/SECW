@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SECW.UpdateSenser"
+             Title="UpdateSenser">
+    <ScrollView>
+    <VerticalStackLayout>
+        <Label 
+            Text="Update Sensor Page"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+        />
+        
+        <Label 
+            Text="Air Sensors"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+        />
+
+        <Button x:Name="UpdateConAir1"
+        Text="Update Configurations For NO2"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateConAir1Btn_Click" />
+
+        <Button x:Name="UpdateConAir2"
+        Text="Update Configurations For SO2"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateConAir2Btn_Click" />
+
+        <Button x:Name="UpdateConAir3"
+        Text="Update Configurations For PM2.5"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateConAir3Btn_Click" />
+
+        <Button x:Name="UpdateConAir4"
+        Text="Update Configurations For PM10"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateConAir4Btn_Click" />
+
+        <Button x:Name="UpdateAirFirmware"
+        Text="Update Firmware for Air"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateAirFirmwareBtn_Click" />
+
+        <Label 
+            Text="Water Sensors"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+        />
+
+        <Button x:Name="UpdateConWater1"
+        Text="Update Configurations For Nitrate"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateConWater1Btn_Click" />
+
+        <Button x:Name="UpdateConWater2"
+        Text="Update Configurations For Nitrite"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateConWater2Btn_Click" />
+
+        <Button x:Name="UpdateConWater3"
+        Text="Update Configurations For Phosphate"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateConWater3Btn_Click" />
+
+        <Button x:Name="UpdateWaterFirmware"
+        Text="Update Firmware for Water"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateWaterFirmwareBtn_Click" />
+
+        <Label 
+            Text="Weather Sensors"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+        />
+
+        <Button x:Name="UpdateConWeather1"
+        Text="Update Configurations For Temp"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateConWeather1Btn_Click" />
+
+        <Button x:Name="UpdateConWeather2"
+        Text="Update Configurations For Humidity"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateConWeather2Btn_Click" />
+
+        <Button x:Name="UpdateConWeather3"
+        Text="Update Configurations For WindSpeed"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateConWeather3Btn_Click" />
+
+        <Button x:Name="UpdateWeatherFirmware"
+        Text="Update Firmware for Weather"
+        BackgroundColor="DarkOrange"
+        TextColor="White"
+        FontSize="18"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        HorizontalOptions="Fill"
+        HeightRequest="50"
+        Margin="0,0,0,10"
+        Clicked="UpdateWeatherFirmwareBtn_Click" />
+
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
