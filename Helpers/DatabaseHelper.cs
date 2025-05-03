@@ -73,7 +73,7 @@ namespace SECW.Helpers
                         try
                         {
                             const string createSensorTypeTableQuery = @"
-                            CREATE TABLE IF NOT EXISTS SensorType (
+                            CREATE TABLE IF NOT EXISTS SensorType(
                                 SensorTypeID INTEGER PRIMARY KEY AUTOINCREMENT,
                                 SensorTypeFirmware REAL,
                                 SensorTypeName TEXT NOT NULL UNIQUE 
