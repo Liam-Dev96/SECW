@@ -78,8 +78,14 @@ public partial class AdminPage : ContentPage
     {
         try
         {
-            // Log placeholder action
-            Console.WriteLine("SettingsBtn_Click invoked. Functionality not yet implemented.");
+                        // Log navigation attempt
+            Console.WriteLine("Navigating to UpdateSenser...");
+
+            // Navigate to UpdateSenser
+            Navigation.PushAsync(new UpdateSenser());
+
+            // Log successful navigation
+            Console.WriteLine("Successfully navigated to UpdateSencerPage.");
         }
         catch (Exception ex)
         {
