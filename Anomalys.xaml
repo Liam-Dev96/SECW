@@ -6,17 +6,17 @@
     <ScrollView>
         <VerticalStackLayout>
             <Label 
-                Text="malfunctions or anomalies"
+                Text="Anomalies"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
+        
+            <ListView x:Name="AnomalysListbox">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding DisplayText}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </VerticalStackLayout>
-        <ListView x:Name="AnomalysListbox">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding DisplayText}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
     </ScrollView>
 </ContentPage>
