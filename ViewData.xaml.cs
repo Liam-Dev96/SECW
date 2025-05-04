@@ -129,17 +129,17 @@ public partial class ViewData : ContentPage
     private string FormatDisplayText(Dictionary<string, object> values, int sensorTypeID)
     {
         //create the display text as a string and add the timestamp to it
-        var sb = new StringBuilder();
-        sb.AppendLine(values["Timestamp"].ToString());
+        var stringbuild = new StringBuilder();
+        stringbuild.AppendLine(values["Timestamp"].ToString());
         
         //for each item in Value that is not Timestamp add their feild name and value to the display text
         // if the value is null, add N/A to the display text
-        foreach (var kvp in values.Where(x => x.Key != "DataID" && x.Key != "Timestamp"))
+        foreach (var keyvalue in values.Where(x => x.Key != "DataID" && x.Key != "Timestamp"))
         {
-            sb.AppendLine($"{kvp.Key}: {kvp.Value ?? "N/A"}");
+            stringbuild.AppendLine($"{keyvalue.Key}: {keyvalue.Value ?? "N/A"}");
         }
         
-        return sb.ToString();
+        return stringbuild.ToString();
     }
 }
 
