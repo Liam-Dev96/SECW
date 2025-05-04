@@ -252,25 +252,37 @@ namespace SECW.Helpers
                             Console.WriteLine($"Error creating Alerts table: {ex.Message}");
                         }
 
-                        // Create the Maintenance table
+                        // Create the Malfunctions table
                         try
                         {
-                            string CreateMaintenanceTableQuery = @"Create Table If Not Exists Maintenance(
-                            MaintenanceID integer Primary Key,
+                            string CreateMalfunctionsTableQuery = @"Create Table If Not Exists Malfunctions(
+                            MalfunctionsID integer Primary Key,
                             SensorID Integer,
-                            ScheduledDate DateTime,
-                            CompletedDate DateTime,
-                            Technician VARCHAR (100),
+                            Timestamp DateTime,
                             Notes VARCHAR (255),
-                            Status VARCHAR (20),
-                            Foreign Key (SensorID) References Sensors(SensorID)
+                            Foreign Key (SensorID) References Sensor(SensorID)
                             );";
-                            using var Command = new SqliteCommand(CreateMaintenanceTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateMalfunctionsTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
                         catch (SqliteException ex)
                         {
-                            Console.WriteLine($"Error creating Maintenance table: {ex.Message}");
+                            Console.WriteLine($"Error creating Malfunctions table: {ex.Message}");
+                        }
+
+                        string InsertMalfunctionsQuery = @"
+                            INSERT OR IGNORE INTO Malfunctions(MalfunctionsID, SensorID, Timestamp, Notes) VALUES (1, 3, '2025-03-25 8:00:00', 'Procresser needs replaced');
+                            INSERT OR IGNORE INTO Malfunctions(MalfunctionsID, SensorID, Timestamp, Notes) VALUES (2, 4, '2025-03-25 10:00:00', 'Corrosion');
+                            INSERT OR IGNORE INTO Malfunctions(MalfunctionsID, SensorID, Timestamp, Notes) VALUES (3, 2, '2025-03-25 11:00:00', 'Water Damage to internal parts');
+                            ";
+                        try
+                        {
+                            using var insertMalfunctionsCommand = new SqliteCommand(InsertMalfunctionsQuery, Connection);
+                            insertMalfunctionsCommand.ExecuteNonQuery();
+                        }
+                        catch (SqliteException ex)
+                        {
+                            Console.WriteLine($"Error inserting roles: {ex.Message}");
                         }
 
                         // Create the Reports table
