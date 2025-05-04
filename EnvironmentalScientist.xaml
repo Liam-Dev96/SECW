@@ -1,9 +1,161 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:SECW.Helpers"
              x:Class="SECW.EnvironmentalScientistPage"
              Title="Environmental Scientist">
-    <StackLayout Padding="20">
-        <Label Text="Welcome to the Environmental Scientist Dashboard" FontSize="24" HorizontalOptions="Center" />
-    </StackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <helpers:NullToBoolConverter x:Key="NullToBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Environmental Scientist Dashboard" FontSize="24" HorizontalOptions="Center" />
+
+            <Button Text="View" Clicked="OnViewClicked" Margin="0,10,0,0" />
+
+            <!-- Sensor Management Section -->
+            <Label Text="Manage Sensors" FontSize="18" />
+            <ListView x:Name="SensorListView" ItemsSource="{Binding Sensors}" 
+                    SelectedItem="{Binding SelectedSensor, Mode=TwoWay}"
+                    ItemSelected="OnSensorSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding SensorID}" Detail="{Binding Status}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="Add Sensor" Clicked="OnAddSensorClicked" Margin="0,10,0,0"/>
+                <Button Text="Remove Sensor" Clicked="OnRemoveSensorClicked" Margin="0,10,0,0"/>
+                <Button Text="Clear all Fields" Clicked="OnClearFieldsClicked" Margin="0,10,0,0"/>
+                <Button Text="Logout" x:Name="LogoutBtn" BackgroundColor="#FF321459" BorderWidth="3" BorderColor="DarkCyan" TextColor="White" Clicked="LogoutBtn_Click" Margin="0,10,0,0"/>
+            </StackLayout>
+
+                        <!-- Sensor Configuration Section -->
+                        <Label Text="Sensor Configuration" FontSize="18" />
+                        <StackLayout>
+                            <Label Text="Sensor ID:" />
+                            <Entry x:Name="SensorIDEntry" Placeholder="Enter Sensor ID" />
+                            <Label Text="Status:" />
+                            <Entry x:Name="StatusEntry" Placeholder="Enter Status" />
+                            <Label Text="Firmware Version:" />
+                            <Entry x:Name="FirmwareVersionEntry" Placeholder="Enter Firmware Version" />
+                            <Label Text="Sensor Type:" />
+                            <Entry x:Name="SensorTypeEntry" Placeholder="Enter Sensor Type" />
+                            <Label Text="Location:" />
+                            <Entry x:Name="LocationEntry" Placeholder="Enter Location" />
+                            <Label Text="Manufacturer:" />
+                            <Entry x:Name="ManufacturerEntry" Placeholder="Enter Manufacturer" />
+                            <Label Text="Model:" />
+                            <Entry x:Name="ModelEntry" Placeholder="Enter Model" />
+                            <Label Text="Serial Number:" />
+                            <Entry x:Name="SerialNumberEntry" Placeholder="Enter Serial Number" />
+                            <Label Text="Calibration Date:" />
+                            <DatePicker x:Name="CalibrationDatePicker" Format="d" />
+                            <Label Text="Last Maintenance Date:" />
+                            <DatePicker x:Name="LastMaintenanceDatePicker" Format="d" />
+                            <Label Text="Battery Percentage:" />
+<Picker x:Name="BatteryPercentagePicker" Title="Select Battery Percentage">
+    <Picker.ItemsSource>
+        <x:Array Type="{x:Type x:Int32}">
+            <x:Int32>100</x:Int32>
+            <x:Int32>95</x:Int32>
+            <x:Int32>90</x:Int32>
+            <x:Int32>85</x:Int32>
+            <x:Int32>80</x:Int32>
+            <x:Int32>75</x:Int32>
+            <x:Int32>70</x:Int32>
+            <x:Int32>65</x:Int32>
+            <x:Int32>60</x:Int32>
+            <x:Int32>55</x:Int32>
+            <x:Int32>50</x:Int32>
+            <x:Int32>45</x:Int32>
+            <x:Int32>40</x:Int32>
+            <x:Int32>35</x:Int32>
+            <x:Int32>30</x:Int32>
+            <x:Int32>25</x:Int32>
+            <x:Int32>20</x:Int32>
+            <x:Int32>15</x:Int32>
+            <x:Int32>10</x:Int32>
+            <x:Int32>5</x:Int32>
+        </x:Array>
+    </Picker.ItemsSource>
+</Picker>
+                            <Label Text="Signal Strength:" />
+                            <Entry x:Name="SignalStrengthEntry" Placeholder="Enter Signal Strength" />
+                            <Label Text="Data Rate:" />
+                            <Entry x:Name="DataRateEntry" Placeholder="Enter Data Rate" />
+                            <Label Text="Data Format:" />
+                            <Entry x:Name="DataFormatEntry" Placeholder="Enter Data Format" />
+                            <Label Text="Communication Protocol:" />
+                            <Entry x:Name="CommunicationProtocolEntry" Placeholder="Enter Communication Protocol" />
+                            <Label Text="Power Source:" />
+                            <Entry x:Name="PowerSourceEntry" Placeholder="Enter Power Source" />
+                            <Label Text="Operating Temperature Range:" />
+                            <Entry x:Name="OperatingTemperatureRangeEntry" Placeholder="Enter Operating Temperature Range" />
+                            <Label Text="Humidity Range:" />
+                            <Entry x:Name="HumidityRangeEntry" Placeholder="Enter Humidity Range" />
+                            <Label Text="Pressure Range:" />
+                            <Entry x:Name="PressureRangeEntry" Placeholder="Enter Pressure Range" />
+                            <Label Text="Measurement Range:" />
+                            <Entry x:Name="MeasurementRangeEntry" Placeholder="Enter Measurement Range" />
+                            <Label Text="Measurement Units:" />
+                            <Entry x:Name="MeasurementUnitsEntry" Placeholder="Enter Measurement Units" />
+                            <Label Text="Measurement Accuracy:" />
+                            <Entry x:Name="MeasurementAccuracyEntry" Placeholder="Enter Measurement Accuracy" />
+                            <Label Text="Measurement Resolution:" />
+                            <Entry x:Name="MeasurementResolutionEntry" Placeholder="Enter Measurement Resolution" />
+                            <Label Text="Measurement Interval:" />
+                            <Entry x:Name="MeasurementIntervalEntry" Placeholder="Enter Measurement Interval" />
+                            <Label Text="Data Storage Capacity:" />
+                            <Entry x:Name="DataStorageCapacityEntry" Placeholder="Enter Data Storage Capacity" />
+                            <Label Text="Data Transmission Interval:" />
+                            <Entry x:Name="DataTransmissionIntervalEntry" Placeholder="Enter Data Transmission Interval" />
+                            <Label Text="Data Transmission Method:" />
+                            <Entry x:Name="DataTransmissionMethodEntry" Placeholder="Enter Data Transmission Method" />
+                            <Label Text="Data Encryption:" />
+                            <Entry x:Name="DataEncryptionEntry" Placeholder="Enter Data Encryption" />
+                            <Label Text="Data Compression:" />
+                            <Entry x:Name="DataCompressionEntry" Placeholder="Enter Data Compression" />
+                            <Label Text="Data Backup:" />
+                            <Entry x:Name="DataBackupEntry" Placeholder="Enter Data Backup" />
+                            <Label Text="Data Recovery:" />
+                            <Entry x:Name="DataRecoveryEntry" Placeholder="Enter Data Recovery" />
+                            <Label Text="Data Visualization:" />
+                            <Entry x:Name="DataVisualizationEntry" Placeholder="Enter Data Visualization" />
+                            <Label Text="Data Analysis:" />
+                            <Entry x:Name="DataAnalysisEntry" Placeholder="Enter Data Analysis" />
+                            <Label Text="Data Reporting:" />
+                            <Entry x:Name="DataReportingEntry" Placeholder="Enter Data Reporting" />
+                            <Label Text="Data Sharing:" />
+                            <Entry x:Name="DataSharingEntry" Placeholder="Enter Data Sharing" />
+                            <Label Text="Data Integration:" />
+                            <Entry x:Name="DataIntegrationEntry" Placeholder="Enter Data Integration" />
+                            <Label Text="Data Storage Location:" />
+                            <Entry x:Name="DataStorageLocationEntry" Placeholder="Enter Data Storage Location" />
+                            <Label Text="Data Access Control:" />
+                            <Entry x:Name="DataAccessControlEntry" Placeholder="Enter Data Access Control" />
+                            <Label Text="Data Retention Policy:" />
+                            <Entry x:Name="DataRetentionPolicyEntry" Placeholder="Enter Data Retention Policy" />
+                            <Label Text="Data Disposal Policy:" />
+                            <Entry x:Name="DataDisposalPolicyEntry" Placeholder="Enter Data Disposal Policy" />
+                            <Label Text="Data Security:" />
+                            <Entry x:Name="DataSecurityEntry" Placeholder="Enter Data Security" />
+                            <Label Text="Data Privacy:" />
+                            <Entry x:Name="DataPrivacyEntry" Placeholder="Enter Data Privacy" />
+                            <Label Text="Data Compliance:" />
+                            <Entry x:Name="DataComplianceEntry" Placeholder="Enter Data Compliance" />
+                            <Label Text="Data Governance:" />
+                            <Entry x:Name="DataGovernanceEntry" Placeholder="Enter Data Governance" />
+                            <Label Text="Data Quality:" />
+                            <Entry x:Name="DataQualityEntry" Placeholder="Enter Data Quality" />
+                            <Label Text="Data Integrity:" />
+                            <Entry x:Name="DataIntegrityEntry" Placeholder="Enter Data Integrity" />
+                            <Button Text="Save Configuration" Clicked="OnSaveConfigurationClicked" />
+                        </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

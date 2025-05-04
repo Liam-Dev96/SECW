@@ -1,5 +1,6 @@
 using Microsoft.Data.Sqlite;
 using System.IO;
+using System.Collections.Generic;
 
 namespace SECW.Helpers
 {
@@ -68,60 +69,89 @@ namespace SECW.Helpers
                             Console.WriteLine($"Error creating Roles table: {ex.Message}");
                         }
 
-                        // Create the Sensors table
+                        // Create the SensorType table
                         try
                         {
-                            string CreateSensorsTableQuery = @"Create Table If Not Exists Sensors(
+                            const string createSensorTypeTableQuery = @"
+                            CREATE TABLE IF NOT EXISTS SensorType(
+                                SensorTypeID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                SensorTypeFirmware REAL,
+                                SensorTypeName TEXT NOT NULL UNIQUE 
+                                    CHECK (SensorTypeName IN ('Air Quality', 'Water Quality', 'Weather')),
+                                Data1Min REAL,
+                                Data1Max REAL,
+                                Data2Min REAL,
+                                Data2Max REAL,
+                                Data3Min REAL,
+                                Data3Max REAL,
+                                Data4Min REAL,
+                                Data4Max REAL
+                            );";
+
+                            using var command = new SqliteCommand(createSensorTypeTableQuery, Connection);
+                            command.ExecuteNonQuery();
+                            
+                            Console.WriteLine("SensorType table created/verified successfully");
+                        }
+                        catch (SqliteException ex)
+                        {
+                            Console.WriteLine($"Error creating SensorType table (SQLite Error {ex.ErrorCode}): {ex.Message}");
+                            // Consider rethrowing if this is a critical error for your application
+                            throw;
+                        }
+
+                        string InsertSensorTypeQuery = @"
+                        INSERT OR IGNORE INTO SensorType (SensorTypeID, SensorTypeFirmware, SensorTypeName, Data1Min, Data1Max, Data2Min, Data2Max, Data3Min, Data3Max, Data4Min, Data4Max) VALUES (1, 10.9, 'Air Quality', 1.0, 70.0, 0.5, 5.0, 0.5, 10.0, 0.1, 15.0);
+                        INSERT OR IGNORE INTO SensorType (SensorTypeID, SensorTypeFirmware, SensorTypeName, Data1Min, Data1Max, Data2Min, Data2Max, Data3Min, Data3Max, Data4Min, Data4Max) VALUES (2, 4.8, 'Water Quality', 20.0, 30.0, 1.0, 2.0, 0.01, 0.2, Null, Null);
+                        INSERT OR IGNORE INTO SensorType (SensorTypeID, SensorTypeFirmware, SensorTypeName , Data1Min, Data1Max, Data2Min, Data2Max, Data3Min, Data3Max, Data4Min, Data4Max) VALUES (3, 11.0, 'Weather', -5.0, 15.0, 75.0, 95.0, -0.1, 4.0, Null, Null);
+                        ";
+                try
+                {
+                        using var insertSensorTypeCommand = new SqliteCommand(InsertSensorTypeQuery, Connection);
+                        insertSensorTypeCommand.ExecuteNonQuery();
+                    }
+                    catch (SqliteException ex)
+                    {
+                        Console.WriteLine($"Error inserting roles: {ex.Message}");
+                    }
+
+                        
+                        // Create the sensor table
+                        try
+                        {
+                            string CreateSensorTableQuery = @"Create Table If Not Exists Sensor(
                             SensorID integer Primary Key,
-                            SensorTypeID Integer,
-                            LocationID Integer,
-                            Status VARCHAR (20),
-                            InstallationDate DateTime,
-                            FirmwareVersion VARCHAR (20),
-                            Foreign Key (SensorTypeID) References SensorTypes(SensorTypeID),
-                            Foreign Key (LocationID) References Locations(LocationID)
-                            );";
-                            using var Command = new SqliteCommand(CreateSensorsTableQuery, Connection);
-                            Command.ExecuteNonQuery();
-                        }
-                        catch (SqliteException ex)
-                        {
-                            Console.WriteLine($"Error creating Sensors table: {ex.Message}");
-                        }
-
-                        // Create the SensorTypes table
-                        try
-                        {
-                            string CreateSensorTypesTableQuery = @"Create Table If Not Exists SensorTypes(
-                            SensorTypeID integer Primary Key,
-                            TypeName VARCHAR (20),
-                            Description VARCHAR (255)
-                            );";
-                            using var Command = new SqliteCommand(CreateSensorTypesTableQuery, Connection);
-                            Command.ExecuteNonQuery();
-                        }
-                        catch (SqliteException ex)
-                        {
-                            Console.WriteLine($"Error creating SensorTypes table: {ex.Message}");
-                        }
-
-                        // Create the Locations table
-                        try
-                        {
-                            string CreateLocationsTableQuery = @"Create Table If Not Exists Locations(
-                            LocationID integer Primary Key,
+                            SensorTypeID integer,
+                            SensorName VARCHAR(255),
                             Latitude Decimal(9,6),
                             Longitude Decimal(9,6),
                             Address VARCHAR (255),
-                            Description VARCHAR (255)
+                            Foreign Key (SensorTypeID) References SensorType(SensorTypeID)
                             );";
-                            using var Command = new SqliteCommand(CreateLocationsTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateSensorTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
                         catch (SqliteException ex)
                         {
-                            Console.WriteLine($"Error creating Locations table: {ex.Message}");
+                            Console.WriteLine($"Error creating sensor table: {ex.Message}");
                         }
+
+                        string InsertSensorQuery = @"
+                                    INSERT OR IGNORE INTO Sensor (SensorID, SensorTypeID, SensorName, Latitude, Longitude, Address) VALUES (1, 1, 'Air Sensor 1', 55.94476, -3.183991, 'Edinburgh Nicolson Street');
+                                    INSERT OR IGNORE INTO Sensor (SensorID, SensorTypeID, SensorName, Latitude, Longitude, Address) VALUES (2, 2, 'Water Sensor 1', 55.94476, -3.183991, 'Edinburgh Nicolson Street');
+                                    INSERT OR IGNORE INTO Sensor (SensorID, SensorTypeID, SensorName, Latitude, Longitude, Address) VALUES (3, 3, 'Weather Sensor 1', 55.94476, -3.183991, 'Edinburgh Nicolson Street');
+                                    INSERT OR IGNORE INTO Sensor (SensorID, SensorTypeID, SensorName, Latitude, Longitude, Address) VALUES (4, 1, 'Air Sensor 2', 79.87535, -15.81265, 'Edinburgh Morningside Road');
+                                    ";
+                        try
+                        {
+                            using var insertSensorCommand = new SqliteCommand(InsertSensorQuery, Connection);
+                            insertSensorCommand.ExecuteNonQuery();
+                        }
+                        catch (SqliteException ex)
+                        {
+                            Console.WriteLine($"Error inserting roles: {ex.Message}");
+                        }
+
 
                         // Create the EnvironmentalData table
                         try
@@ -130,21 +160,18 @@ namespace SECW.Helpers
                             DataID integer Primary Key,
                             SensorID Integer,
                             Timestamp DateTime,
-                            DataType VARCHAR (20),
+                            NO2 Float,
+                            SO2 Float,
                             PM25 Float,
                             PM10 Float,
-                            CO2 Float,
-                            SO2 Float,
-                            NO2 Float,
-                            pH Float,
-                            DissolvedOxygen Float,
-                            Turbidity Float,
-                            WaterTemp Float,
-                            AirTemp Float,
+                            Nitrate Float,
+                            Nitrite Float,
+                            Phosphate Float,
+                            Temp Float,
                             Humidity Float,
                             WindSpeed Float,
-                            Precipitation Float,
-                            Foreign Key (SensorID) References Sensors(SensorID)
+                            WindDirection Float,
+                            Foreign Key (SensorID) References Sensor(SensorID)
                             );";
                             using var Command = new SqliteCommand(CreateEnvironmentalDataTableQuery, Connection);
                             Command.ExecuteNonQuery();
@@ -153,6 +180,35 @@ namespace SECW.Helpers
                         {
                             Console.WriteLine($"Error creating EnvironmentalData table: {ex.Message}");
                         }
+
+                        string InsertEnvironmentalDataQuery = @"
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, NO2, SO2, PM25, PM10) VALUES (1, 1, '2025-03-25 07:00:00', 23.1, 2.3, 5.1, 9.1);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, NO2, SO2, PM25, PM10) VALUES (2, 1, '2025-03-25 08:00:00', 42.5, 5.4, 2.7, 11.9);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, NO2, SO2, PM25, PM10) VALUES (3, 1, '2025-03-25 09:00:00', 33.9, 4.3, 5.6, 10.5);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, NO2, SO2, PM25, PM10) VALUES (4, 1, '2025-03-25 10:00:00', 63.2, 4.2, 5.7, 9.3);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, Nitrate, Nitrite, Phosphate) VALUES (5, 2, '2025-03-25 07:00:00', 23.1, 1.3, 0.02);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, Nitrate, Nitrite, Phosphate) VALUES (6, 2, '2025-03-25 08:00:00', 29.9, 1.4, 0.03);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, Nitrate, Nitrite, Phosphate) VALUES (7, 2, '2025-03-25 09:00:00', 25.0, 1.3, 0.06);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, Nitrate, Nitrite, Phosphate) VALUES (8, 2, '2025-03-25 10:00:00', 24.3, 1.6, 0.04);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, Temp, Humidity, WindSpeed, WindDirection) VALUES (9, 3, '2025-03-25 07:00:00', 3.1, 82.3, 3.1, 53);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, Temp, Humidity, WindSpeed, WindDirection) VALUES (10, 3, '2025-03-25 08:00:00', 7.4, 84.5, 1.6, 183);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, Temp, Humidity, WindSpeed, WindDirection) VALUES (11, 3, '2025-03-25 09:00:00', 7.3, 83.3, 2.3, 187);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, Temp, Humidity, WindSpeed, WindDirection) VALUES (12, 3, '2025-03-25 10:00:00', 10.0, 82.7, 2.4, 273);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, NO2, SO2, PM25, PM10) VALUES (13, 4, '2025-03-25 07:00:00', 77.7, 2.1, 6.4, 5.6);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, NO2, SO2, PM25, PM10) VALUES (14, 4, '2025-03-25 08:00:00', 25.6, 2.1, 7.3, 6.1);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, NO2, SO2, PM25, PM10) VALUES (15, 4, '2025-03-25 09:00:00', 55.2, 3.4, 6.5, 7.2);
+                                    INSERT OR IGNORE INTO EnvironmentalData (DataID, SensorID, Timestamp, NO2, SO2, PM25, PM10) VALUES (16, 4, '2025-03-25 10:00:00', 48.8, 3.9, 6.9, 5.9);
+                                    ";
+                        try
+                        {
+                            using var insertEnvironmentalDataCommand = new SqliteCommand(InsertEnvironmentalDataQuery, Connection);
+                            insertEnvironmentalDataCommand.ExecuteNonQuery();
+                        }
+                        catch (SqliteException ex)
+                        {
+                            Console.WriteLine($"Error inserting roles: {ex.Message}");
+                        }
+                        
 
                         // Create the AlertThresholds table
                         try
@@ -196,25 +252,37 @@ namespace SECW.Helpers
                             Console.WriteLine($"Error creating Alerts table: {ex.Message}");
                         }
 
-                        // Create the Maintenance table
+                        // Create the Malfunctions table
                         try
                         {
-                            string CreateMaintenanceTableQuery = @"Create Table If Not Exists Maintenance(
-                            MaintenanceID integer Primary Key,
+                            string CreateMalfunctionsTableQuery = @"Create Table If Not Exists Malfunctions(
+                            MalfunctionsID integer Primary Key,
                             SensorID Integer,
-                            ScheduledDate DateTime,
-                            CompletedDate DateTime,
-                            Technician VARCHAR (100),
+                            Timestamp DateTime,
                             Notes VARCHAR (255),
-                            Status VARCHAR (20),
-                            Foreign Key (SensorID) References Sensors(SensorID)
+                            Foreign Key (SensorID) References Sensor(SensorID)
                             );";
-                            using var Command = new SqliteCommand(CreateMaintenanceTableQuery, Connection);
+                            using var Command = new SqliteCommand(CreateMalfunctionsTableQuery, Connection);
                             Command.ExecuteNonQuery();
                         }
                         catch (SqliteException ex)
                         {
-                            Console.WriteLine($"Error creating Maintenance table: {ex.Message}");
+                            Console.WriteLine($"Error creating Malfunctions table: {ex.Message}");
+                        }
+
+                        string InsertMalfunctionsQuery = @"
+                            INSERT OR IGNORE INTO Malfunctions(MalfunctionsID, SensorID, Timestamp, Notes) VALUES (1, 3, '2025-03-25 8:00:00', 'Procresser needs replaced');
+                            INSERT OR IGNORE INTO Malfunctions(MalfunctionsID, SensorID, Timestamp, Notes) VALUES (2, 4, '2025-03-25 10:00:00', 'Corrosion');
+                            INSERT OR IGNORE INTO Malfunctions(MalfunctionsID, SensorID, Timestamp, Notes) VALUES (3, 2, '2025-03-25 11:00:00', 'Water Damage to internal parts');
+                            ";
+                        try
+                        {
+                            using var insertMalfunctionsCommand = new SqliteCommand(InsertMalfunctionsQuery, Connection);
+                            insertMalfunctionsCommand.ExecuteNonQuery();
+                        }
+                        catch (SqliteException ex)
+                        {
+                            Console.WriteLine($"Error inserting roles: {ex.Message}");
                         }
 
                         // Create the Reports table
@@ -321,4 +389,4 @@ namespace SECW.Helpers
             }
         }
     }
-}
+    }

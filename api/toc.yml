@@ -1,0 +1,71 @@
+### YamlMime:TableOfContent
+items:
+- uid: SECW
+  name: SECW
+  type: Namespace
+  items:
+  - uid: SECW.AdminPage
+    name: AdminPage
+    type: Class
+  - uid: SECW.AdminSettingsPage
+    name: AdminSettingsPage
+    type: Class
+  - uid: SECW.App
+    name: App
+    type: Class
+  - uid: SECW.AppShell
+    name: AppShell
+    type: Class
+  - uid: SECW.EditUserPage
+    name: EditUserPage
+    type: Class
+  - uid: SECW.EnvironmentalScientistPage
+    name: EnvironmentalScientistPage
+    type: Class
+  - uid: SECW.Login
+    name: Login
+    type: Class
+  - uid: SECW.MainActivity
+    name: MainActivity
+    type: Class
+  - uid: SECW.MainApplication
+    name: MainApplication
+    type: Class
+  - uid: SECW.ManageUsers
+    name: ManageUsers
+    type: Class
+  - uid: SECW.ManageUsers.DataBaseHelper
+    name: ManageUsers.DataBaseHelper
+    type: Class
+  - uid: SECW.ManageUsers.User
+    name: ManageUsers.User
+    type: Class
+  - uid: SECW.MauiProgram
+    name: MauiProgram
+    type: Class
+  - uid: SECW.OperationalManagerPage
+    name: OperationalManagerPage
+    type: Class
+  - uid: SECW.Resource
+    name: Resource
+    type: Class
+  - uid: SECW.UserPage
+    name: UserPage
+    type: Class
+- uid: SECW.Helpers
+  name: SECW.Helpers
+  type: Namespace
+  items:
+  - uid: SECW.Helpers.DataBaseHelper
+    name: DataBaseHelper
+    type: Class
+  - uid: SECW.Helpers.NullToBoolConverter
+    name: NullToBoolConverter
+    type: Class
+  - uid: SECW.Helpers.Sensor
+    name: Sensor
+    type: Class
+  - uid: SECW.Helpers.SensorsHelper
+    name: SensorsHelper
+    type: Class
+memberLayout: SamePage

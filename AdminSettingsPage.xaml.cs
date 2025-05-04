@@ -6,21 +6,32 @@ using SECW.Helpers;
 
 namespace SECW
 {
+    /// <summary>
+    /// Represents the Admin Settings Page where users can update their account details.
+    /// </summary>
     public partial class AdminSettingsPage : ContentPage
     {
         // Connection string for SQLite database
         private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdminSettingsPage"/> class.
+        /// </summary>
         public AdminSettingsPage()
         {
             InitializeComponent();
         }
 
-        // Event handler for the "Save Changes" button click
+        /// <summary>
+        /// Event handler for the "Save Changes" button click.
+        /// Updates the user's account details in the database.
+        /// </summary>
         private void OnSaveChangesClicked(object sender, EventArgs e)
         {
             try
             {
+                Console.WriteLine("Save Changes button clicked. Starting validation...");
+
                 // Retrieve the logged-in user's username
                 string loggedInUser = GetLoggedInUser();
                 string username = loggedInUser; // Ensure the logged-in user is being updated
@@ -34,24 +45,30 @@ namespace SECW
                 if (string.IsNullOrWhiteSpace(username))
                 {
                     DisplayAlert("Input Error", "Username is required.", "OK");
+                    Console.WriteLine("Validation failed: Username is empty.");
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(oldPassword))
                 {
                     DisplayAlert("Input Error", "Old password is required.", "OK");
+                    Console.WriteLine("Validation failed: Old password is empty.");
                     return;
                 }
 
                 // Validate the old password before proceeding
                 if (!ValidatePasswordChange(username, oldPassword))
                 {
+                    Console.WriteLine("Validation failed: Old password is incorrect.");
                     return; // Validation failed, error already displayed
                 }
+
+                Console.WriteLine("Validation passed. Proceeding with database update...");
 
                 using (var connection = new SqliteConnection(connectionString))
                 {
                     connection.Open();
+                    Console.WriteLine("Database connection opened.");
 
                     using (var transaction = connection.BeginTransaction())
                     {
@@ -64,6 +81,7 @@ namespace SECW
                             if (newUsername == username)
                             {
                                 DisplayAlert("Input Error", "New username cannot be the same as the current username.", "OK");
+                                Console.WriteLine("Validation failed: New username is the same as the current username.");
                                 return;
                             }
                             parameters.Add("Username = @newUsername");
@@ -75,6 +93,7 @@ namespace SECW
                             if (!email.Contains("@"))
                             {
                                 DisplayAlert("Input Error", "Please enter a valid email address.", "OK");
+                                Console.WriteLine("Validation failed: Invalid email address.");
                                 return;
                             }
                             parameters.Add("Email = @newEmail");
@@ -86,6 +105,7 @@ namespace SECW
                             if (newPassword != confirmPassword)
                             {
                                 DisplayAlert("Validation Error", "Passwords do not match.", "OK");
+                                Console.WriteLine("Validation failed: Passwords do not match.");
                                 return;
                             }
 
@@ -98,6 +118,7 @@ namespace SECW
                         if (parameters.Count == 0)
                         {
                             DisplayAlert("Input Error", "No changes to save. Please modify at least one field.", "OK");
+                            Console.WriteLine("Validation failed: No changes to save.");
                             return;
                         }
 
@@ -123,85 +144,116 @@ namespace SECW
                             if (rowsAffected == 0)
                             {
                                 DisplayAlert("Error", "No matching user found to update. No changes made.", "OK");
+                                Console.WriteLine("Database update failed: No matching user found.");
                                 return;
                             }
                         }
 
                         // Commit the transaction if all operations succeed
                         transaction.Commit();
+                        Console.WriteLine("Database transaction committed successfully.");
                     }
                 }
 
                 // Notify the user of success
                 DisplayAlert("Success", "Changes saved successfully.", "OK");
+                Console.WriteLine("Changes saved successfully.");
+                loggedInUser = newUsername; // Update the logged-in user if username changed
+                Preferences.Set("LoggedInUser", loggedInUser); // Update the stored username in preferences
+                //clear input fields after successful update
+                UsernameEntry.Text = string.Empty;
+                EmailEntry.Text = string.Empty;
+                OldPassword.Text = string.Empty;
+                PasswordEntry.Text = string.Empty;
+                ConfirmPasswordEntry.Text = string.Empty;
+                Console.WriteLine("Input fields cleared after successful update.");
             }
             catch (SqliteException ex)
             {
                 // Handle database-related errors
                 DisplayAlert("Database Error", ex.Message, "OK");
+                Console.WriteLine($"Database error: {ex.Message}");
             }
             catch (Exception ex)
             {
                 // Handle general errors
                 DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
+                Console.WriteLine($"General error: {ex.Message}");
             }
         }
 
-        // Validates the old password for the logged-in user
+        /// <summary>
+        /// Validates the old password for the logged-in user.
+        /// </summary>
+        /// <param name="username">The username of the logged-in user.</param>
+        /// <param name="oldPassword">The old password to validate.</param>
+        /// <returns>True if the old password is valid; otherwise, false.</returns>
         private bool ValidatePasswordChange(string username, string oldPassword)
         {
-            using (var connection = new SqliteConnection(connectionString))
+            try
             {
-                connection.Open();
-                string verifyQuery = "SELECT PasswordHash FROM Users WHERE Username = @username";
-                using (var verifyCommand = new SqliteCommand(verifyQuery, connection))
+                using (var connection = new SqliteConnection(connectionString))
                 {
-                    verifyCommand.Parameters.AddWithValue("@username", username); // Use the username parameter
-                    var storedHash = verifyCommand.ExecuteScalar()?.ToString();
+                    connection.Open();
+                    Console.WriteLine("Database connection opened for password validation.");
 
-                    if (storedHash == null)
+                    string verifyQuery = "SELECT PasswordHash FROM Users WHERE Username = @username";
+                    using (var verifyCommand = new SqliteCommand(verifyQuery, connection))
                     {
-                        DisplayAlert("Validation Error", "User not found.", "OK");
-                        return false;
-                    }
+                        verifyCommand.Parameters.AddWithValue("@username", username); // Use the username parameter
+                        var storedHash = verifyCommand.ExecuteScalar()?.ToString();
 
-                    // Verify the old password against the stored hash
-                    if (!BCrypt.Net.BCrypt.Verify(oldPassword, storedHash))
-                    {
-                        DisplayAlert("Validation Error", "Old password is incorrect.", "OK");
-                        return false;
+                        if (storedHash == null)
+                        {
+                            DisplayAlert("Validation Error", "User not found.", "OK");
+                            Console.WriteLine("Password validation failed: User not found.");
+                            return false;
+                        }
+
+                        // Verify the old password against the stored hash
+                        if (!BCrypt.Net.BCrypt.Verify(oldPassword, storedHash))
+                        {
+                            DisplayAlert("Validation Error", "Old password is incorrect.", "OK");
+                            Console.WriteLine("Password validation failed: Old password is incorrect.");
+                            return false;
+                        }
                     }
                 }
-            }
 
-            return true;
+                Console.WriteLine("Password validation succeeded.");
+                return true;
+            }
+            catch (SqliteException ex)
+            {
+                DisplayAlert("Database Error", ex.Message, "OK");
+                Console.WriteLine($"Database error during password validation: {ex.Message}");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
+                Console.WriteLine($"General error during password validation: {ex.Message}");
+                return false;
+            }
         }
 
-        // Retrieves the currently logged-in user's username from preferences
+        /// <summary>
+        /// Retrieves the currently logged-in user's username from preferences.
+        /// </summary>
+        /// <returns>The username of the logged-in user.</returns>
         private string GetLoggedInUser()
         {
-            return Preferences.Get("LoggedInUser", string.Empty); // Default to empty string if not set
-        }
-
-        // Validates input fields for general correctness
-        private bool IsInputValid(string username, string email, string oldPassword, string newPassword, string confirmPassword)
-        {
-            if (string.IsNullOrWhiteSpace(username) ||
-                string.IsNullOrWhiteSpace(email) ||
-                string.IsNullOrWhiteSpace(newPassword) ||
-                string.IsNullOrWhiteSpace(confirmPassword))
+            try
             {
-                DisplayAlert("Input Error", "All fields are required.", "OK");
-                return false;
+                string loggedInUser = Preferences.Get("LoggedInUser", string.Empty); // Default to empty string if not set
+                Console.WriteLine($"Retrieved logged-in user: {loggedInUser}");
+                return loggedInUser;
             }
-
-            if (!email.Contains("@"))
+            catch (Exception ex)
             {
-                DisplayAlert("Input Error", "Please enter a valid email address.", "OK");
-                return false;
+                Console.WriteLine($"Error retrieving logged-in user: {ex.Message}");
+                return string.Empty;
             }
-
-            return true;
         }
     }
 }

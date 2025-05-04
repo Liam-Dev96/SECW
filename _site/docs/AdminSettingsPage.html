@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | SECW </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | SECW ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Liam-Dev96/SECW/blob/Documentation/docs/AdminSettingsPage.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="SECW">
+            SECW
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<p>&quot;# Admin Settings Page&quot;</p>
+<h2 id="overview">Overview</h2>
+<p>The Admin Settings Page allows administrators to configure application settings. This page is implemented using the <code>AdminSettings.xaml</code> and its code-behind file <code>AdminSettings.xaml.cs</code>.</p>
+<h2 id="key-features">Key Features</h2>
+<ul>
+<li><strong>User Management</strong>: Add, edit, or remove users.</li>
+<li><strong>Configuration Settings</strong>: Update application-wide settings such as themes, permissions, and notifications.</li>
+<li><strong>Audit Logs</strong>: View and manage system logs for tracking changes.</li>
+</ul>
+<h2 id="xaml-structure">XAML Structure</h2>
+<p>The <code>AdminSettings.xaml</code> defines the UI layout, including:</p>
+<ul>
+<li><strong>Header Section</strong>: Displays the page title and navigation options.</li>
+<li><strong>Settings Form</strong>: Contains input fields, dropdowns, and toggles for configuration.</li>
+<li><strong>Action Buttons</strong>: Includes &quot;Save&quot;, &quot;Cancel&quot;, and &quot;Reset to Default&quot; buttons.</li>
+</ul>
+<h3 id="example-xaml-snippet">Example XAML Snippet</h3>
+<pre><code class="lang-xml">&lt;StackPanel&gt;
+    &lt;TextBlock Text=&quot;Admin Settings&quot; FontSize=&quot;24&quot; FontWeight=&quot;Bold&quot; /&gt;
+    &lt;TextBox x:Name=&quot;SettingInput&quot; PlaceholderText=&quot;Enter setting value&quot; /&gt;
+    &lt;Button Content=&quot;Save&quot; Click=&quot;SaveButton_Click&quot; /&gt;
+&lt;/StackPanel&gt;
+</code></pre>
+<h2 id="code-behind-functionality">Code-Behind Functionality</h2>
+<p>The <code>AdminSettings.xaml.cs</code> handles the logic for user interactions, such as:</p>
+<ul>
+<li><strong>Saving Settings</strong>: Validates and saves changes to the database or configuration file.</li>
+<li><strong>Resetting Settings</strong>: Restores default values.</li>
+<li><strong>Error Handling</strong>: Displays error messages for invalid inputs.</li>
+</ul>
+<h3 id="example-code-behind-snippet">Example Code-Behind Snippet</h3>
+<pre><code class="lang-csharp">private void SaveButton_Click(object sender, RoutedEventArgs e)
+{
+    string settingValue = SettingInput.Text;
+    if (string.IsNullOrEmpty(settingValue))
+    {
+        MessageBox.Show(&quot;Setting value cannot be empty.&quot;);
+        return;
+    }
+    SaveSetting(settingValue);
+    MessageBox.Show(&quot;Settings saved successfully.&quot;);
+}
+
+private void SaveSetting(string value)
+{
+    // Logic to save the setting
+}
+</code></pre>
+<h2 id="additional-notes">Additional Notes</h2>
+<ul>
+<li>Ensure proper validation for all inputs.</li>
+<li>Use binding and MVVM patterns for better maintainability.</li>
+<li>Test thoroughly to avoid breaking changes in critical settings.</li>
+<li>Follow accessibility guidelines for UI components.</li>
+<li>Log all changes for audit purposes.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Liam-Dev96/SECW/blob/Documentation/docs/AdminSettingsPage.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

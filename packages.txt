@@ -7,12 +7,9 @@ Project 'SECW' has the following package references
    > Microsoft.Maui.Controls                       8.0.100      8.0.100 
    > Microsoft.Maui.Controls.Compatibility         8.0.100      8.0.100 
    > Microsoft.NET.ILLink.Tasks              (A)   [8.0.15, )   8.0.15  
-   > System.Data.SQLite                            1.0.116      1.0.116 
 
    Transitive Package                                           Resolved       
-   > EntityFramework                                            6.4.4          
    > GoogleGson                                                 2.10.1.4       
-   > Microsoft.CSharp                                           4.7.0          
    > Microsoft.Data.Sqlite.Core                                 9.0.4          
    > Microsoft.Extensions.Configuration                         8.0.0          
    > Microsoft.Extensions.Configuration.Abstractions            8.0.0          
@@ -29,26 +26,13 @@ Project 'SECW' has the following package references
    > Microsoft.Maui.Essentials                                  8.0.100        
    > Microsoft.Maui.Graphics                                    8.0.100        
    > Microsoft.Maui.Resizetizer                                 8.0.100        
-   > Microsoft.NETCore.Platforms                                3.1.0          
    > SQLitePCLRaw.bundle_e_sqlite3                              2.1.10         
    > SQLitePCLRaw.core                                          2.1.10         
    > SQLitePCLRaw.lib.e_sqlite3.android                         2.1.10         
    > SQLitePCLRaw.provider.e_sqlite3                            2.1.10         
-   > Stub.System.Data.SQLite.Core.NetStandard                   1.0.116        
    > System.Buffers                                             4.4.0          
-   > System.CodeDom                                             4.7.0          
-   > System.ComponentModel.Annotations                          4.7.0          
-   > System.Configuration.ConfigurationManager                  4.7.0          
-   > System.Data.SqlClient                                      4.8.1          
-   > System.Data.SQLite.Core                                    1.0.116        
-   > System.Data.SQLite.EF6                                     1.0.116        
-   > System.Drawing.Common                                      4.7.0          
    > System.Memory                                              4.5.3          
    > System.Runtime.CompilerServices.Unsafe                     4.5.2          
-   > System.Security.AccessControl                              4.7.0          
-   > System.Security.Permissions                                4.7.0          
-   > System.Security.Principal.Windows                          4.7.0          
-   > System.Windows.Extensions                                  4.7.0          
    > Xamarin.Android.Glide                                      4.15.1.2       
    > Xamarin.Android.Glide.Annotations                          4.15.1.2       
    > Xamarin.Android.Glide.DiskLruCache                         4.15.1.2       
@@ -141,53 +125,30 @@ Project 'SECW' has the following package references
    > Microsoft.Maui.Controls                       8.0.100      8.0.100 
    > Microsoft.Maui.Controls.Compatibility         8.0.100      8.0.100 
    > Microsoft.NET.ILLink.Tasks              (A)   [8.0.15, )   8.0.15  
-   > System.Data.SQLite                            1.0.116      1.0.116 
 
-   Transitive Package                                                Resolved
-   > EntityFramework                                                 6.4.4   
-   > Microsoft.CSharp                                                4.7.0   
-   > Microsoft.Data.Sqlite.Core                                      9.0.4   
-   > Microsoft.Extensions.Configuration                              8.0.0   
-   > Microsoft.Extensions.Configuration.Abstractions                 8.0.0   
-   > Microsoft.Extensions.DependencyInjection                        8.0.1   
-   > Microsoft.Extensions.DependencyInjection.Abstractions           8.0.2   
-   > Microsoft.Extensions.Logging                                    8.0.1   
-   > Microsoft.Extensions.Logging.Abstractions                       8.0.2   
-   > Microsoft.Extensions.Options                                    8.0.2   
-   > Microsoft.Extensions.Primitives                                 8.0.0   
-   > Microsoft.Maui.Controls.Build.Tasks                             8.0.100 
-   > Microsoft.Maui.Controls.Core                                    8.0.100 
-   > Microsoft.Maui.Controls.Xaml                                    8.0.100 
-   > Microsoft.Maui.Core                                             8.0.100 
-   > Microsoft.Maui.Essentials                                       8.0.100 
-   > Microsoft.Maui.Graphics                                         8.0.100 
-   > Microsoft.Maui.Resizetizer                                      8.0.100 
-   > Microsoft.NETCore.Platforms                                     3.1.0   
-   > Microsoft.Win32.Registry                                        4.7.0   
-   > Microsoft.Win32.SystemEvents                                    4.7.0   
-   > runtime.native.System.Data.SqlClient.sni                        4.7.0   
-   > runtime.win-arm64.runtime.native.System.Data.SqlClient.sni      4.4.0   
-   > runtime.win-x64.runtime.native.System.Data.SqlClient.sni        4.4.0   
-   > runtime.win-x86.runtime.native.System.Data.SqlClient.sni        4.4.0   
-   > SQLitePCLRaw.bundle_e_sqlite3                                   2.1.10  
-   > SQLitePCLRaw.core                                               2.1.10  
-   > SQLitePCLRaw.lib.e_sqlite3.ios                                  2.1.10  
-   > SQLitePCLRaw.provider.internal                                  2.1.10  
-   > Stub.System.Data.SQLite.Core.NetStandard                        1.0.116 
-   > System.CodeDom                                                  4.7.0   
-   > System.ComponentModel.Annotations                               4.7.0   
-   > System.Configuration.ConfigurationManager                       4.7.0   
-   > System.Data.SqlClient                                           4.8.1   
-   > System.Data.SQLite.Core                                         1.0.116 
-   > System.Data.SQLite.EF6                                          1.0.116 
-   > System.Drawing.Common                                           4.7.0   
-   > System.Memory                                                   4.5.3   
-   > System.Runtime.InteropServices.NFloat.Internal                  6.0.1   
-   > System.Security.AccessControl                                   4.7.0   
-   > System.Security.Cryptography.ProtectedData                      4.7.0   
-   > System.Security.Permissions                                     4.7.0   
-   > System.Security.Principal.Windows                               4.7.0   
-   > System.Windows.Extensions                                       4.7.0   
+   Transitive Package                                           Resolved
+   > Microsoft.Data.Sqlite.Core                                 9.0.4   
+   > Microsoft.Extensions.Configuration                         8.0.0   
+   > Microsoft.Extensions.Configuration.Abstractions            8.0.0   
+   > Microsoft.Extensions.DependencyInjection                   8.0.1   
+   > Microsoft.Extensions.DependencyInjection.Abstractions      8.0.2   
+   > Microsoft.Extensions.Logging                               8.0.1   
+   > Microsoft.Extensions.Logging.Abstractions                  8.0.2   
+   > Microsoft.Extensions.Options                               8.0.2   
+   > Microsoft.Extensions.Primitives                            8.0.0   
+   > Microsoft.Maui.Controls.Build.Tasks                        8.0.100 
+   > Microsoft.Maui.Controls.Core                               8.0.100 
+   > Microsoft.Maui.Controls.Xaml                               8.0.100 
+   > Microsoft.Maui.Core                                        8.0.100 
+   > Microsoft.Maui.Essentials                                  8.0.100 
+   > Microsoft.Maui.Graphics                                    8.0.100 
+   > Microsoft.Maui.Resizetizer                                 8.0.100 
+   > SQLitePCLRaw.bundle_e_sqlite3                              2.1.10  
+   > SQLitePCLRaw.core                                          2.1.10  
+   > SQLitePCLRaw.lib.e_sqlite3.ios                             2.1.10  
+   > SQLitePCLRaw.provider.internal                             2.1.10  
+   > System.Memory                                              4.5.3   
+   > System.Runtime.InteropServices.NFloat.Internal             6.0.1   
 
    [net8.0-maccatalyst18.0]: 
    Top-level Package                               Requested    Resolved
@@ -197,52 +158,29 @@ Project 'SECW' has the following package references
    > Microsoft.Maui.Controls                       8.0.100      8.0.100 
    > Microsoft.Maui.Controls.Compatibility         8.0.100      8.0.100 
    > Microsoft.NET.ILLink.Tasks              (A)   [8.0.15, )   8.0.15  
-   > System.Data.SQLite                            1.0.116      1.0.116 
 
-   Transitive Package                                                Resolved
-   > EntityFramework                                                 6.4.4   
-   > Microsoft.CSharp                                                4.7.0   
-   > Microsoft.Data.Sqlite.Core                                      9.0.4   
-   > Microsoft.Extensions.Configuration                              8.0.0   
-   > Microsoft.Extensions.Configuration.Abstractions                 8.0.0   
-   > Microsoft.Extensions.DependencyInjection                        8.0.1   
-   > Microsoft.Extensions.DependencyInjection.Abstractions           8.0.2   
-   > Microsoft.Extensions.Logging                                    8.0.1   
-   > Microsoft.Extensions.Logging.Abstractions                       8.0.2   
-   > Microsoft.Extensions.Options                                    8.0.2   
-   > Microsoft.Extensions.Primitives                                 8.0.0   
-   > Microsoft.Maui.Controls.Build.Tasks                             8.0.100 
-   > Microsoft.Maui.Controls.Core                                    8.0.100 
-   > Microsoft.Maui.Controls.Xaml                                    8.0.100 
-   > Microsoft.Maui.Core                                             8.0.100 
-   > Microsoft.Maui.Essentials                                       8.0.100 
-   > Microsoft.Maui.Graphics                                         8.0.100 
-   > Microsoft.Maui.Resizetizer                                      8.0.100 
-   > Microsoft.NETCore.Platforms                                     3.1.0   
-   > Microsoft.Win32.Registry                                        4.7.0   
-   > Microsoft.Win32.SystemEvents                                    4.7.0   
-   > runtime.native.System.Data.SqlClient.sni                        4.7.0   
-   > runtime.win-arm64.runtime.native.System.Data.SqlClient.sni      4.4.0   
-   > runtime.win-x64.runtime.native.System.Data.SqlClient.sni        4.4.0   
-   > runtime.win-x86.runtime.native.System.Data.SqlClient.sni        4.4.0   
-   > SQLitePCLRaw.bundle_e_sqlite3                                   2.1.10  
-   > SQLitePCLRaw.core                                               2.1.10  
-   > SQLitePCLRaw.lib.e_sqlite3                                      2.1.10  
-   > SQLitePCLRaw.provider.e_sqlite3                                 2.1.10  
-   > Stub.System.Data.SQLite.Core.NetStandard                        1.0.116 
-   > System.CodeDom                                                  4.7.0   
-   > System.ComponentModel.Annotations                               4.7.0   
-   > System.Configuration.ConfigurationManager                       4.7.0   
-   > System.Data.SqlClient                                           4.8.1   
-   > System.Data.SQLite.Core                                         1.0.116 
-   > System.Data.SQLite.EF6                                          1.0.116 
-   > System.Drawing.Common                                           4.7.0   
-   > System.Memory                                                   4.5.3   
-   > System.Security.AccessControl                                   4.7.0   
-   > System.Security.Cryptography.ProtectedData                      4.7.0   
-   > System.Security.Permissions                                     4.7.0   
-   > System.Security.Principal.Windows                               4.7.0   
-   > System.Windows.Extensions                                       4.7.0   
+   Transitive Package                                           Resolved
+   > Microsoft.Data.Sqlite.Core                                 9.0.4   
+   > Microsoft.Extensions.Configuration                         8.0.0   
+   > Microsoft.Extensions.Configuration.Abstractions            8.0.0   
+   > Microsoft.Extensions.DependencyInjection                   8.0.1   
+   > Microsoft.Extensions.DependencyInjection.Abstractions      8.0.2   
+   > Microsoft.Extensions.Logging                               8.0.1   
+   > Microsoft.Extensions.Logging.Abstractions                  8.0.2   
+   > Microsoft.Extensions.Options                               8.0.2   
+   > Microsoft.Extensions.Primitives                            8.0.0   
+   > Microsoft.Maui.Controls.Build.Tasks                        8.0.100 
+   > Microsoft.Maui.Controls.Core                               8.0.100 
+   > Microsoft.Maui.Controls.Xaml                               8.0.100 
+   > Microsoft.Maui.Core                                        8.0.100 
+   > Microsoft.Maui.Essentials                                  8.0.100 
+   > Microsoft.Maui.Graphics                                    8.0.100 
+   > Microsoft.Maui.Resizetizer                                 8.0.100 
+   > SQLitePCLRaw.bundle_e_sqlite3                              2.1.10  
+   > SQLitePCLRaw.core                                          2.1.10  
+   > SQLitePCLRaw.lib.e_sqlite3                                 2.1.10  
+   > SQLitePCLRaw.provider.e_sqlite3                            2.1.10  
+   > System.Memory                                              4.5.3   
 
    [net8.0-windows10.0.19041]: 
    Top-level Package                            Requested   Resolved
@@ -251,56 +189,33 @@ Project 'SECW' has the following package references
    > Microsoft.Extensions.Logging.Debug         8.0.1       8.0.1   
    > Microsoft.Maui.Controls                    8.0.100     8.0.100 
    > Microsoft.Maui.Controls.Compatibility      8.0.100     8.0.100 
-   > System.Data.SQLite                         1.0.116     1.0.116 
 
-   Transitive Package                                                Resolved      
-   > EntityFramework                                                 6.4.4         
-   > Microsoft.CSharp                                                4.7.0         
-   > Microsoft.Data.Sqlite.Core                                      9.0.4         
-   > Microsoft.Extensions.Configuration                              8.0.0         
-   > Microsoft.Extensions.Configuration.Abstractions                 8.0.0         
-   > Microsoft.Extensions.DependencyInjection                        8.0.1         
-   > Microsoft.Extensions.DependencyInjection.Abstractions           8.0.2         
-   > Microsoft.Extensions.Logging                                    8.0.1         
-   > Microsoft.Extensions.Logging.Abstractions                       8.0.2         
-   > Microsoft.Extensions.Options                                    8.0.2         
-   > Microsoft.Extensions.Primitives                                 8.0.0         
-   > Microsoft.Graphics.Win2D                                        1.2.0         
-   > Microsoft.IO.RecyclableMemoryStream                             3.0.1         
-   > Microsoft.Maui.Controls.Build.Tasks                             8.0.100       
-   > Microsoft.Maui.Controls.Core                                    8.0.100       
-   > Microsoft.Maui.Controls.Xaml                                    8.0.100       
-   > Microsoft.Maui.Core                                             8.0.100       
-   > Microsoft.Maui.Essentials                                       8.0.100       
-   > Microsoft.Maui.Graphics                                         8.0.100       
-   > Microsoft.Maui.Graphics.Win2D.WinUI.Desktop                     8.0.100       
-   > Microsoft.Maui.Resizetizer                                      8.0.100       
-   > Microsoft.NETCore.Platforms                                     3.1.0         
-   > Microsoft.Win32.Registry                                        4.7.0         
-   > Microsoft.Win32.SystemEvents                                    4.7.0         
-   > Microsoft.Windows.SDK.BuildTools                                10.0.22621.756
-   > Microsoft.WindowsAppSDK                                         1.5.240802000 
-   > runtime.native.System.Data.SqlClient.sni                        4.7.0         
-   > runtime.win-arm64.runtime.native.System.Data.SqlClient.sni      4.4.0         
-   > runtime.win-x64.runtime.native.System.Data.SqlClient.sni        4.4.0         
-   > runtime.win-x86.runtime.native.System.Data.SqlClient.sni        4.4.0         
-   > SQLitePCLRaw.bundle_e_sqlite3                                   2.1.10        
-   > SQLitePCLRaw.core                                               2.1.10        
-   > SQLitePCLRaw.lib.e_sqlite3                                      2.1.10        
-   > SQLitePCLRaw.provider.e_sqlite3                                 2.1.10        
-   > Stub.System.Data.SQLite.Core.NetStandard                        1.0.116       
-   > System.CodeDom                                                  4.7.0         
-   > System.ComponentModel.Annotations                               4.7.0         
-   > System.Configuration.ConfigurationManager                       4.7.0         
-   > System.Data.SqlClient                                           4.8.1         
-   > System.Data.SQLite.Core                                         1.0.116       
-   > System.Data.SQLite.EF6                                          1.0.116       
-   > System.Drawing.Common                                           4.7.0         
-   > System.Memory                                                   4.5.3         
-   > System.Security.AccessControl                                   4.7.0         
-   > System.Security.Cryptography.ProtectedData                      4.7.0         
-   > System.Security.Permissions                                     4.7.0         
-   > System.Security.Principal.Windows                               4.7.0         
-   > System.Windows.Extensions                                       4.7.0         
+   Transitive Package                                           Resolved      
+   > Microsoft.Data.Sqlite.Core                                 9.0.4         
+   > Microsoft.Extensions.Configuration                         8.0.0         
+   > Microsoft.Extensions.Configuration.Abstractions            8.0.0         
+   > Microsoft.Extensions.DependencyInjection                   8.0.1         
+   > Microsoft.Extensions.DependencyInjection.Abstractions      8.0.2         
+   > Microsoft.Extensions.Logging                               8.0.1         
+   > Microsoft.Extensions.Logging.Abstractions                  8.0.2         
+   > Microsoft.Extensions.Options                               8.0.2         
+   > Microsoft.Extensions.Primitives                            8.0.0         
+   > Microsoft.Graphics.Win2D                                   1.2.0         
+   > Microsoft.IO.RecyclableMemoryStream                        3.0.1         
+   > Microsoft.Maui.Controls.Build.Tasks                        8.0.100       
+   > Microsoft.Maui.Controls.Core                               8.0.100       
+   > Microsoft.Maui.Controls.Xaml                               8.0.100       
+   > Microsoft.Maui.Core                                        8.0.100       
+   > Microsoft.Maui.Essentials                                  8.0.100       
+   > Microsoft.Maui.Graphics                                    8.0.100       
+   > Microsoft.Maui.Graphics.Win2D.WinUI.Desktop                8.0.100       
+   > Microsoft.Maui.Resizetizer                                 8.0.100       
+   > Microsoft.Windows.SDK.BuildTools                           10.0.22621.756
+   > Microsoft.WindowsAppSDK                                    1.5.240802000 
+   > SQLitePCLRaw.bundle_e_sqlite3                              2.1.10        
+   > SQLitePCLRaw.core                                          2.1.10        
+   > SQLitePCLRaw.lib.e_sqlite3                                 2.1.10        
+   > SQLitePCLRaw.provider.e_sqlite3                            2.1.10        
+   > System.Memory                                              4.5.3         
 
 (A) : Auto-referenced package.
