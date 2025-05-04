@@ -10,28 +10,18 @@ namespace SECW;
 
 public partial class UpdateSenser : ContentPage
 {
+	// Connection string to the SQLite database
+	// The database is located in the Helpers folder of the project
 	private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;";
 	public UpdateSenser()
 	{
 		InitializeComponent();
-		InitializeDatabase();
 
 	}
 
-	private void InitializeDatabase()
-    {
-        try
-        {
-            DataBaseHelper.initializeDatabase();
-            Console.WriteLine("[INFO] Database initialized successfully.");
-        }
-        catch (Exception ex)
-        {
-            DisplayAlert("Error", $"Failed to initialize the database: {ex.Message}", "OK");
-            Console.WriteLine($"[ERROR] Database initialization failed: {ex.Message}");
-        }
-    }
-
+	// when called it will fetch the min and max values of the button pressed
+	// and then it will ask the user to input the new min and max values
+	// and then it will update the database with the new values
 	public async void UpdateSensorCon(int id, string Min, string Max)
 	{
 
@@ -109,9 +99,12 @@ public partial class UpdateSenser : ContentPage
 		
 	}
 
+	// when called it will fetch the current firmware version of the sensor type selected
+	// and then it will ask the user to input the new firmware version
+	// and then it will update the database with the new firmware version
 	public async void UpdateSensorFramework(int id)
 	{
-				try
+		try
         {
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -180,6 +173,9 @@ public partial class UpdateSenser : ContentPage
         }
 	}
 
+	// Event handlers for button clicks to update sensor configurations
+	// Each button corresponds to a specific sensor type or range in a sensor type 
+	// and calls the UpdateSensorCon or UpdateSensorFramework method with appropriate parameters
 	private void UpdateConAir1Btn_Click(object sender, EventArgs e)
 	{
 		int Id = 1;

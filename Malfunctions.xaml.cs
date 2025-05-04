@@ -15,27 +15,14 @@ public partial class Malfunctions : ContentPage
     public Malfunctions()
     {
         InitializeComponent();
-        InitializeDatabase();
         MalfunctionsList();
         
         // Add item selected handler
         MalfunctionsListbox.ItemSelected += OnMalfunctionsSelected;
     }
 
-    private void InitializeDatabase()
-    {
-        try
-        {
-            DataBaseHelper.initializeDatabase();
-            Console.WriteLine("[INFO] Database initialized successfully.");
-        }
-        catch (Exception ex)
-        {
-            DisplayAlert("Error", $"Failed to initialize the database: {ex.Message}", "OK");
-            Console.WriteLine($"[ERROR] Database initialization failed: {ex.Message}");
-        }
-    }
-
+    // Load the list of malfunctions from the database and display them in the ListBox
+    // The list is populated with the SensorName and Timestamp of each malfunction
     private void MalfunctionsList()
     {
         var malfunctions = new List<MalfunctionsItem>();
@@ -73,6 +60,12 @@ public partial class Malfunctions : ContentPage
         MalfunctionsListbox.ItemsSource = malfunctions;
     }
 
+    // Event handler for when an item in the ListBox is selected
+    // Displays an action sheet with options to view details or mark as resolved
+    // If the user selects "View Details", a detailed view of the malfunction is shown
+    // If the user selects "Mark as Resolved", a confirmation dialog is shown
+    // If confirmed, the malfunction is marked as resolved in the database
+    // and the list is refreshed
     private async void OnMalfunctionsSelected(object sender, SelectedItemChangedEventArgs e)
     {
         if (e.SelectedItem == null)
@@ -113,6 +106,8 @@ public partial class Malfunctions : ContentPage
         MalfunctionsListbox.SelectedItem = null;
     }
 
+    // Mark the selected malfunction as resolved in the database
+    // by deleting it from the Malfunctions table
     private async void OnResolvedClicked(MalfunctionsItem malfunction)
     {
         try

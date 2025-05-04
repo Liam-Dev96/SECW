@@ -16,26 +16,14 @@ public partial class ViewData : ContentPage
     public ViewData()
     {
         InitializeComponent();
-        InitializeDatabase();
-        LoadSensorPicker();
-    }
 
-    private void InitializeDatabase()
-    {
-        try
-        {
-            DataBaseHelper.initializeDatabase();
-            Console.WriteLine("[INFO] Database initialized successfully.");
-        }
-        catch (Exception ex)
-        {
-            DisplayAlert("Error", $"Failed to initialize the database: {ex.Message}", "OK");
-            Console.WriteLine($"[ERROR] Database initialization failed: {ex.Message}");
-        }
+        LoadSensorPicker();
     }
 
     private async void LoadSensorPicker()
     {
+        //connect to the database and Select All the sensors and there types
+        // and add them to the SensorPicker
         try
         {
             using (var connection = new SqliteConnection(connectionString))
@@ -71,6 +59,8 @@ public partial class ViewData : ContentPage
         }
     }
 
+    // Event handler for when the selected item in the SensorPicker changes
+    // This will load the data for the selected sensor
     private async void SensorPicker_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (SensorPicker.SelectedItem is SensorItem selectedSensor)
@@ -79,6 +69,9 @@ public partial class ViewData : ContentPage
         }
     }
 
+    // Load the data for the selected sensor from the database
+    // based on the sensor type ID, it will load different data types
+    // and display them in the DataCollectionView
     private async Task LoadSensorData(int sensorId, int sensorTypeID)
     {
         try
@@ -99,6 +92,7 @@ public partial class ViewData : ContentPage
                 command.CommandText = query;
                 command.Parameters.AddWithValue("@sensorId", sensorId);
                 
+                // create a list to hold the data items
                 var dataItems = new List<SensorDataItem>();
                 
                 using (var reader = await command.ExecuteReaderAsync())
@@ -111,6 +105,8 @@ public partial class ViewData : ContentPage
                             values[reader.GetName(i)] = reader.IsDBNull(i) ? null : reader.GetValue(i);
                         }
                         
+                        // Add the data item to the list
+                        // Format the display text
                         dataItems.Add(new SensorDataItem
                         {
                             Values = values,
@@ -128,11 +124,16 @@ public partial class ViewData : ContentPage
         }
     }
 
+
+    // Format the display text for the data item based on the sensor type ID
     private string FormatDisplayText(Dictionary<string, object> values, int sensorTypeID)
     {
+        //create the display text as a string and add the timestamp to it
         var sb = new StringBuilder();
         sb.AppendLine(values["Timestamp"].ToString());
         
+        //for each item in Value that is not Timestamp add their feild name and value to the display text
+        // if the value is null, add N/A to the display text
         foreach (var kvp in values.Where(x => x.Key != "DataID" && x.Key != "Timestamp"))
         {
             sb.AppendLine($"{kvp.Key}: {kvp.Value ?? "N/A"}");

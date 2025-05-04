@@ -15,27 +15,15 @@ public partial class Anomalys : ContentPage
     public Anomalys()
     {
         InitializeComponent();
-        InitializeDatabase();
         AnomalysList();
         
         // Add item selected handler
         AnomalysListbox.ItemSelected += OnAnomalySelected;
     }
 
-    private void InitializeDatabase()
-    {
-        try
-        {
-            DataBaseHelper.initializeDatabase();
-            Console.WriteLine("[INFO] Database initialized successfully.");
-        }
-        catch (Exception ex)
-        {
-            DisplayAlert("Error", $"Failed to initialize the database: {ex.Message}", "OK");
-            Console.WriteLine($"[ERROR] Database initialization failed: {ex.Message}");
-        }
-    }
-
+    // Load the list of anomalies from the database and display them in the ListBox
+    // The list is populated with the SensorName and Timestamp of each anomaly
+    // Create the reason and details of the anomaly from the data in the database
     private void AnomalysList()
     {
         var anomalies = new List<AnomalyItem>();
@@ -119,6 +107,10 @@ public partial class Anomalys : ContentPage
         AnomalysListbox.ItemsSource = anomalies;
     }
 
+    // Event handler for when an item in the ListBox is selected
+    // This will show detailed information about the selected anomaly
+    // The details include the sensor name, timestamp, reason, and specific details of the anomaly
+    // After displaying the details, it will deselect the item in the ListBox
     private async void OnAnomalySelected(object sender, SelectedItemChangedEventArgs e)
     {
         if (e.SelectedItem == null)

@@ -6,7 +6,7 @@
     <ScrollView>
         <VerticalStackLayout>
             <Label 
-                Text="malfunctions"
+                Text="Malfunctions"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
         
