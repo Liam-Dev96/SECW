@@ -49,7 +49,7 @@
         Clicked="ViewReportsBtn_Click" />
 
 <Button x:Name="SettingsBtn"
-        Text="Settings"
+        Text="Update Sensor config/Firmware"
         BackgroundColor="DarkOrange"
         TextColor="White"
         FontSize="18"
