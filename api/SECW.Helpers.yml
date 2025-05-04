@@ -1,0 +1,67 @@
+### YamlMime:ManagedReference
+items:
+- uid: SECW.Helpers
+  commentId: N:SECW.Helpers
+  id: SECW.Helpers
+  children:
+  - SECW.Helpers.DataBaseHelper
+  - SECW.Helpers.NullToBoolConverter
+  - SECW.Helpers.Sensor
+  - SECW.Helpers.SensorsHelper
+  langs:
+  - csharp
+  - vb
+  name: SECW.Helpers
+  nameWithType: SECW.Helpers
+  fullName: SECW.Helpers
+  type: Namespace
+  assemblies:
+  - SECW
+references:
+- uid: SECW.Helpers.DataBaseHelper
+  commentId: T:SECW.Helpers.DataBaseHelper
+  href: SECW.Helpers.DataBaseHelper.html
+  name: DataBaseHelper
+  nameWithType: DataBaseHelper
+  fullName: SECW.Helpers.DataBaseHelper
+- uid: SECW.Helpers.NullToBoolConverter
+  commentId: T:SECW.Helpers.NullToBoolConverter
+  href: SECW.Helpers.NullToBoolConverter.html
+  name: NullToBoolConverter
+  nameWithType: NullToBoolConverter
+  fullName: SECW.Helpers.NullToBoolConverter
+- uid: SECW.Helpers.SensorsHelper
+  commentId: T:SECW.Helpers.SensorsHelper
+  href: SECW.Helpers.SensorsHelper.html
+  name: SensorsHelper
+  nameWithType: SensorsHelper
+  fullName: SECW.Helpers.SensorsHelper
+- uid: SECW.Helpers.Sensor
+  commentId: T:SECW.Helpers.Sensor
+  parent: SECW.Helpers
+  href: SECW.Helpers.Sensor.html
+  name: Sensor
+  nameWithType: Sensor
+  fullName: SECW.Helpers.Sensor
+- uid: SECW.Helpers
+  commentId: N:SECW.Helpers
+  href: SECW.html
+  name: SECW.Helpers
+  nameWithType: SECW.Helpers
+  fullName: SECW.Helpers
+  spec.csharp:
+  - uid: SECW
+    name: SECW
+    href: SECW.html
+  - name: .
+  - uid: SECW.Helpers
+    name: Helpers
+    href: SECW.Helpers.html
+  spec.vb:
+  - uid: SECW
+    name: SECW
+    href: SECW.html
+  - name: .
+  - uid: SECW.Helpers
+    name: Helpers
+    href: SECW.Helpers.html

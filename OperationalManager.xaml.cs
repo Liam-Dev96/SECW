@@ -185,4 +185,46 @@ public partial class OperationalManagerPage : ContentPage
             DisplayAlert("Error", "An error occurred while checking maintenance and calibration dates. Please try again.", "OK");
         }
     }
+
+
+//on click to move to the anomalys page
+    private void OnCheckAnomalysClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            // Log navigation attempt
+            Console.WriteLine("Navigating to Anomalys...");
+
+            // Navigate to Anomalys
+            Navigation.PushAsync(new Anomalys());
+
+            // Log successful navigation
+            Console.WriteLine("Successfully navigated to AnomalysPage.");
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            Console.WriteLine($"Error in OnCheckAnomalysClicked: {ex.Message}");
+        }
+    }
+
+    private void OnCheckMalfunctionsClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            // Log navigation attempt
+            Console.WriteLine("Navigating to Malfunctions...");
+
+            // Navigate to Malfunctions
+            Navigation.PushAsync(new Malfunctions());
+
+            // Log successful navigation
+            Console.WriteLine("Successfully navigated to MalfunctionsPage.");
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            Console.WriteLine($"Error in OnCheckMalfunctionsClicked: {ex.Message}");
+        }
+    }
 }

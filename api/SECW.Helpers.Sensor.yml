@@ -1,0 +1,2027 @@
+### YamlMime:ManagedReference
+items:
+- uid: SECW.Helpers.Sensor
+  commentId: T:SECW.Helpers.Sensor
+  id: Sensor
+  parent: SECW.Helpers
+  children:
+  - SECW.Helpers.Sensor.BatteryStatus
+  - SECW.Helpers.Sensor.CalibrationDate
+  - SECW.Helpers.Sensor.CommunicationProtocol
+  - SECW.Helpers.Sensor.DataAccessControl
+  - SECW.Helpers.Sensor.DataAnalysis
+  - SECW.Helpers.Sensor.DataBackup
+  - SECW.Helpers.Sensor.DataCompliance
+  - SECW.Helpers.Sensor.DataCompression
+  - SECW.Helpers.Sensor.DataDisposalPolicy
+  - SECW.Helpers.Sensor.DataEncryption
+  - SECW.Helpers.Sensor.DataFormat
+  - SECW.Helpers.Sensor.DataGovernance
+  - SECW.Helpers.Sensor.DataIntegration
+  - SECW.Helpers.Sensor.DataIntegrity
+  - SECW.Helpers.Sensor.DataPrivacy
+  - SECW.Helpers.Sensor.DataQuality
+  - SECW.Helpers.Sensor.DataRate
+  - SECW.Helpers.Sensor.DataRecovery
+  - SECW.Helpers.Sensor.DataReporting
+  - SECW.Helpers.Sensor.DataRetentionPolicy
+  - SECW.Helpers.Sensor.DataSecurity
+  - SECW.Helpers.Sensor.DataSharing
+  - SECW.Helpers.Sensor.DataStorageCapacity
+  - SECW.Helpers.Sensor.DataStorageLocation
+  - SECW.Helpers.Sensor.DataTransmissionInterval
+  - SECW.Helpers.Sensor.DataTransmissionMethod
+  - SECW.Helpers.Sensor.DataVisualization
+  - SECW.Helpers.Sensor.FirmwareVersion
+  - SECW.Helpers.Sensor.HumidityRange
+  - SECW.Helpers.Sensor.LastMaintenanceDate
+  - SECW.Helpers.Sensor.Location
+  - SECW.Helpers.Sensor.Manufacturer
+  - SECW.Helpers.Sensor.MeasurementAccuracy
+  - SECW.Helpers.Sensor.MeasurementInterval
+  - SECW.Helpers.Sensor.MeasurementRange
+  - SECW.Helpers.Sensor.MeasurementResolution
+  - SECW.Helpers.Sensor.MeasurementUnits
+  - SECW.Helpers.Sensor.Model
+  - SECW.Helpers.Sensor.OperatingTemperatureRange
+  - SECW.Helpers.Sensor.PowerSource
+  - SECW.Helpers.Sensor.PressureRange
+  - SECW.Helpers.Sensor.SensorID
+  - SECW.Helpers.Sensor.SensorType
+  - SECW.Helpers.Sensor.SerialNumber
+  - SECW.Helpers.Sensor.SignalStrength
+  - SECW.Helpers.Sensor.Status
+  langs:
+  - csharp
+  - vb
+  name: Sensor
+  nameWithType: Sensor
+  fullName: SECW.Helpers.Sensor
+  type: Class
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: Sensor
+    path: Helpers/SensorsHelper.cs
+    startLine: 343
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public class Sensor
+    content.vb: Public Class Sensor
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: SECW.Helpers.Sensor.SensorID
+  commentId: P:SECW.Helpers.Sensor.SensorID
+  id: SensorID
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: SensorID
+  nameWithType: Sensor.SensorID
+  fullName: SECW.Helpers.Sensor.SensorID
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: SensorID
+    path: Helpers/SensorsHelper.cs
+    startLine: 345
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public int SensorID { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property SensorID As Integer
+  overload: SECW.Helpers.Sensor.SensorID*
+- uid: SECW.Helpers.Sensor.Status
+  commentId: P:SECW.Helpers.Sensor.Status
+  id: Status
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: Status
+  nameWithType: Sensor.Status
+  fullName: SECW.Helpers.Sensor.Status
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: Status
+    path: Helpers/SensorsHelper.cs
+    startLine: 346
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? Status { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Status As String
+  overload: SECW.Helpers.Sensor.Status*
+- uid: SECW.Helpers.Sensor.FirmwareVersion
+  commentId: P:SECW.Helpers.Sensor.FirmwareVersion
+  id: FirmwareVersion
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: FirmwareVersion
+  nameWithType: Sensor.FirmwareVersion
+  fullName: SECW.Helpers.Sensor.FirmwareVersion
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: FirmwareVersion
+    path: Helpers/SensorsHelper.cs
+    startLine: 347
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? FirmwareVersion { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property FirmwareVersion As String
+  overload: SECW.Helpers.Sensor.FirmwareVersion*
+- uid: SECW.Helpers.Sensor.SensorType
+  commentId: P:SECW.Helpers.Sensor.SensorType
+  id: SensorType
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: SensorType
+  nameWithType: Sensor.SensorType
+  fullName: SECW.Helpers.Sensor.SensorType
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: SensorType
+    path: Helpers/SensorsHelper.cs
+    startLine: 348
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? SensorType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property SensorType As String
+  overload: SECW.Helpers.Sensor.SensorType*
+- uid: SECW.Helpers.Sensor.Location
+  commentId: P:SECW.Helpers.Sensor.Location
+  id: Location
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: Location
+  nameWithType: Sensor.Location
+  fullName: SECW.Helpers.Sensor.Location
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: Location
+    path: Helpers/SensorsHelper.cs
+    startLine: 349
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? Location { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Location As String
+  overload: SECW.Helpers.Sensor.Location*
+- uid: SECW.Helpers.Sensor.Manufacturer
+  commentId: P:SECW.Helpers.Sensor.Manufacturer
+  id: Manufacturer
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: Manufacturer
+  nameWithType: Sensor.Manufacturer
+  fullName: SECW.Helpers.Sensor.Manufacturer
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: Manufacturer
+    path: Helpers/SensorsHelper.cs
+    startLine: 350
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? Manufacturer { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Manufacturer As String
+  overload: SECW.Helpers.Sensor.Manufacturer*
+- uid: SECW.Helpers.Sensor.Model
+  commentId: P:SECW.Helpers.Sensor.Model
+  id: Model
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: Model
+  nameWithType: Sensor.Model
+  fullName: SECW.Helpers.Sensor.Model
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: Model
+    path: Helpers/SensorsHelper.cs
+    startLine: 351
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? Model { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Model As String
+  overload: SECW.Helpers.Sensor.Model*
+- uid: SECW.Helpers.Sensor.SerialNumber
+  commentId: P:SECW.Helpers.Sensor.SerialNumber
+  id: SerialNumber
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: SerialNumber
+  nameWithType: Sensor.SerialNumber
+  fullName: SECW.Helpers.Sensor.SerialNumber
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: SerialNumber
+    path: Helpers/SensorsHelper.cs
+    startLine: 352
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? SerialNumber { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property SerialNumber As String
+  overload: SECW.Helpers.Sensor.SerialNumber*
+- uid: SECW.Helpers.Sensor.CalibrationDate
+  commentId: P:SECW.Helpers.Sensor.CalibrationDate
+  id: CalibrationDate
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: CalibrationDate
+  nameWithType: Sensor.CalibrationDate
+  fullName: SECW.Helpers.Sensor.CalibrationDate
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: CalibrationDate
+    path: Helpers/SensorsHelper.cs
+    startLine: 353
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public DateTime? CalibrationDate { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.DateTime}
+    content.vb: Public Property CalibrationDate As Date?
+  overload: SECW.Helpers.Sensor.CalibrationDate*
+- uid: SECW.Helpers.Sensor.LastMaintenanceDate
+  commentId: P:SECW.Helpers.Sensor.LastMaintenanceDate
+  id: LastMaintenanceDate
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: LastMaintenanceDate
+  nameWithType: Sensor.LastMaintenanceDate
+  fullName: SECW.Helpers.Sensor.LastMaintenanceDate
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: LastMaintenanceDate
+    path: Helpers/SensorsHelper.cs
+    startLine: 354
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public DateTime? LastMaintenanceDate { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.DateTime}
+    content.vb: Public Property LastMaintenanceDate As Date?
+  overload: SECW.Helpers.Sensor.LastMaintenanceDate*
+- uid: SECW.Helpers.Sensor.BatteryStatus
+  commentId: P:SECW.Helpers.Sensor.BatteryStatus
+  id: BatteryStatus
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: BatteryStatus
+  nameWithType: Sensor.BatteryStatus
+  fullName: SECW.Helpers.Sensor.BatteryStatus
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: BatteryStatus
+    path: Helpers/SensorsHelper.cs
+    startLine: 355
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? BatteryStatus { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property BatteryStatus As String
+  overload: SECW.Helpers.Sensor.BatteryStatus*
+- uid: SECW.Helpers.Sensor.SignalStrength
+  commentId: P:SECW.Helpers.Sensor.SignalStrength
+  id: SignalStrength
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: SignalStrength
+  nameWithType: Sensor.SignalStrength
+  fullName: SECW.Helpers.Sensor.SignalStrength
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: SignalStrength
+    path: Helpers/SensorsHelper.cs
+    startLine: 356
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? SignalStrength { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property SignalStrength As String
+  overload: SECW.Helpers.Sensor.SignalStrength*
+- uid: SECW.Helpers.Sensor.DataRate
+  commentId: P:SECW.Helpers.Sensor.DataRate
+  id: DataRate
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataRate
+  nameWithType: Sensor.DataRate
+  fullName: SECW.Helpers.Sensor.DataRate
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataRate
+    path: Helpers/SensorsHelper.cs
+    startLine: 357
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataRate { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataRate As String
+  overload: SECW.Helpers.Sensor.DataRate*
+- uid: SECW.Helpers.Sensor.DataFormat
+  commentId: P:SECW.Helpers.Sensor.DataFormat
+  id: DataFormat
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataFormat
+  nameWithType: Sensor.DataFormat
+  fullName: SECW.Helpers.Sensor.DataFormat
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataFormat
+    path: Helpers/SensorsHelper.cs
+    startLine: 358
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataFormat { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataFormat As String
+  overload: SECW.Helpers.Sensor.DataFormat*
+- uid: SECW.Helpers.Sensor.CommunicationProtocol
+  commentId: P:SECW.Helpers.Sensor.CommunicationProtocol
+  id: CommunicationProtocol
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: CommunicationProtocol
+  nameWithType: Sensor.CommunicationProtocol
+  fullName: SECW.Helpers.Sensor.CommunicationProtocol
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: CommunicationProtocol
+    path: Helpers/SensorsHelper.cs
+    startLine: 359
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? CommunicationProtocol { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CommunicationProtocol As String
+  overload: SECW.Helpers.Sensor.CommunicationProtocol*
+- uid: SECW.Helpers.Sensor.PowerSource
+  commentId: P:SECW.Helpers.Sensor.PowerSource
+  id: PowerSource
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: PowerSource
+  nameWithType: Sensor.PowerSource
+  fullName: SECW.Helpers.Sensor.PowerSource
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: PowerSource
+    path: Helpers/SensorsHelper.cs
+    startLine: 360
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? PowerSource { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PowerSource As String
+  overload: SECW.Helpers.Sensor.PowerSource*
+- uid: SECW.Helpers.Sensor.OperatingTemperatureRange
+  commentId: P:SECW.Helpers.Sensor.OperatingTemperatureRange
+  id: OperatingTemperatureRange
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: OperatingTemperatureRange
+  nameWithType: Sensor.OperatingTemperatureRange
+  fullName: SECW.Helpers.Sensor.OperatingTemperatureRange
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: OperatingTemperatureRange
+    path: Helpers/SensorsHelper.cs
+    startLine: 361
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? OperatingTemperatureRange { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property OperatingTemperatureRange As String
+  overload: SECW.Helpers.Sensor.OperatingTemperatureRange*
+- uid: SECW.Helpers.Sensor.HumidityRange
+  commentId: P:SECW.Helpers.Sensor.HumidityRange
+  id: HumidityRange
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: HumidityRange
+  nameWithType: Sensor.HumidityRange
+  fullName: SECW.Helpers.Sensor.HumidityRange
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: HumidityRange
+    path: Helpers/SensorsHelper.cs
+    startLine: 362
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? HumidityRange { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property HumidityRange As String
+  overload: SECW.Helpers.Sensor.HumidityRange*
+- uid: SECW.Helpers.Sensor.PressureRange
+  commentId: P:SECW.Helpers.Sensor.PressureRange
+  id: PressureRange
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: PressureRange
+  nameWithType: Sensor.PressureRange
+  fullName: SECW.Helpers.Sensor.PressureRange
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: PressureRange
+    path: Helpers/SensorsHelper.cs
+    startLine: 363
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? PressureRange { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PressureRange As String
+  overload: SECW.Helpers.Sensor.PressureRange*
+- uid: SECW.Helpers.Sensor.MeasurementRange
+  commentId: P:SECW.Helpers.Sensor.MeasurementRange
+  id: MeasurementRange
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: MeasurementRange
+  nameWithType: Sensor.MeasurementRange
+  fullName: SECW.Helpers.Sensor.MeasurementRange
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: MeasurementRange
+    path: Helpers/SensorsHelper.cs
+    startLine: 364
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? MeasurementRange { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property MeasurementRange As String
+  overload: SECW.Helpers.Sensor.MeasurementRange*
+- uid: SECW.Helpers.Sensor.MeasurementUnits
+  commentId: P:SECW.Helpers.Sensor.MeasurementUnits
+  id: MeasurementUnits
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: MeasurementUnits
+  nameWithType: Sensor.MeasurementUnits
+  fullName: SECW.Helpers.Sensor.MeasurementUnits
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: MeasurementUnits
+    path: Helpers/SensorsHelper.cs
+    startLine: 365
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? MeasurementUnits { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property MeasurementUnits As String
+  overload: SECW.Helpers.Sensor.MeasurementUnits*
+- uid: SECW.Helpers.Sensor.MeasurementAccuracy
+  commentId: P:SECW.Helpers.Sensor.MeasurementAccuracy
+  id: MeasurementAccuracy
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: MeasurementAccuracy
+  nameWithType: Sensor.MeasurementAccuracy
+  fullName: SECW.Helpers.Sensor.MeasurementAccuracy
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: MeasurementAccuracy
+    path: Helpers/SensorsHelper.cs
+    startLine: 366
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? MeasurementAccuracy { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property MeasurementAccuracy As String
+  overload: SECW.Helpers.Sensor.MeasurementAccuracy*
+- uid: SECW.Helpers.Sensor.MeasurementResolution
+  commentId: P:SECW.Helpers.Sensor.MeasurementResolution
+  id: MeasurementResolution
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: MeasurementResolution
+  nameWithType: Sensor.MeasurementResolution
+  fullName: SECW.Helpers.Sensor.MeasurementResolution
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: MeasurementResolution
+    path: Helpers/SensorsHelper.cs
+    startLine: 367
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? MeasurementResolution { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property MeasurementResolution As String
+  overload: SECW.Helpers.Sensor.MeasurementResolution*
+- uid: SECW.Helpers.Sensor.MeasurementInterval
+  commentId: P:SECW.Helpers.Sensor.MeasurementInterval
+  id: MeasurementInterval
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: MeasurementInterval
+  nameWithType: Sensor.MeasurementInterval
+  fullName: SECW.Helpers.Sensor.MeasurementInterval
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: MeasurementInterval
+    path: Helpers/SensorsHelper.cs
+    startLine: 368
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? MeasurementInterval { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property MeasurementInterval As String
+  overload: SECW.Helpers.Sensor.MeasurementInterval*
+- uid: SECW.Helpers.Sensor.DataStorageCapacity
+  commentId: P:SECW.Helpers.Sensor.DataStorageCapacity
+  id: DataStorageCapacity
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataStorageCapacity
+  nameWithType: Sensor.DataStorageCapacity
+  fullName: SECW.Helpers.Sensor.DataStorageCapacity
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataStorageCapacity
+    path: Helpers/SensorsHelper.cs
+    startLine: 369
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataStorageCapacity { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataStorageCapacity As String
+  overload: SECW.Helpers.Sensor.DataStorageCapacity*
+- uid: SECW.Helpers.Sensor.DataTransmissionInterval
+  commentId: P:SECW.Helpers.Sensor.DataTransmissionInterval
+  id: DataTransmissionInterval
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataTransmissionInterval
+  nameWithType: Sensor.DataTransmissionInterval
+  fullName: SECW.Helpers.Sensor.DataTransmissionInterval
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataTransmissionInterval
+    path: Helpers/SensorsHelper.cs
+    startLine: 370
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataTransmissionInterval { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataTransmissionInterval As String
+  overload: SECW.Helpers.Sensor.DataTransmissionInterval*
+- uid: SECW.Helpers.Sensor.DataTransmissionMethod
+  commentId: P:SECW.Helpers.Sensor.DataTransmissionMethod
+  id: DataTransmissionMethod
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataTransmissionMethod
+  nameWithType: Sensor.DataTransmissionMethod
+  fullName: SECW.Helpers.Sensor.DataTransmissionMethod
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataTransmissionMethod
+    path: Helpers/SensorsHelper.cs
+    startLine: 371
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataTransmissionMethod { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataTransmissionMethod As String
+  overload: SECW.Helpers.Sensor.DataTransmissionMethod*
+- uid: SECW.Helpers.Sensor.DataEncryption
+  commentId: P:SECW.Helpers.Sensor.DataEncryption
+  id: DataEncryption
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataEncryption
+  nameWithType: Sensor.DataEncryption
+  fullName: SECW.Helpers.Sensor.DataEncryption
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataEncryption
+    path: Helpers/SensorsHelper.cs
+    startLine: 372
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataEncryption { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataEncryption As String
+  overload: SECW.Helpers.Sensor.DataEncryption*
+- uid: SECW.Helpers.Sensor.DataCompression
+  commentId: P:SECW.Helpers.Sensor.DataCompression
+  id: DataCompression
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataCompression
+  nameWithType: Sensor.DataCompression
+  fullName: SECW.Helpers.Sensor.DataCompression
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataCompression
+    path: Helpers/SensorsHelper.cs
+    startLine: 373
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataCompression { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataCompression As String
+  overload: SECW.Helpers.Sensor.DataCompression*
+- uid: SECW.Helpers.Sensor.DataBackup
+  commentId: P:SECW.Helpers.Sensor.DataBackup
+  id: DataBackup
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataBackup
+  nameWithType: Sensor.DataBackup
+  fullName: SECW.Helpers.Sensor.DataBackup
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataBackup
+    path: Helpers/SensorsHelper.cs
+    startLine: 374
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataBackup { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataBackup As String
+  overload: SECW.Helpers.Sensor.DataBackup*
+- uid: SECW.Helpers.Sensor.DataRecovery
+  commentId: P:SECW.Helpers.Sensor.DataRecovery
+  id: DataRecovery
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataRecovery
+  nameWithType: Sensor.DataRecovery
+  fullName: SECW.Helpers.Sensor.DataRecovery
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataRecovery
+    path: Helpers/SensorsHelper.cs
+    startLine: 375
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataRecovery { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataRecovery As String
+  overload: SECW.Helpers.Sensor.DataRecovery*
+- uid: SECW.Helpers.Sensor.DataVisualization
+  commentId: P:SECW.Helpers.Sensor.DataVisualization
+  id: DataVisualization
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataVisualization
+  nameWithType: Sensor.DataVisualization
+  fullName: SECW.Helpers.Sensor.DataVisualization
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataVisualization
+    path: Helpers/SensorsHelper.cs
+    startLine: 376
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataVisualization { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataVisualization As String
+  overload: SECW.Helpers.Sensor.DataVisualization*
+- uid: SECW.Helpers.Sensor.DataAnalysis
+  commentId: P:SECW.Helpers.Sensor.DataAnalysis
+  id: DataAnalysis
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataAnalysis
+  nameWithType: Sensor.DataAnalysis
+  fullName: SECW.Helpers.Sensor.DataAnalysis
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataAnalysis
+    path: Helpers/SensorsHelper.cs
+    startLine: 377
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataAnalysis { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataAnalysis As String
+  overload: SECW.Helpers.Sensor.DataAnalysis*
+- uid: SECW.Helpers.Sensor.DataReporting
+  commentId: P:SECW.Helpers.Sensor.DataReporting
+  id: DataReporting
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataReporting
+  nameWithType: Sensor.DataReporting
+  fullName: SECW.Helpers.Sensor.DataReporting
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataReporting
+    path: Helpers/SensorsHelper.cs
+    startLine: 378
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataReporting { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataReporting As String
+  overload: SECW.Helpers.Sensor.DataReporting*
+- uid: SECW.Helpers.Sensor.DataSharing
+  commentId: P:SECW.Helpers.Sensor.DataSharing
+  id: DataSharing
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataSharing
+  nameWithType: Sensor.DataSharing
+  fullName: SECW.Helpers.Sensor.DataSharing
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataSharing
+    path: Helpers/SensorsHelper.cs
+    startLine: 379
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataSharing { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataSharing As String
+  overload: SECW.Helpers.Sensor.DataSharing*
+- uid: SECW.Helpers.Sensor.DataIntegration
+  commentId: P:SECW.Helpers.Sensor.DataIntegration
+  id: DataIntegration
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataIntegration
+  nameWithType: Sensor.DataIntegration
+  fullName: SECW.Helpers.Sensor.DataIntegration
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataIntegration
+    path: Helpers/SensorsHelper.cs
+    startLine: 380
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataIntegration { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataIntegration As String
+  overload: SECW.Helpers.Sensor.DataIntegration*
+- uid: SECW.Helpers.Sensor.DataStorageLocation
+  commentId: P:SECW.Helpers.Sensor.DataStorageLocation
+  id: DataStorageLocation
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataStorageLocation
+  nameWithType: Sensor.DataStorageLocation
+  fullName: SECW.Helpers.Sensor.DataStorageLocation
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataStorageLocation
+    path: Helpers/SensorsHelper.cs
+    startLine: 381
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataStorageLocation { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataStorageLocation As String
+  overload: SECW.Helpers.Sensor.DataStorageLocation*
+- uid: SECW.Helpers.Sensor.DataAccessControl
+  commentId: P:SECW.Helpers.Sensor.DataAccessControl
+  id: DataAccessControl
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataAccessControl
+  nameWithType: Sensor.DataAccessControl
+  fullName: SECW.Helpers.Sensor.DataAccessControl
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataAccessControl
+    path: Helpers/SensorsHelper.cs
+    startLine: 382
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataAccessControl { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataAccessControl As String
+  overload: SECW.Helpers.Sensor.DataAccessControl*
+- uid: SECW.Helpers.Sensor.DataRetentionPolicy
+  commentId: P:SECW.Helpers.Sensor.DataRetentionPolicy
+  id: DataRetentionPolicy
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataRetentionPolicy
+  nameWithType: Sensor.DataRetentionPolicy
+  fullName: SECW.Helpers.Sensor.DataRetentionPolicy
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataRetentionPolicy
+    path: Helpers/SensorsHelper.cs
+    startLine: 383
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataRetentionPolicy { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataRetentionPolicy As String
+  overload: SECW.Helpers.Sensor.DataRetentionPolicy*
+- uid: SECW.Helpers.Sensor.DataDisposalPolicy
+  commentId: P:SECW.Helpers.Sensor.DataDisposalPolicy
+  id: DataDisposalPolicy
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataDisposalPolicy
+  nameWithType: Sensor.DataDisposalPolicy
+  fullName: SECW.Helpers.Sensor.DataDisposalPolicy
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataDisposalPolicy
+    path: Helpers/SensorsHelper.cs
+    startLine: 384
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataDisposalPolicy { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataDisposalPolicy As String
+  overload: SECW.Helpers.Sensor.DataDisposalPolicy*
+- uid: SECW.Helpers.Sensor.DataSecurity
+  commentId: P:SECW.Helpers.Sensor.DataSecurity
+  id: DataSecurity
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataSecurity
+  nameWithType: Sensor.DataSecurity
+  fullName: SECW.Helpers.Sensor.DataSecurity
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataSecurity
+    path: Helpers/SensorsHelper.cs
+    startLine: 385
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataSecurity { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataSecurity As String
+  overload: SECW.Helpers.Sensor.DataSecurity*
+- uid: SECW.Helpers.Sensor.DataPrivacy
+  commentId: P:SECW.Helpers.Sensor.DataPrivacy
+  id: DataPrivacy
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataPrivacy
+  nameWithType: Sensor.DataPrivacy
+  fullName: SECW.Helpers.Sensor.DataPrivacy
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataPrivacy
+    path: Helpers/SensorsHelper.cs
+    startLine: 386
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataPrivacy { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataPrivacy As String
+  overload: SECW.Helpers.Sensor.DataPrivacy*
+- uid: SECW.Helpers.Sensor.DataCompliance
+  commentId: P:SECW.Helpers.Sensor.DataCompliance
+  id: DataCompliance
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataCompliance
+  nameWithType: Sensor.DataCompliance
+  fullName: SECW.Helpers.Sensor.DataCompliance
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataCompliance
+    path: Helpers/SensorsHelper.cs
+    startLine: 387
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataCompliance { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataCompliance As String
+  overload: SECW.Helpers.Sensor.DataCompliance*
+- uid: SECW.Helpers.Sensor.DataGovernance
+  commentId: P:SECW.Helpers.Sensor.DataGovernance
+  id: DataGovernance
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataGovernance
+  nameWithType: Sensor.DataGovernance
+  fullName: SECW.Helpers.Sensor.DataGovernance
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataGovernance
+    path: Helpers/SensorsHelper.cs
+    startLine: 388
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataGovernance { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataGovernance As String
+  overload: SECW.Helpers.Sensor.DataGovernance*
+- uid: SECW.Helpers.Sensor.DataQuality
+  commentId: P:SECW.Helpers.Sensor.DataQuality
+  id: DataQuality
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataQuality
+  nameWithType: Sensor.DataQuality
+  fullName: SECW.Helpers.Sensor.DataQuality
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataQuality
+    path: Helpers/SensorsHelper.cs
+    startLine: 389
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataQuality { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataQuality As String
+  overload: SECW.Helpers.Sensor.DataQuality*
+- uid: SECW.Helpers.Sensor.DataIntegrity
+  commentId: P:SECW.Helpers.Sensor.DataIntegrity
+  id: DataIntegrity
+  parent: SECW.Helpers.Sensor
+  langs:
+  - csharp
+  - vb
+  name: DataIntegrity
+  nameWithType: Sensor.DataIntegrity
+  fullName: SECW.Helpers.Sensor.DataIntegrity
+  type: Property
+  source:
+    remote:
+      path: Helpers/SensorsHelper.cs
+      branch: Documentation
+      repo: https://github.com/Liam-Dev96/SECW.git
+    id: DataIntegrity
+    path: Helpers/SensorsHelper.cs
+    startLine: 390
+  assemblies:
+  - SECW
+  namespace: SECW.Helpers
+  syntax:
+    content: public string? DataIntegrity { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataIntegrity As String
+  overload: SECW.Helpers.Sensor.DataIntegrity*
+references:
+- uid: SECW.Helpers
+  commentId: N:SECW.Helpers
+  href: SECW.html
+  name: SECW.Helpers
+  nameWithType: SECW.Helpers
+  fullName: SECW.Helpers
+  spec.csharp:
+  - uid: SECW
+    name: SECW
+    href: SECW.html
+  - name: .
+  - uid: SECW.Helpers
+    name: Helpers
+    href: SECW.Helpers.html
+  spec.vb:
+  - uid: SECW
+    name: SECW
+    href: SECW.html
+  - name: .
+  - uid: SECW.Helpers
+    name: Helpers
+    href: SECW.Helpers.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SECW.Helpers.Sensor.SensorID*
+  commentId: Overload:SECW.Helpers.Sensor.SensorID
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_SensorID
+  name: SensorID
+  nameWithType: Sensor.SensorID
+  fullName: SECW.Helpers.Sensor.SensorID
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: SECW.Helpers.Sensor.Status*
+  commentId: Overload:SECW.Helpers.Sensor.Status
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_Status
+  name: Status
+  nameWithType: Sensor.Status
+  fullName: SECW.Helpers.Sensor.Status
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: SECW.Helpers.Sensor.FirmwareVersion*
+  commentId: Overload:SECW.Helpers.Sensor.FirmwareVersion
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_FirmwareVersion
+  name: FirmwareVersion
+  nameWithType: Sensor.FirmwareVersion
+  fullName: SECW.Helpers.Sensor.FirmwareVersion
+- uid: SECW.Helpers.Sensor.SensorType*
+  commentId: Overload:SECW.Helpers.Sensor.SensorType
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_SensorType
+  name: SensorType
+  nameWithType: Sensor.SensorType
+  fullName: SECW.Helpers.Sensor.SensorType
+- uid: SECW.Helpers.Sensor.Location*
+  commentId: Overload:SECW.Helpers.Sensor.Location
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_Location
+  name: Location
+  nameWithType: Sensor.Location
+  fullName: SECW.Helpers.Sensor.Location
+- uid: SECW.Helpers.Sensor.Manufacturer*
+  commentId: Overload:SECW.Helpers.Sensor.Manufacturer
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_Manufacturer
+  name: Manufacturer
+  nameWithType: Sensor.Manufacturer
+  fullName: SECW.Helpers.Sensor.Manufacturer
+- uid: SECW.Helpers.Sensor.Model*
+  commentId: Overload:SECW.Helpers.Sensor.Model
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_Model
+  name: Model
+  nameWithType: Sensor.Model
+  fullName: SECW.Helpers.Sensor.Model
+- uid: SECW.Helpers.Sensor.SerialNumber*
+  commentId: Overload:SECW.Helpers.Sensor.SerialNumber
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_SerialNumber
+  name: SerialNumber
+  nameWithType: Sensor.SerialNumber
+  fullName: SECW.Helpers.Sensor.SerialNumber
+- uid: SECW.Helpers.Sensor.CalibrationDate*
+  commentId: Overload:SECW.Helpers.Sensor.CalibrationDate
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_CalibrationDate
+  name: CalibrationDate
+  nameWithType: Sensor.CalibrationDate
+  fullName: SECW.Helpers.Sensor.CalibrationDate
+- uid: System.Nullable{System.DateTime}
+  commentId: T:System.Nullable{System.DateTime}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime?
+  nameWithType: DateTime?
+  fullName: System.DateTime?
+  nameWithType.vb: Date?
+  fullName.vb: Date?
+  name.vb: Date?
+  spec.csharp:
+  - uid: System.DateTime
+    name: DateTime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: '?'
+  spec.vb:
+  - uid: System.DateTime
+    name: Date
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: SECW.Helpers.Sensor.LastMaintenanceDate*
+  commentId: Overload:SECW.Helpers.Sensor.LastMaintenanceDate
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_LastMaintenanceDate
+  name: LastMaintenanceDate
+  nameWithType: Sensor.LastMaintenanceDate
+  fullName: SECW.Helpers.Sensor.LastMaintenanceDate
+- uid: SECW.Helpers.Sensor.BatteryStatus*
+  commentId: Overload:SECW.Helpers.Sensor.BatteryStatus
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_BatteryStatus
+  name: BatteryStatus
+  nameWithType: Sensor.BatteryStatus
+  fullName: SECW.Helpers.Sensor.BatteryStatus
+- uid: SECW.Helpers.Sensor.SignalStrength*
+  commentId: Overload:SECW.Helpers.Sensor.SignalStrength
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_SignalStrength
+  name: SignalStrength
+  nameWithType: Sensor.SignalStrength
+  fullName: SECW.Helpers.Sensor.SignalStrength
+- uid: SECW.Helpers.Sensor.DataRate*
+  commentId: Overload:SECW.Helpers.Sensor.DataRate
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataRate
+  name: DataRate
+  nameWithType: Sensor.DataRate
+  fullName: SECW.Helpers.Sensor.DataRate
+- uid: SECW.Helpers.Sensor.DataFormat*
+  commentId: Overload:SECW.Helpers.Sensor.DataFormat
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataFormat
+  name: DataFormat
+  nameWithType: Sensor.DataFormat
+  fullName: SECW.Helpers.Sensor.DataFormat
+- uid: SECW.Helpers.Sensor.CommunicationProtocol*
+  commentId: Overload:SECW.Helpers.Sensor.CommunicationProtocol
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_CommunicationProtocol
+  name: CommunicationProtocol
+  nameWithType: Sensor.CommunicationProtocol
+  fullName: SECW.Helpers.Sensor.CommunicationProtocol
+- uid: SECW.Helpers.Sensor.PowerSource*
+  commentId: Overload:SECW.Helpers.Sensor.PowerSource
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_PowerSource
+  name: PowerSource
+  nameWithType: Sensor.PowerSource
+  fullName: SECW.Helpers.Sensor.PowerSource
+- uid: SECW.Helpers.Sensor.OperatingTemperatureRange*
+  commentId: Overload:SECW.Helpers.Sensor.OperatingTemperatureRange
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_OperatingTemperatureRange
+  name: OperatingTemperatureRange
+  nameWithType: Sensor.OperatingTemperatureRange
+  fullName: SECW.Helpers.Sensor.OperatingTemperatureRange
+- uid: SECW.Helpers.Sensor.HumidityRange*
+  commentId: Overload:SECW.Helpers.Sensor.HumidityRange
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_HumidityRange
+  name: HumidityRange
+  nameWithType: Sensor.HumidityRange
+  fullName: SECW.Helpers.Sensor.HumidityRange
+- uid: SECW.Helpers.Sensor.PressureRange*
+  commentId: Overload:SECW.Helpers.Sensor.PressureRange
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_PressureRange
+  name: PressureRange
+  nameWithType: Sensor.PressureRange
+  fullName: SECW.Helpers.Sensor.PressureRange
+- uid: SECW.Helpers.Sensor.MeasurementRange*
+  commentId: Overload:SECW.Helpers.Sensor.MeasurementRange
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_MeasurementRange
+  name: MeasurementRange
+  nameWithType: Sensor.MeasurementRange
+  fullName: SECW.Helpers.Sensor.MeasurementRange
+- uid: SECW.Helpers.Sensor.MeasurementUnits*
+  commentId: Overload:SECW.Helpers.Sensor.MeasurementUnits
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_MeasurementUnits
+  name: MeasurementUnits
+  nameWithType: Sensor.MeasurementUnits
+  fullName: SECW.Helpers.Sensor.MeasurementUnits
+- uid: SECW.Helpers.Sensor.MeasurementAccuracy*
+  commentId: Overload:SECW.Helpers.Sensor.MeasurementAccuracy
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_MeasurementAccuracy
+  name: MeasurementAccuracy
+  nameWithType: Sensor.MeasurementAccuracy
+  fullName: SECW.Helpers.Sensor.MeasurementAccuracy
+- uid: SECW.Helpers.Sensor.MeasurementResolution*
+  commentId: Overload:SECW.Helpers.Sensor.MeasurementResolution
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_MeasurementResolution
+  name: MeasurementResolution
+  nameWithType: Sensor.MeasurementResolution
+  fullName: SECW.Helpers.Sensor.MeasurementResolution
+- uid: SECW.Helpers.Sensor.MeasurementInterval*
+  commentId: Overload:SECW.Helpers.Sensor.MeasurementInterval
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_MeasurementInterval
+  name: MeasurementInterval
+  nameWithType: Sensor.MeasurementInterval
+  fullName: SECW.Helpers.Sensor.MeasurementInterval
+- uid: SECW.Helpers.Sensor.DataStorageCapacity*
+  commentId: Overload:SECW.Helpers.Sensor.DataStorageCapacity
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataStorageCapacity
+  name: DataStorageCapacity
+  nameWithType: Sensor.DataStorageCapacity
+  fullName: SECW.Helpers.Sensor.DataStorageCapacity
+- uid: SECW.Helpers.Sensor.DataTransmissionInterval*
+  commentId: Overload:SECW.Helpers.Sensor.DataTransmissionInterval
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataTransmissionInterval
+  name: DataTransmissionInterval
+  nameWithType: Sensor.DataTransmissionInterval
+  fullName: SECW.Helpers.Sensor.DataTransmissionInterval
+- uid: SECW.Helpers.Sensor.DataTransmissionMethod*
+  commentId: Overload:SECW.Helpers.Sensor.DataTransmissionMethod
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataTransmissionMethod
+  name: DataTransmissionMethod
+  nameWithType: Sensor.DataTransmissionMethod
+  fullName: SECW.Helpers.Sensor.DataTransmissionMethod
+- uid: SECW.Helpers.Sensor.DataEncryption*
+  commentId: Overload:SECW.Helpers.Sensor.DataEncryption
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataEncryption
+  name: DataEncryption
+  nameWithType: Sensor.DataEncryption
+  fullName: SECW.Helpers.Sensor.DataEncryption
+- uid: SECW.Helpers.Sensor.DataCompression*
+  commentId: Overload:SECW.Helpers.Sensor.DataCompression
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataCompression
+  name: DataCompression
+  nameWithType: Sensor.DataCompression
+  fullName: SECW.Helpers.Sensor.DataCompression
+- uid: SECW.Helpers.Sensor.DataBackup*
+  commentId: Overload:SECW.Helpers.Sensor.DataBackup
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataBackup
+  name: DataBackup
+  nameWithType: Sensor.DataBackup
+  fullName: SECW.Helpers.Sensor.DataBackup
+- uid: SECW.Helpers.Sensor.DataRecovery*
+  commentId: Overload:SECW.Helpers.Sensor.DataRecovery
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataRecovery
+  name: DataRecovery
+  nameWithType: Sensor.DataRecovery
+  fullName: SECW.Helpers.Sensor.DataRecovery
+- uid: SECW.Helpers.Sensor.DataVisualization*
+  commentId: Overload:SECW.Helpers.Sensor.DataVisualization
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataVisualization
+  name: DataVisualization
+  nameWithType: Sensor.DataVisualization
+  fullName: SECW.Helpers.Sensor.DataVisualization
+- uid: SECW.Helpers.Sensor.DataAnalysis*
+  commentId: Overload:SECW.Helpers.Sensor.DataAnalysis
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataAnalysis
+  name: DataAnalysis
+  nameWithType: Sensor.DataAnalysis
+  fullName: SECW.Helpers.Sensor.DataAnalysis
+- uid: SECW.Helpers.Sensor.DataReporting*
+  commentId: Overload:SECW.Helpers.Sensor.DataReporting
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataReporting
+  name: DataReporting
+  nameWithType: Sensor.DataReporting
+  fullName: SECW.Helpers.Sensor.DataReporting
+- uid: SECW.Helpers.Sensor.DataSharing*
+  commentId: Overload:SECW.Helpers.Sensor.DataSharing
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataSharing
+  name: DataSharing
+  nameWithType: Sensor.DataSharing
+  fullName: SECW.Helpers.Sensor.DataSharing
+- uid: SECW.Helpers.Sensor.DataIntegration*
+  commentId: Overload:SECW.Helpers.Sensor.DataIntegration
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataIntegration
+  name: DataIntegration
+  nameWithType: Sensor.DataIntegration
+  fullName: SECW.Helpers.Sensor.DataIntegration
+- uid: SECW.Helpers.Sensor.DataStorageLocation*
+  commentId: Overload:SECW.Helpers.Sensor.DataStorageLocation
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataStorageLocation
+  name: DataStorageLocation
+  nameWithType: Sensor.DataStorageLocation
+  fullName: SECW.Helpers.Sensor.DataStorageLocation
+- uid: SECW.Helpers.Sensor.DataAccessControl*
+  commentId: Overload:SECW.Helpers.Sensor.DataAccessControl
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataAccessControl
+  name: DataAccessControl
+  nameWithType: Sensor.DataAccessControl
+  fullName: SECW.Helpers.Sensor.DataAccessControl
+- uid: SECW.Helpers.Sensor.DataRetentionPolicy*
+  commentId: Overload:SECW.Helpers.Sensor.DataRetentionPolicy
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataRetentionPolicy
+  name: DataRetentionPolicy
+  nameWithType: Sensor.DataRetentionPolicy
+  fullName: SECW.Helpers.Sensor.DataRetentionPolicy
+- uid: SECW.Helpers.Sensor.DataDisposalPolicy*
+  commentId: Overload:SECW.Helpers.Sensor.DataDisposalPolicy
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataDisposalPolicy
+  name: DataDisposalPolicy
+  nameWithType: Sensor.DataDisposalPolicy
+  fullName: SECW.Helpers.Sensor.DataDisposalPolicy
+- uid: SECW.Helpers.Sensor.DataSecurity*
+  commentId: Overload:SECW.Helpers.Sensor.DataSecurity
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataSecurity
+  name: DataSecurity
+  nameWithType: Sensor.DataSecurity
+  fullName: SECW.Helpers.Sensor.DataSecurity
+- uid: SECW.Helpers.Sensor.DataPrivacy*
+  commentId: Overload:SECW.Helpers.Sensor.DataPrivacy
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataPrivacy
+  name: DataPrivacy
+  nameWithType: Sensor.DataPrivacy
+  fullName: SECW.Helpers.Sensor.DataPrivacy
+- uid: SECW.Helpers.Sensor.DataCompliance*
+  commentId: Overload:SECW.Helpers.Sensor.DataCompliance
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataCompliance
+  name: DataCompliance
+  nameWithType: Sensor.DataCompliance
+  fullName: SECW.Helpers.Sensor.DataCompliance
+- uid: SECW.Helpers.Sensor.DataGovernance*
+  commentId: Overload:SECW.Helpers.Sensor.DataGovernance
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataGovernance
+  name: DataGovernance
+  nameWithType: Sensor.DataGovernance
+  fullName: SECW.Helpers.Sensor.DataGovernance
+- uid: SECW.Helpers.Sensor.DataQuality*
+  commentId: Overload:SECW.Helpers.Sensor.DataQuality
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataQuality
+  name: DataQuality
+  nameWithType: Sensor.DataQuality
+  fullName: SECW.Helpers.Sensor.DataQuality
+- uid: SECW.Helpers.Sensor.DataIntegrity*
+  commentId: Overload:SECW.Helpers.Sensor.DataIntegrity
+  href: SECW.Helpers.Sensor.html#SECW_Helpers_Sensor_DataIntegrity
+  name: DataIntegrity
+  nameWithType: Sensor.DataIntegrity
+  fullName: SECW.Helpers.Sensor.DataIntegrity

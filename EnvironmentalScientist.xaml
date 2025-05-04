@@ -14,6 +14,8 @@
         <StackLayout Padding="20" Spacing="15">
             <Label Text="Environmental Scientist Dashboard" FontSize="24" HorizontalOptions="Center" />
 
+            <Button Text="View" Clicked="OnViewClicked" Margin="0,10,0,0" />
+
             <!-- Sensor Management Section -->
             <Label Text="Manage Sensors" FontSize="18" />
             <ListView x:Name="SensorListView" ItemsSource="{Binding Sensors}" 

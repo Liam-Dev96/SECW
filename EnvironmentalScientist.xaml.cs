@@ -21,6 +21,26 @@ public partial class EnvironmentalScientistPage : ContentPage
         LoadSensors();
     }
 
+        private void OnViewClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            // Log navigation attempt
+            Console.WriteLine("Navigating to View...");
+
+            // Navigate to Malfunctions
+            Navigation.PushAsync(new ViewData());
+
+            // Log successful navigation
+            Console.WriteLine("Successfully navigated to ViewPage.");
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            Console.WriteLine($"Error in OnViewClicked: {ex.Message}");
+        }
+    }
+
     /// <summary>
     /// Loads sensors from the database and populates the ObservableCollection.
     /// </summary>
