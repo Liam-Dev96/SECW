@@ -1,0 +1,167 @@
+### YamlMime:ManagedReference
+items:
+- uid: SECW
+  commentId: N:SECW
+  id: SECW
+  children:
+  - SECW.AdminPage
+  - SECW.AdminSettingsPage
+  - SECW.App
+  - SECW.AppShell
+  - SECW.EditUserPage
+  - SECW.EnvironmentalScientistPage
+  - SECW.Login
+  - SECW.MainActivity
+  - SECW.MainApplication
+  - SECW.ManageUsers
+  - SECW.ManageUsers.DataBaseHelper
+  - SECW.ManageUsers.User
+  - SECW.MauiProgram
+  - SECW.OperationalManagerPage
+  - SECW.Resource
+  - SECW.UserPage
+  langs:
+  - csharp
+  - vb
+  name: SECW
+  nameWithType: SECW
+  fullName: SECW
+  type: Namespace
+  assemblies:
+  - SECW
+references:
+- uid: SECW.AdminPage
+  commentId: T:SECW.AdminPage
+  href: SECW.AdminPage.html
+  name: AdminPage
+  nameWithType: AdminPage
+  fullName: SECW.AdminPage
+- uid: SECW.AdminSettingsPage
+  commentId: T:SECW.AdminSettingsPage
+  href: SECW.AdminSettingsPage.html
+  name: AdminSettingsPage
+  nameWithType: AdminSettingsPage
+  fullName: SECW.AdminSettingsPage
+- uid: SECW.App
+  commentId: T:SECW.App
+  href: SECW.App.html
+  name: App
+  nameWithType: App
+  fullName: SECW.App
+- uid: SECW.AppShell
+  commentId: T:SECW.AppShell
+  href: SECW.AppShell.html
+  name: AppShell
+  nameWithType: AppShell
+  fullName: SECW.AppShell
+- uid: SECW.EditUserPage
+  commentId: T:SECW.EditUserPage
+  href: SECW.EditUserPage.html
+  name: EditUserPage
+  nameWithType: EditUserPage
+  fullName: SECW.EditUserPage
+- uid: SECW.EnvironmentalScientistPage
+  commentId: T:SECW.EnvironmentalScientistPage
+  href: SECW.EnvironmentalScientistPage.html
+  name: EnvironmentalScientistPage
+  nameWithType: EnvironmentalScientistPage
+  fullName: SECW.EnvironmentalScientistPage
+- uid: SECW.Login
+  commentId: T:SECW.Login
+  href: SECW.Login.html
+  name: Login
+  nameWithType: Login
+  fullName: SECW.Login
+- uid: SECW.ManageUsers
+  commentId: T:SECW.ManageUsers
+  href: SECW.ManageUsers.html
+  name: ManageUsers
+  nameWithType: ManageUsers
+  fullName: SECW.ManageUsers
+- uid: SECW.ManageUsers.DataBaseHelper
+  commentId: T:SECW.ManageUsers.DataBaseHelper
+  href: SECW.ManageUsers.html
+  name: ManageUsers.DataBaseHelper
+  nameWithType: ManageUsers.DataBaseHelper
+  fullName: SECW.ManageUsers.DataBaseHelper
+  spec.csharp:
+  - uid: SECW.ManageUsers
+    name: ManageUsers
+    href: SECW.ManageUsers.html
+  - name: .
+  - uid: SECW.ManageUsers.DataBaseHelper
+    name: DataBaseHelper
+    href: SECW.ManageUsers.DataBaseHelper.html
+  spec.vb:
+  - uid: SECW.ManageUsers
+    name: ManageUsers
+    href: SECW.ManageUsers.html
+  - name: .
+  - uid: SECW.ManageUsers.DataBaseHelper
+    name: DataBaseHelper
+    href: SECW.ManageUsers.DataBaseHelper.html
+- uid: SECW.ManageUsers.User
+  commentId: T:SECW.ManageUsers.User
+  parent: SECW
+  href: SECW.ManageUsers.html
+  name: ManageUsers.User
+  nameWithType: ManageUsers.User
+  fullName: SECW.ManageUsers.User
+  spec.csharp:
+  - uid: SECW.ManageUsers
+    name: ManageUsers
+    href: SECW.ManageUsers.html
+  - name: .
+  - uid: SECW.ManageUsers.User
+    name: User
+    href: SECW.ManageUsers.User.html
+  spec.vb:
+  - uid: SECW.ManageUsers
+    name: ManageUsers
+    href: SECW.ManageUsers.html
+  - name: .
+  - uid: SECW.ManageUsers.User
+    name: User
+    href: SECW.ManageUsers.User.html
+- uid: SECW.MauiProgram
+  commentId: T:SECW.MauiProgram
+  href: SECW.MauiProgram.html
+  name: MauiProgram
+  nameWithType: MauiProgram
+  fullName: SECW.MauiProgram
+- uid: SECW.OperationalManagerPage
+  commentId: T:SECW.OperationalManagerPage
+  href: SECW.OperationalManagerPage.html
+  name: OperationalManagerPage
+  nameWithType: OperationalManagerPage
+  fullName: SECW.OperationalManagerPage
+- uid: SECW.MainActivity
+  commentId: T:SECW.MainActivity
+  href: SECW.MainActivity.html
+  name: MainActivity
+  nameWithType: MainActivity
+  fullName: SECW.MainActivity
+- uid: SECW.MainApplication
+  commentId: T:SECW.MainApplication
+  href: SECW.MainApplication.html
+  name: MainApplication
+  nameWithType: MainApplication
+  fullName: SECW.MainApplication
+- uid: SECW.UserPage
+  commentId: T:SECW.UserPage
+  href: SECW.UserPage.html
+  name: UserPage
+  nameWithType: UserPage
+  fullName: SECW.UserPage
+- uid: SECW.Resource
+  commentId: T:SECW.Resource
+  href: SECW.Resource.html
+  name: Resource
+  nameWithType: Resource
+  fullName: SECW.Resource
+- uid: SECW
+  commentId: N:SECW
+  href: SECW.html
+  name: SECW
+  nameWithType: SECW
+  fullName: SECW

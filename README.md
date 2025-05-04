@@ -1,50 +1,101 @@
 # SECW
-which documentation tool are we moving forward with? I think it may be best to use Docfx due to its auto gernerative html documents from xml comments instead of the alternatives such as sandcastle (which is a tad bit too old) or doxygen (compatible with diffrent langauges).
 
-#I already installed Docfx on my device using "dotnet tool install -g docfx"
-#and we can simply comment the desired descriptive sections using // and invoke its use with docfx build which as the document says should create the html file automatically in the _site folder. as for presentation am not too sure if it adds any styling or css but a simple document should suffice.
+## Documentation Tool
+We are moving forward with **Docfx** for documentation due to its ability to auto-generate HTML documents from XML comments. This makes it a better choice compared to alternatives like Sandcastle (outdated) or Doxygen (multi-language support but less streamlined for our needs).
 
-#Used command "dotnet list package --include-transitive > packages.txt" #(to update packages.txt run this command once more.)
-in order to create a file similar to Requiremnts, to store all packages and Dependancies needed to be installed for this specific application to run.
-the database helper is coded in C# and it includes a prototype of the required tables along side multiple comments to explain what each section does.
+### Docfx Installation
+Docfx is already installed using the following command:
+```bash
+dotnet tool install -g docfx
+```
 
+### Usage
+1. Add descriptive sections in your code using `//` comments.
+2. Run the following command to generate the documentation:
+```bash
+docfx build
+```
+This will create the HTML files in the `_site` folder.
 
-Validation libraries, login and sign up related related information
-for email validation I plan to use the built in System.ComponentModel.DataAnnotations.
-for password validation I plan to use Bcrypt.
-will also need to update the dependencies or packages.txt folder after successfuly installing bcrypt...
-Dependancies have been updated.
+3. To serve the generated documentation locally:
+```bash
+docfx serve _site/docs
+```
 
-#Due to my assigned tasks including the creation of the db and login I also took it upon myself to create the other tables and columns required for the completion of the application
+---
 
+## Dependencies and Packages
+To document all dependencies, the following command was used:
+```bash
+dotnet list package --include-transitive > packages.txt
+```
+This creates a `packages.txt` file listing all required packages and dependencies for the application.
 
-to ensure that the application runs, 
-you firstly need to download the dependencies for sqllite.
+### Updates
+- Dependencies have been updated after installing **Bcrypt** for password validation.
+- SQLite dependencies need to be downloaded for the application to run.
 
-list of commands 
-dotnet clean
-Functionality: Cleans the project by removing all compiled files (e.g., bin and obj folders).
-Use Case: To ensure a fresh build by removing old or cached files.
+---
 
-I also deleted the bin and obj file from the previous demo project the click counter.
+## Commands and Their Functionality
 
- dotnet workload update
-Functionality: Updates all installed .NET workloads to their latest versions.
-Use Case: To ensure that all workloads (e.g., Android, iOS, etc.) are up to date.
+### General Commands
+- **`dotnet clean`**
+- **Functionality**: Cleans the project by removing all compiled files (e.g., `bin` and `obj` folders).
+- **Use Case**: Ensures a fresh build by removing old or cached files.
 
- dotnet add package Microsoft.Data.Sqlite
-Functionality: Adds the Microsoft.Data.Sqlite NuGet package to the project.
-Use Case: To use SQLite in a cross-platform manner, especially for .NET MAUI projects.
+- **`dotnet workload update`**
+- **Functionality**: Updates all installed .NET workloads to their latest versions.
+- **Use Case**: Keeps workloads (e.g., Android, iOS) up to date.
 
-dotnet workload install android
-Functionality: Installs the Android workload for .NET MAUI development.
-Use Case: To enable building and running the project on Android devices.
+- **`dotnet workload install android`**
+- **Functionality**: Installs the Android workload for .NET MAUI development.
+- **Use Case**: Enables building and running the project on Android devices.
 
- dotnet list package --include-transitive > packages.txt
-Functionality: Lists all the NuGet packages (including transitive dependencies) used in the project and saves the output to a file named packages.txt.
-Use Case: To document all dependencies required for the project.
+### SQLite and Dependencies
+- **`dotnet add package Microsoft.Data.Sqlite`**
+- **Functionality**: Adds the `Microsoft.Data.Sqlite` NuGet package to the project.
+- **Use Case**: Enables SQLite usage in a cross-platform manner.
 
- docfx build
-Functionality: Builds the documentation using Docfx and generates the output in the _site folder.
-Use Case: To create HTML documentation for your project based on XML comments.
-just testing to see if the auto document features work as expected or not.
+- **`dotnet list package --include-transitive > packages.txt`**
+- **Functionality**: Lists all NuGet packages (including transitive dependencies) and saves them to `packages.txt`.
+- **Use Case**: Documents all dependencies required for the project.
+
+### Testing and Mocking
+- **`dotnet new xunit -n SECW.Tests`**
+- **Functionality**: Creates a new xUnit test project named `SECW.Tests`.
+- **Use Case**: Sets up a testing framework for the project.
+
+- **`dotnet add package Moq`**
+- **Functionality**: Adds the `Moq` NuGet package for mocking dependencies in unit tests.
+- **Use Case**: Simplifies unit testing by mocking objects.
+
+### Documentation
+- **`docfx build`**
+- **Functionality**: Builds the documentation using Docfx and generates the output in the `_site` folder.
+- **Use Case**: Creates HTML documentation for the project based on XML comments.
+
+- **`docfx serve _site/docs`**
+- **Functionality**: Serves the generated documentation locally via a web server.
+- **Use Case**: Allows previewing the documentation in a browser.
+
+- **`dotnet add package xunit`**
+- **Functionality**: Adds the `xunit` NuGet package to the project.
+- **Use Case**: Enables unit testing using the xUnit framework.
+
+---
+
+## Notes
+- The database helper is coded in C# and includes a prototype of the required tables with comments explaining each section.
+- For password validation, we are using **Bcrypt**.
+
+---
+
+## important(ingore all warnings that pop up)
+- **'dotnet test SECW.Tests.Solution.sln'**
+this is how to run the unit tests which are implemented using docker in order to isolate the 2 csproj files, I kept running into errors with the dependencies being duplicated and when i deleted one and refrenced the other file it kept saying the dependencies were missing, then even after suppressing the errors the app kept crashing while the unit tests worked, and after I fixed the app the unit tests kept crashing, i created a new project which had the aim of sharing files and code between projects passing data back and forth to classes and even then i ran into dependency issues thats when i remembered that docker existed and that it can simplify all of this, heads up the project has about 400+ warnings, ignore them all or supress them either way it will run without an issue further testing is required though.
+
+# testing added
+I added one testing file with no code coverage
+from what i expect this tests about at least 80% of operations and tasks going through in this application
+reasoning being that it creates a database, mimics table creation based on fields similar to databasehelper, goes through crud operations, then deletes the temporary directory after.

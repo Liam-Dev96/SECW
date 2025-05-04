@@ -1,0 +1,20 @@
+- name: Docs
+  href: docs/
+- name: API Reference
+  href: api/index.md
+- name: Pages
+  items:
+    - name: Admin Page
+      href: docs/AdminPage.md
+    - name: Admin Settings Page
+      href: docs/AdminSettingsPage.md
+    - name: Edit User Page
+      href: docs/EditUserPage.md
+    - name: Environmental Scientist Page
+      href: docs/EnvironmentalScientistPage.md
+    - name: Login Page
+      href: docs/Login.md
+    - name: Manage Users Page
+      href: docs/ManageUsers.md
+    - name: Operational Manager Page
+      href: docs/OperationalManagerPage.md
