@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SECW.ViewData"
+             Title="ViewData">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label Text="Sensor Data" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   FontSize="Large"/>
+            
+            <Picker x:Name="SensorPicker" 
+                    Title="Select a Sensor"
+                    ItemDisplayBinding="{Binding SensorName}"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"/>
+            
+            <CollectionView x:Name="DataCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Label Text="{Binding DisplayText}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
