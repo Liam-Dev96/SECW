@@ -11,6 +11,8 @@ namespace SECW;
 public partial class Malfunctions : ContentPage
 {
     private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;";
+    private SqliteConnection _connection;
+    private Func<string, string, string, Task> _displayAlert;
 
     public Malfunctions()
     {
@@ -21,9 +23,19 @@ public partial class Malfunctions : ContentPage
         MalfunctionsListbox.ItemSelected += OnMalfunctionsSelected;
     }
 
+    public void SetConnection(SqliteConnection connection)
+    {
+        _connection = connection;
+    }
+
+    public void SetDisplayAlert(Func<string, string, string, Task> displayAlert)
+    {
+        _displayAlert = displayAlert;
+    }
+
     // Load the list of malfunctions from the database and display them in the ListBox
     // The list is populated with the SensorName and Timestamp of each malfunction
-    private void MalfunctionsList()
+    public void MalfunctionsList()
     {
         var malfunctions = new List<MalfunctionsItem>();
 
@@ -66,7 +78,7 @@ public partial class Malfunctions : ContentPage
     // If the user selects "Mark as Resolved", a confirmation dialog is shown
     // If confirmed, the malfunction is marked as resolved in the database
     // and the list is refreshed
-    private async void OnMalfunctionsSelected(object sender, SelectedItemChangedEventArgs e)
+    public async void OnMalfunctionsSelected(object sender, SelectedItemChangedEventArgs e)
     {
         if (e.SelectedItem == null)
             return;
@@ -83,11 +95,21 @@ public partial class Malfunctions : ContentPage
 
         if (action == "View Details")
         {
-            await DisplayAlert(
-                $"Malfunction Details - {selectedMalfunction.SensorName}",
-                $"Timestamp: {selectedMalfunction.Timestamp}\n" +
-                $"Notes: {selectedMalfunction.Notes}",
-                "OK");
+            // Use injected DisplayAlert for testing
+            if (_displayAlert != null)
+            {
+                await _displayAlert(
+                    $"Malfunction Details - {selectedMalfunction.SensorName}",
+                    $"Timestamp: {selectedMalfunction.Timestamp}\nNotes: {selectedMalfunction.Notes}",
+                    "OK");
+            }
+            else
+            {
+                await DisplayAlert(
+                    $"Malfunction Details - {selectedMalfunction.SensorName}",
+                    $"Timestamp: {selectedMalfunction.Timestamp}\nNotes: {selectedMalfunction.Notes}",
+                    "OK");
+            }
         }
         else if (action == "Mark as Resolved")
         {
@@ -108,7 +130,7 @@ public partial class Malfunctions : ContentPage
 
     // Mark the selected malfunction as resolved in the database
     // by deleting it from the Malfunctions table
-    private async void OnResolvedClicked(MalfunctionsItem malfunction)
+    public async Task OnResolvedClicked(MalfunctionsItem malfunction)
     {
         try
         {
