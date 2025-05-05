@@ -11,6 +11,8 @@ namespace SECW;
 public partial class Anomalys : ContentPage
 {
     private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;";
+    private SqliteConnection _connection;
+    private Func<string, string, string, Task> _displayAlert;
 
     public Anomalys()
     {
@@ -21,10 +23,20 @@ public partial class Anomalys : ContentPage
         AnomalysListbox.ItemSelected += OnAnomalySelected;
     }
 
+    public void SetConnection(SqliteConnection connection)
+    {
+        _connection = connection;
+    }
+
+    public void SetDisplayAlert(Func<string, string, string, Task> displayAlert)
+    {
+        _displayAlert = displayAlert;
+    }
+
     // Load the list of anomalies from the database and display them in the ListBox
     // The list is populated with the SensorName and Timestamp of each anomaly
     // Create the reason and details of the anomaly from the data in the database
-    private void AnomalysList()
+    public void AnomalysList()
     {
         var anomalies = new List<AnomalyItem>();
 
@@ -111,21 +123,34 @@ public partial class Anomalys : ContentPage
     // This will show detailed information about the selected anomaly
     // The details include the sensor name, timestamp, reason, and specific details of the anomaly
     // After displaying the details, it will deselect the item in the ListBox
-    private async void OnAnomalySelected(object sender, SelectedItemChangedEventArgs e)
+    public void OnAnomalySelected(object sender, SelectedItemChangedEventArgs e)
     {
         if (e.SelectedItem == null)
             return;
 
         var selectedAnomaly = e.SelectedItem as AnomalyItem;
         
-        // Show detailed information
-        await DisplayAlert(
-            $"Anomaly Details - {selectedAnomaly.SensorName}",
-            $"Sensor Type: {selectedAnomaly.SensorType}\n" +
-            $"Timestamp: {selectedAnomaly.Timestamp}\n" +
-            $"Reason: {selectedAnomaly.AnomalyReason}\n" +
-            $"Details: {selectedAnomaly.AnomalyDetails}",
-            "OK");
+        // Use injected DisplayAlert for testing
+        if (_displayAlert != null)
+        {
+            _displayAlert(
+                $"Anomaly Details - {selectedAnomaly.SensorName}",
+                $"Sensor Type: {selectedAnomaly.SensorType}\n" +
+                $"Timestamp: {selectedAnomaly.Timestamp}\n" +
+                $"Reason: {selectedAnomaly.AnomalyReason}\n" +
+                $"Details: {selectedAnomaly.AnomalyDetails}",
+                "OK").ConfigureAwait(false);
+        }
+        else
+        {
+            DisplayAlert(
+                $"Anomaly Details - {selectedAnomaly.SensorName}",
+                $"Sensor Type: {selectedAnomaly.SensorType}\n" +
+                $"Timestamp: {selectedAnomaly.Timestamp}\n" +
+                $"Reason: {selectedAnomaly.AnomalyReason}\n" +
+                $"Details: {selectedAnomaly.AnomalyDetails}",
+                "OK").ConfigureAwait(false);
+        }
 
         // Deselect the item
         AnomalysListbox.SelectedItem = null;
