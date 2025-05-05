@@ -12,7 +12,8 @@ namespace SECW;
 public partial class ViewData : ContentPage
 {
     private static string connectionString = @"Data Source=Helpers\SoftwareEngineering.db;";
-    
+    private SqliteConnection _connection;
+
     public ViewData()
     {
         InitializeComponent();
@@ -20,7 +21,12 @@ public partial class ViewData : ContentPage
         LoadSensorPicker();
     }
 
-    private async void LoadSensorPicker()
+    public void SetConnection(SqliteConnection connection)
+    {
+        _connection = connection;
+    }
+
+    public  async Task LoadSensorPicker()
     {
         //connect to the database and Select All the sensors and there types
         // and add them to the SensorPicker
@@ -61,7 +67,7 @@ public partial class ViewData : ContentPage
 
     // Event handler for when the selected item in the SensorPicker changes
     // This will load the data for the selected sensor
-    private async void SensorPicker_SelectedIndexChanged(object sender, EventArgs e)
+    public async void SensorPicker_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (SensorPicker.SelectedItem is SensorItem selectedSensor)
         {
@@ -126,7 +132,7 @@ public partial class ViewData : ContentPage
 
 
     // Format the display text for the data item based on the sensor type ID
-    private string FormatDisplayText(Dictionary<string, object> values, int sensorTypeID)
+    public string FormatDisplayText(Dictionary<string, object> values, int sensorTypeID)
     {
         //create the display text as a string and add the timestamp to it
         var stringbuild = new StringBuilder();
