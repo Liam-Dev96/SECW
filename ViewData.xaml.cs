@@ -75,6 +75,8 @@ public partial class ViewData : ContentPage
         }
     }
 
+
+
     // Load the data for the selected sensor from the database
     // based on the sensor type ID, it will load different data types
     // and display them in the DataCollectionView
@@ -86,7 +88,7 @@ public partial class ViewData : ContentPage
             {
                 await connection.OpenAsync();
                 var command = connection.CreateCommand();
-                
+
                 string query = sensorTypeID switch
                 {
                     1 => "SELECT DataID, Timestamp, NO2, SO2, PM25, PM10 FROM EnvironmentalData WHERE SensorID = @sensorId",
@@ -97,10 +99,10 @@ public partial class ViewData : ContentPage
 
                 command.CommandText = query;
                 command.Parameters.AddWithValue("@sensorId", sensorId);
-                
+
                 // create a list to hold the data items
                 var dataItems = new List<SensorDataItem>();
-                
+
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
@@ -110,7 +112,7 @@ public partial class ViewData : ContentPage
                         {
                             values[reader.GetName(i)] = reader.IsDBNull(i) ? null : reader.GetValue(i);
                         }
-                        
+
                         // Add the data item to the list
                         // Format the display text
                         dataItems.Add(new SensorDataItem
@@ -120,7 +122,7 @@ public partial class ViewData : ContentPage
                         });
                     }
                 }
-                
+
                 DataCollectionView.ItemsSource = dataItems;
             }
         }
@@ -157,8 +159,10 @@ public class SensorItem
     public string SensorName { get; set; }
 }
 
+
 public class SensorDataItem
 {
+    public Picker SensorPicker { get; set; } 
     public Dictionary<string, object> Values { get; set; }
     public string DisplayText { get; set; }
 }

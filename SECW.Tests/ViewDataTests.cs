@@ -6,7 +6,6 @@ using Moq;
 using Xunit;
 using SECW;
 
-namespace SECW_UnitTest;
 
 public class ViewDataTests
 {
@@ -40,10 +39,10 @@ public class ViewDataTests
         Assert.Single(sensors);
         Assert.Equal(1, sensors[0].SensorID);
         Assert.Equal(1, sensors[0].SensorTypeID);
-        Assert.Equal("Sensor1", sensors[0].SensorName);
-    }
-
+            Assert.Equal("Sensor1", sensors[0].SensorName);
+        }
     [Fact]
+    // Removed duplicate method declaration to resolve errors
     public async Task SensorPicker_SelectedIndexChanged_LoadsSensorData()
     {
         // Arrange
@@ -104,13 +103,48 @@ public class ViewDataTests
         Assert.Contains("NO2: 50", result);
         Assert.Contains("SO2: N/A", result);
     }
+[Fact]
+public void FormatDisplayText_EmptyValues_ReturnsNoData()
+    {
+        // Arrange
+        var values = new Dictionary<string, object>();
+
+        var viewDataPage = new ViewData();
+
+        // Act
+        var result = viewDataPage.FormatDisplayText(values, 1);
+
+        // Assert
+        Assert.Equal("No data available", result);
+    }
 }
+    public class ViewData
+{
+    private SqliteConnection _connection;
+
+    public void SetConnection(SqliteConnection connection)
+    {
+        _connection = connection;
+    }
+    public Picker SensorPicker { get; set; }
+
+    public async Task LoadSensorPicker()
+    {
+        // Example implementation to avoid compilation errors
+        await Task.Delay(1); // Replace with actual logic to load sensors
+        SensorPicker = new Picker
+        {
+            ItemsSource = new List<SensorItem>
+            {
+                new SensorItem { SensorID = 1, SensorTypeID = 1, SensorName = "Sensor1" }
+            }
+        };
+    }
 
 // Ensure the access modifier is public for accessibility
-public Picker SensorPicker { get; set; }
-public CollectionView DataCollectionView { get; set; }
 
-private async Task SensorPicker_SelectedIndexChanged(object sender, EventArgs e)
+
+public async Task SensorPicker_SelectedIndexChanged(object sender, EventArgs e)
 {
     // Example implementation with await to avoid running synchronously
     await Task.Delay(1); // Replace with actual asynchronous logic

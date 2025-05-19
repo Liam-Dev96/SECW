@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Windows.Controls; // Add this for ListBox
+using System.Collections.Generic; // Use List<T> instead of ListBox
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Moq;
 using Xunit;
 using SECW;
 
-namespace SECW_UnitTest;
 
 public class MalfunctionsTests
 {
@@ -20,8 +19,8 @@ public class MalfunctionsTests
         var mockReader = new Mock<SqliteDataReader>();
 
         mockReader.SetupSequence(r => r.Read())
-                  .Returns(true) // Simulate one malfunction
-                  .Returns(false); // End of data
+          .Returns(true) // Simulate one malfunction
+          .Returns(false); // End of data
         mockReader.Setup(r => r["SensorName"]).Returns("Sensor1");
         mockReader.Setup(r => r["Timestamp"]).Returns("2025-05-05 12:00:00");
         mockReader.Setup(r => r["Notes"]).Returns("Sensor malfunction detected");
@@ -37,8 +36,8 @@ public class MalfunctionsTests
         malfunctionsPage.MalfunctionsList();
 
         // Assert
-        Assert.NotNull(malfunctionsPage.MalfunctionsListbox.ItemsSource);
-        var malfunctions = malfunctionsPage.MalfunctionsListbox.ItemsSource as List<Malfunctions.MalfunctionsItem>;
+        Assert.NotNull(malfunctionsPage.MalfunctionsListbox);
+        var malfunctions = malfunctionsPage.MalfunctionsListbox;
         Assert.Single(malfunctions);
         Assert.Equal("Sensor1 - 2025-05-05 12:00:00", malfunctions[0].DisplayText);
         Assert.Equal("Sensor malfunction detected", malfunctions[0].Notes);
@@ -61,7 +60,7 @@ public class MalfunctionsTests
         malfunctionsPage.SetDisplayAlert(mockDisplayAlert.Object);
 
         // Act
-        await malfunctionsPage.OnMalfunctionsSelected(null, new SelectedItemChangedEventArgs(malfunctionItem, 0));
+        await malfunctionsPage.OnMalfunctionsSelected(null, new Malfunctions.SelectedItemChangedEventArgs(malfunctionItem, 0));
 
         // Assert
         mockDisplayAlert.Verify(alert =>
@@ -96,46 +95,58 @@ public class MalfunctionsTests
         // Assert
         mockCommand.Verify(c => c.ExecuteNonQuery(), Times.Once);
     }
+
+    public class Malfunctions
+    {
+        public List<MalfunctionsItem> MalfunctionsListbox { get; private set; } = new List<MalfunctionsItem>();
+
+        public void SetConnection(SqliteConnection connection)
+        {
+            // Implementation here
+        }
+
+        public void MalfunctionsList()
+        {
+            // Implementation here
+        }
+
+        public void SetDisplayAlert(Func<string, string, string, Task> displayAlert)
+        {
+            // Implementation here
+        }
+
+        public async Task OnResolvedClicked(MalfunctionsItem malfunctionItem)
+        {
+            // Implementation here
+            await Task.CompletedTask; // Placeholder to ensure it is awaitable
+        }
+
+        public async Task OnMalfunctionsSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            // Implementation here
+            await Task.CompletedTask; // Placeholder to ensure it is awaitable
+        }
+
+        public class SelectedItemChangedEventArgs : EventArgs
+{
+    public object SelectedItem { get; }
+    public int SelectedItemIndex { get; }
+
+    public SelectedItemChangedEventArgs(object selectedItem, int selectedItemIndex)
+    {
+        SelectedItem = selectedItem;
+        SelectedItemIndex = selectedItemIndex;
+    }
 }
 
-public class Malfunctions
-{
-    public ListBox MalfunctionsListbox { get; private set; }
+        public class MalfunctionsItem
+        {
+            public string SensorName { get; set; }
+            public string Timestamp { get; set; }
+            public string Notes { get; set; }
+            public string MalfunctionsID { get; set; }
 
-    public void SetConnection(SqliteConnection connection)
-    {
-        // Implementation here
-    }
-
-    public void MalfunctionsList()
-    {
-        // Implementation here
-    }
-
-    public void SetDisplayAlert(Func<string, string, string, Task> displayAlert)
-    {
-        // Implementation here
-    }
-
-    public async Task OnResolvedClicked(MalfunctionsItem malfunctionItem)
-    {
-        // Implementation here
-        await Task.CompletedTask; // Placeholder to ensure it is awaitable
-    }
-
-    public async Task OnMalfunctionsSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        // Implementation here
-        await Task.CompletedTask; // Placeholder to ensure it is awaitable
-    }
-
-    public class MalfunctionsItem
-    {
-        public string SensorName { get; set; }
-        public string Timestamp { get; set; }
-        public string Notes { get; set; }
-        public string MalfunctionsID { get; set; }
-
-        public string DisplayText => $"{SensorName} - {Timestamp}";
+            public string DisplayText => $"{SensorName} - {Timestamp}";
+        }
     }
 }

@@ -5,7 +5,7 @@ using Moq;
 using Xunit;
 using SECW; // Add this to reference the UpdateSenser class
 
-namespace SECW_UnitTest;
+
 
 public class UpdateSenserTests
 {
@@ -61,13 +61,6 @@ public class UpdateSenserTests
         // Assert
         mockCommand.Verify(c => c.ExecuteNonQuery(), Times.Never);
     }
-
-    private async Task UpdateSensorFramework(int sensorId)
-    {
-        // Placeholder implementation for UpdateSensorFramework
-        // Add your logic here to handle the framework update
-        await Task.CompletedTask;
-    }
 }
 
 public class UpdateSenser
@@ -80,6 +73,11 @@ public class UpdateSenser
     }
 
     public async Task UpdateSensorCon(int sensorId, string minField, string maxField)
+    {
+        // Method implementation
+    }
+
+        public async Task UpdateSensorFramework(int sensorId)
     {
         // Method implementation
     }
